@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>DailymotionSDK</groupId>
+    <artifactId>DailymotionSDK</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <resthub.version>2.1.4</resthub.version>
+        <spring.version>4.0.0.RELEASE</spring.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>DailymotionSDK</groupId>
+                <artifactId>DailymotionSDK-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.resthub</groupId>
+                <artifactId>resthub-web-client</artifactId>
+                <version>${resthub.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.resthub</groupId>
+                <artifactId>resthub-test</artifactId>
+                <version>${resthub.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>0.6.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
