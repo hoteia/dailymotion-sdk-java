@@ -3,18 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>DailymotionSDK</artifactId>
-        <groupId>DailymotionSDK</groupId>
+        <artifactId>com.bc.dailymotion</artifactId>
+        <groupId>dailymotion-sdk</groupId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>DailymotionSDK-client</artifactId>
+    <artifactId>dailymotion-sdk-client</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>DailymotionSDK</groupId>
-            <artifactId>DailymotionSDK-api</artifactId>
+            <groupId>com.bc.dailymotion</groupId>
+            <artifactId>dailymotion-sdk-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.resthub</groupId>
