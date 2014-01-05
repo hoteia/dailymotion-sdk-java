@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="com.bc.dailymotion"/>
+
+    <!-- Import properties files to Override default values -->
+    <context:property-placeholder
+            location="classpath*:dailymotionClient.properties"
+            properties-ref="dailymotionClientProperties" ignore-resource-not-found="true"
+            ignore-unresolvable="true"/>
+
+    <!-- Define default values for Properties, can be overriden in properties
+		files defined in the PropertyPlaceHolder -->
+    <util:properties id="dailymotionClientProperties">
+        <!-- Properties for the Dailymotion API component -->
+        <prop key="dailymotion.api.url">https://api.dailymotion.com/</prop>
+        <prop key="dailymotion.api.timeout">5000</prop>
+        <prop key="dailymotion.api.useProxy">5000</prop>
+        <prop key="dailymotion.api.proxyHost">5000</prop>
+        <prop key="dailymotion.api.proxyPort">5000</prop>
+    </util:properties>
+</beans>

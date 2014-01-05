@@ -1,4 +1,4 @@
-package com.bc.dailymotion.api.endpoint;
+package com.bc.dailymotion.api;
 
 import com.bc.dailymotion.api.dto.*;
 

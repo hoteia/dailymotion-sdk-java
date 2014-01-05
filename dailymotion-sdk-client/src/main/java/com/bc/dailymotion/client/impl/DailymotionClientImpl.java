@@ -1,12 +1,15 @@
-package com.bc.dailymotion.client.web.impl;
+package com.bc.dailymotion.client.impl;
 
+import checkers.nullness.quals.NonNull;
+import com.bc.dailymotion.api.Connection;
+import com.bc.dailymotion.api.Connection.ConnectionType;
+import com.bc.dailymotion.api.Endpoint;
+import com.bc.dailymotion.api.Endpoint.EndpointType;
 import com.bc.dailymotion.api.Response;
-import com.bc.dailymotion.api.connection.Connection;
-import com.bc.dailymotion.api.endpoint.Endpoint;
-import com.bc.dailymotion.client.web.DailymotionClient;
+import com.bc.dailymotion.client.DailymotionClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ning.http.client.AsyncHttpClientConfig;
 import org.jboss.netty.handler.codec.http.HttpMethod;
-import org.modelmapper.ModelMapper;
 import org.resthub.web.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +63,6 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private Client httpClient = new Client();
 
     /**
-     * Mapper used for REST responses
-     */
-    private ModelMapper modelMapper;
-
-    /**
      * Static logger used for traces
      */
     private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClient.class);
@@ -79,11 +78,8 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param <T>      The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <T> Response<T> doRequest(final HttpMethod method, Class<? extends Endpoint<T>> endPoint, Endpoint.EndpointType type, String id, Map<String, List<String>> params) {
-        Assert.notNull(method);
-        Assert.notNull(endPoint);
-        Assert.notNull(type);
-
+    private <T> Response<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Endpoint<T>> endPoint, @NonNull EndpointType type, String id, Map<String, List<String>> params) {
+        LOGGER.trace("[IN] doRequest with parameters {},{},{},{},{}", method, endPoint, type, id, params);
         try {
             String endpointUrl = (String) endPoint.getField(type.toString()).get(null);
 
@@ -98,9 +94,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}?{1}", url, this.mapToString(params));
             }
             String body = this.callDailymotionAPI(method, url);
-            return modelMapper.map(null, null);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
+            Response<T> response = new Response<>();
+            return new ObjectMapper().readValue(body, response.getClass());
+        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+            LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
         return null;
@@ -113,18 +110,13 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param connection The connection to call
      * @param type       The type of request
      * @param id         The id to insert
-     * @param subId      The second to insert (can be null)
+     * @param subId      The second id to insert (can be null)
      * @param params     The optional parameters
      * @param <E>        The parametrized type of the parent endpoint type
      * @param <T>        The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <E, T> Response<T> doRequest(final HttpMethod method, Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        Assert.notNull(method);
-        Assert.notNull(connection);
-        Assert.notNull(type);
-        Assert.notNull(id);
-
+    private <E, T> Response<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, String subId, Map<String, List<String>> params) {
         try {
             String endpointUrl = (String) connection.getSuperclass().getField(Endpoint.EndpointType.ID.toString()).get(null);
             String connectionUrl = (String) connection.getField(type.toString()).get(null);
@@ -140,9 +132,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}?{1}", url, this.mapToString(params));
             }
             String body = this.callDailymotionAPI(method, url);
-            return modelMapper.map(null, null);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
+            Response<T> response = new Response<>();
+            return new ObjectMapper().readValue(body, response.getClass());
+        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+            LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
         return null;
@@ -155,7 +148,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param url    The url to use
      * @return Returns the JSON response if any
      */
-    private String callDailymotionAPI(final HttpMethod method, final String url) {
+    private String callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url) {
         LOGGER.trace("[IN] callDailymotionAPI with parameters {}, {}", method, url);
         org.resthub.web.Response response;
         if (HttpMethod.GET.equals(method)) {
@@ -177,7 +170,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param map The Map of String to concatenate
      * @return The String concatenated
      */
-    private String mapToString(Map<String, List<String>> map) {
+    private String mapToString(@NonNull Map<String, List<String>> map) {
+        Assert.notEmpty(map);
+
         LOGGER.trace("[IN] mapToString with parameter {}", map);
         return this.mapToString(new ArrayList<>(map.keySet()), map);
     }
@@ -189,7 +184,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param map   The Map of String to concatenate
      * @return The String representation of the map
      */
-    private String mapToString(List<String> array, Map<String, List<String>> map) {
+    private String mapToString(@NonNull List<String> array, @NonNull Map<String, List<String>> map) {
+        Assert.notEmpty(array);
+
         LOGGER.trace("[IN] arrayToString with parameter {}", array);
         return array.get(0) + "=" + this.arrayToString(map.get(array.get(0))) + (array.size() > 1 ? "&" + this.mapToString(array.subList(1, array.size()), map) : "");
     }
@@ -200,7 +197,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param array The List of String to concatenate
      * @return The String concatenated
      */
-    private String arrayToString(List<String> array) {
+    private String arrayToString(@NonNull List<String> array) {
+        Assert.notEmpty(array);
+
         LOGGER.trace("[IN] arrayToString with parameter {}", array);
         return array.size() > 1 ? array.get(0) + "," + this.arrayToString(array.subList(1, array.size())) : array.get(0);
     }
@@ -227,123 +226,195 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doGet(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type) {
+    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
         return this.doRequest(HttpMethod.GET, endPoint, type, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doGet(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, Map<String, List<String>> params) {
+    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, endPoint, type, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doGet(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id) {
+    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
         return this.doRequest(HttpMethod.GET, endPoint, type, id, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doGet(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id, Map<String, List<String>> params) {
+    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, endPoint, type, id, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doGet(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id) {
+    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
         return this.doRequest(HttpMethod.GET, connection, type, id, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doGet(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, Map<String, List<String>> params) {
+    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, connection, type, id, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doGet(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId) {
+    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
         return this.doRequest(HttpMethod.GET, connection, type, id, subId, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doGet(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId, Map<String, List<String>> params) {
+    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, connection, type, id, subId, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doPost(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type) {
-        return null;
+    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
+        return this.doRequest(HttpMethod.POST, endPoint, type, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doPost(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, Map<String, List<String>> params) {
-        return null;
+    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.POST, endPoint, type, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doPost(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id) {
-        return null;
+    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
+        return this.doRequest(HttpMethod.POST, endPoint, type, id, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doPost(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id, Map<String, List<String>> params) {
-        return null;
+    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.POST, endPoint, type, id, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doPost(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id) {
-        return null;
+    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
+        return this.doRequest(HttpMethod.POST, connection, type, id, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doPost(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, Map<String, List<String>> params) {
-        return null;
+    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.POST, connection, type, id, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doPost(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId) {
-        return null;
+    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
+        return this.doRequest(HttpMethod.POST, connection, type, id, subId, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doPost(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        return null;
+    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.POST, connection, type, id, subId, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doDelete(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type) {
-        return null;
+    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
+        return this.doRequest(HttpMethod.DELETE, endPoint, type, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doDelete(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, Map<String, List<String>> params) {
-        return null;
+    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.DELETE, endPoint, type, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doDelete(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id) {
-        return null;
+    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
+        return this.doRequest(HttpMethod.DELETE, endPoint, type, id, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E> Response<E> doDelete(Class<? extends Endpoint<E>> endPoint, Endpoint.EndpointType type, String id, Map<String, List<String>> params) {
-        return null;
+    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.DELETE, endPoint, type, id, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doDelete(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id) {
-        return null;
+    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
+        return this.doRequest(HttpMethod.DELETE, connection, type, id, null, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doDelete(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, Map<String, List<String>> params) {
-        return null;
+    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.DELETE, connection, type, id, null, params);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doDelete(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId) {
-        return null;
+    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
+        return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public <E, T> Response<T> doDelete(Class<? extends Connection<E, T>> connection, Connection.ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        return null;
+    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
+        return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, params);
     }
 }

@@ -18,6 +18,7 @@
     <modules>
         <module>dailymotion-sdk-api</module>
         <module>dailymotion-sdk-client</module>
+        <module>dailymotion-sdk-sample</module>
     </modules>
 
     <dependencyManagement>
@@ -43,11 +44,19 @@
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.modelmapper</groupId>
-                <artifactId>modelmapper</artifactId>
-                <version>0.6.2</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

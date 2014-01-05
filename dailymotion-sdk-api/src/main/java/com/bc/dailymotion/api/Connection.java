@@ -1,7 +1,6 @@
-package com.bc.dailymotion.api.connection;
+package com.bc.dailymotion.api;
 
 import com.bc.dailymotion.api.dto.*;
-import com.bc.dailymotion.api.endpoint.Endpoint;
 
 /**
  * Created by Bastien on 05/01/2014.
