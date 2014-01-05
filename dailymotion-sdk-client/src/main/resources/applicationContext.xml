@@ -24,8 +24,13 @@
         <!-- Properties for the Dailymotion API component -->
         <prop key="dailymotion.api.url">https://api.dailymotion.com/</prop>
         <prop key="dailymotion.api.timeout">5000</prop>
-        <prop key="dailymotion.api.useProxy">5000</prop>
-        <prop key="dailymotion.api.proxyHost">5000</prop>
-        <prop key="dailymotion.api.proxyPort">5000</prop>
+        <prop key="dailymotion.api.useProxy">false</prop>
+        <prop key="dailymotion.api.proxyHost">my.super.proxy</prop>
+        <prop key="dailymotion.api.proxyPort">8080</prop>
+
+        <prop key="dailymotion.auth.username">my.super.username</prop>
+        <prop key="dailymotion.auth.password">my.super.password</prop>
+        <prop key="dailymotion.auth.clientId">my.super.clientId</prop>
+        <prop key="dailymotion.auth.clientSecret">my.super.clientSecret</prop>
     </util:properties>
 </beans>

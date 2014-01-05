@@ -20,7 +20,6 @@ import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +59,30 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private int timeout;
 
     /**
+     * Username used for the OAuth protocol
+     */
+    @Value("${dailymotion.auth.username}")
+    private String username;
+
+    /**
+     * Password used for the OAuth protocol
+     */
+    @Value("${dailymotion.auth.password}")
+    private String password;
+
+    /**
+     * ClientId defined on your Dailymotion App
+     */
+    @Value("${dailymotion.auth.clientId}")
+    private String clientId;
+
+    /**
+     * ClientSecret defined on your Dailymotion App
+     */
+    @Value("${dailymotion.auth.clientSecret}")
+    private String clientSecret;
+
+    /**
      * HTTP Client used for API calls
      */
     private Client httpClient = new Client();
@@ -92,10 +115,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, endpointUrl);
             }
 
-            if (params != null && !params.isEmpty()) {
-                url = MessageFormat.format("{0}?{1}", url, this.mapToString(params));
-            }
-            String body = this.callDailymotionAPI(method, url);
+            String body = this.callDailymotionAPI(method, url, params).getBody();
             Response<T> response = new Response<>();
             return new ObjectMapper().readValue(body, response.getClass());
         } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
@@ -129,14 +149,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             } else {
                 url = MessageFormat.format("{0}/{1}/{2}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
             }
-
-            if (params != null && !params.isEmpty()) {
-                url = MessageFormat.format("{0}?{1}", url, this.mapToString(params));
-            }
-            String body = this.callDailymotionAPI(method, url);
             Response<T> response = new Response<>();
-            return new ObjectMapper().readValue(body, response.getClass());
-        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+            return this.callDailymotionAPI(method, url, params).resource(response.getClass());
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -150,47 +165,26 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param url    The url to use
      * @return Returns the JSON response if any
      */
-    private String callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url) {
+    private org.resthub.web.Response callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url, final Map<String, List<String>> params) {
         LOGGER.trace("[IN] callDailymotionAPI with parameters {}, {}", method, url);
         org.resthub.web.Response response;
+
+        Client.RequestHolder requestHolder = this.httpClient.url(url);
+        params.forEach((key, value) -> {
+            requestHolder.setQueryParameter(key, this.arrayToString(value));
+        });
+
         if (HttpMethod.GET.equals(method)) {
-            response = this.httpClient.url(url).get();
+            response = requestHolder.get();
         } else if (HttpMethod.POST.equals(method)) {
-            response = this.httpClient.url(url).post();
+            response = requestHolder.post();
         } else if (HttpMethod.DELETE.equals(method)) {
-            response = this.httpClient.url(url).delete();
+            response = requestHolder.delete();
         } else {
             throw new UnsupportedOperationException(MessageFormat.format("The given HttpMethod ({0}) isn't allowed here", method));
         }
-        LOGGER.debug("Response from URL {} is {}", url, response.getBody());
-        return response.getBody();
-    }
-
-    /**
-     * Concatenates a List of String with a given concatenator
-     *
-     * @param map The Map of String to concatenate
-     * @return The String concatenated
-     */
-    private String mapToString(@NonNull Map<String, List<String>> map) {
-        Assert.notEmpty(map);
-
-        LOGGER.trace("[IN] mapToString with parameter {}", map);
-        return this.mapToString(new ArrayList<>(map.keySet()), map);
-    }
-
-    /**
-     * Transforms a map to a concatenated string
-     *
-     * @param array The list of keys in the map
-     * @param map   The Map of String to concatenate
-     * @return The String representation of the map
-     */
-    private String mapToString(@NonNull List<String> array, @NonNull Map<String, List<String>> map) {
-        Assert.notEmpty(array);
-
-        LOGGER.trace("[IN] arrayToString with parameter {}", array);
-        return array.get(0) + "=" + this.arrayToString(map.get(array.get(0))) + (array.size() > 1 ? "&" + this.mapToString(array.subList(1, array.size()), map) : "");
+        LOGGER.trace("Response from URL {} is {}", url, response);
+        return response;
     }
 
     /**
@@ -219,6 +213,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         Assert.notNull(this.useProxy);
         Assert.notNull(this.proxyHost);
         Assert.notNull(this.proxyPort);
+        Assert.notNull(this.username);
+        Assert.notNull(this.password);
+        Assert.notNull(this.clientId);
+        Assert.notNull(this.clientSecret);
 
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setRequestTimeoutInMs(this.timeout);
@@ -226,6 +224,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         if (this.useProxy) {
             this.httpClient.setProxy(this.proxyHost, this.proxyPort);
         }
+        this.httpClient.setOAuth2(this.username, this.password, MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
     }
 
     /**
