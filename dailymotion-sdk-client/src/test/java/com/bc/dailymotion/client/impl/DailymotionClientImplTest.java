@@ -22,5 +22,6 @@ public class DailymotionClientImplTest {
     @Test
     public void testDoGet() throws Exception {
         this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
+
     }
 }
