@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.util.Map;
 /**
  * Created by a528122 on 27/12/13.
  */
+@Service(value = "dailymotionClient")
 public class DailymotionClientImpl implements DailymotionClient, InitializingBean {
     /**
      * Root URL for Dailymotion SDK

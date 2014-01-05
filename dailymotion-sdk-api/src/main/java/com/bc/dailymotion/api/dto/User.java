@@ -59,4 +59,428 @@ public class User {
     int videos_total;//	The total number of user’s public videos	No access_token required for reading.	Returns number, min value: 0.
     Video videostar;//	Change the user’s video star	No access_token required for reading. manage_videos scope required for writing.	Return a video. You can request sub-fields by using videostar.<sub-field> notation.
     int views_total;//	The total aggregated number of views on all user’s videos	No access_token required for reading.	Returns number, min value: 0.
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAvatar_120_url() {
+        return avatar_120_url;
+    }
+
+    public void setAvatar_120_url(String avatar_120_url) {
+        this.avatar_120_url = avatar_120_url;
+    }
+
+    public String getAvatar_190_url() {
+        return avatar_190_url;
+    }
+
+    public void setAvatar_190_url(String avatar_190_url) {
+        this.avatar_190_url = avatar_190_url;
+    }
+
+    public String getAvatar_240_url() {
+        return avatar_240_url;
+    }
+
+    public void setAvatar_240_url(String avatar_240_url) {
+        this.avatar_240_url = avatar_240_url;
+    }
+
+    public String getAvatar_25_url() {
+        return avatar_25_url;
+    }
+
+    public void setAvatar_25_url(String avatar_25_url) {
+        this.avatar_25_url = avatar_25_url;
+    }
+
+    public String getAvatar_360_url() {
+        return avatar_360_url;
+    }
+
+    public void setAvatar_360_url(String avatar_360_url) {
+        this.avatar_360_url = avatar_360_url;
+    }
+
+    public String getAvatar_480_url() {
+        return avatar_480_url;
+    }
+
+    public void setAvatar_480_url(String avatar_480_url) {
+        this.avatar_480_url = avatar_480_url;
+    }
+
+    public String getAvatar_60_url() {
+        return avatar_60_url;
+    }
+
+    public void setAvatar_60_url(String avatar_60_url) {
+        this.avatar_60_url = avatar_60_url;
+    }
+
+    public String getAvatar_720_url() {
+        return avatar_720_url;
+    }
+
+    public void setAvatar_720_url(String avatar_720_url) {
+        this.avatar_720_url = avatar_720_url;
+    }
+
+    public String getAvatar_url() {
+        return avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
+    }
+
+    public String getBackground_url() {
+        return background_url;
+    }
+
+    public void setBackground_url(String background_url) {
+        this.background_url = background_url;
+    }
+
+    public String getBanner_url() {
+        return banner_url;
+    }
+
+    public void setBanner_url(String banner_url) {
+        this.banner_url = banner_url;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCleeng_popup_url() {
+        return cleeng_popup_url;
+    }
+
+    public void setCleeng_popup_url(String cleeng_popup_url) {
+        this.cleeng_popup_url = cleeng_popup_url;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Date getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(Date created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isEmail_notification() {
+        return email_notification;
+    }
+
+    public void setEmail_notification(boolean email_notification) {
+        this.email_notification = email_notification;
+    }
+
+    public String getEvent_delete() {
+        return event_delete;
+    }
+
+    public void setEvent_delete(String event_delete) {
+        this.event_delete = event_delete;
+    }
+
+    public String getEvent_modify() {
+        return event_modify;
+    }
+
+    public void setEvent_modify(String event_modify) {
+        this.event_modify = event_modify;
+    }
+
+    public String getEvent_video_delete() {
+        return event_video_delete;
+    }
+
+    public void setEvent_video_delete(String event_video_delete) {
+        this.event_video_delete = event_video_delete;
+    }
+
+    public String getEvent_video_live_offair() {
+        return event_video_live_offair;
+    }
+
+    public void setEvent_video_live_offair(String event_video_live_offair) {
+        this.event_video_live_offair = event_video_live_offair;
+    }
+
+    public String getEvent_video_live_onair() {
+        return event_video_live_onair;
+    }
+
+    public void setEvent_video_live_onair(String event_video_live_onair) {
+        this.event_video_live_onair = event_video_live_onair;
+    }
+
+    public String getEvent_video_modify() {
+        return event_video_modify;
+    }
+
+    public void setEvent_video_modify(String event_video_modify) {
+        this.event_video_modify = event_video_modify;
+    }
+
+    public String getFilters() {
+        return filters;
+    }
+
+    public void setFilters(String filters) {
+        this.filters = filters;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public String getLimits() {
+        return limits;
+    }
+
+    public void setLimits(String limits) {
+        this.limits = limits;
+    }
+
+    public User getParent() {
+        return parent;
+    }
+
+    public void setParent(User parent) {
+        this.parent = parent;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isPaywall() {
+        return paywall;
+    }
+
+    public void setPaywall(boolean paywall) {
+        this.paywall = paywall;
+    }
+
+    public int getPaywall_price() {
+        return paywall_price;
+    }
+
+    public void setPaywall_price(int paywall_price) {
+        this.paywall_price = paywall_price;
+    }
+
+    public String getPaywall_price_formatted() {
+        return paywall_price_formatted;
+    }
+
+    public void setPaywall_price_formatted(String paywall_price_formatted) {
+        this.paywall_price_formatted = paywall_price_formatted;
+    }
+
+    public String getPaywall_subscription_type() {
+        return paywall_subscription_type;
+    }
+
+    public void setPaywall_subscription_type(String paywall_subscription_type) {
+        this.paywall_subscription_type = paywall_subscription_type;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getPlaylists_total() {
+        return playlists_total;
+    }
+
+    public void setPlaylists_total(int playlists_total) {
+        this.playlists_total = playlists_total;
+    }
+
+    public int getPost_code() {
+        return post_code;
+    }
+
+    public void setPost_code(int post_code) {
+        this.post_code = post_code;
+    }
+
+    public String getScreenname() {
+        return screenname;
+    }
+
+    public void setScreenname(String screenname) {
+        this.screenname = screenname;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getVideos_total() {
+        return videos_total;
+    }
+
+    public void setVideos_total(int videos_total) {
+        this.videos_total = videos_total;
+    }
+
+    public Video getVideostar() {
+        return videostar;
+    }
+
+    public void setVideostar(Video videostar) {
+        this.videostar = videostar;
+    }
+
+    public int getViews_total() {
+        return views_total;
+    }
+
+    public void setViews_total(int views_total) {
+        this.views_total = views_total;
+    }
 }

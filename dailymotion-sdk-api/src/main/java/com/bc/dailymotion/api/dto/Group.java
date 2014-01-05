@@ -18,4 +18,100 @@ public class Group {
     String search;//	Full text search	This field can be used as filter but can’t be read nor written.	Returns string, min size: 1, max size: 150.
     String sort;//	Change result ordering	This field can be used as filter but can’t be read nor written.	Returns string, allowed values: recent, relevance, active.
     String url_name;//	The globally unique group name to be used in URL (only alphanum + “-” and “_” letters are allowed)	No access_token required for reading. This field is writable.	Returns string, min size: 1, max size: 35.
+
+    public String getAvatar_160_url() {
+        return avatar_160_url;
+    }
+
+    public void setAvatar_160_url(String avatar_160_url) {
+        this.avatar_160_url = avatar_160_url;
+    }
+
+    public String getAvatar_40_url() {
+        return avatar_40_url;
+    }
+
+    public void setAvatar_40_url(String avatar_40_url) {
+        this.avatar_40_url = avatar_40_url;
+    }
+
+    public String getAvatar_80_url() {
+        return avatar_80_url;
+    }
+
+    public void setAvatar_80_url(String avatar_80_url) {
+        this.avatar_80_url = avatar_80_url;
+    }
+
+    public Date getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(Date created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getFilters() {
+        return filters;
+    }
+
+    public void setFilters(String filters) {
+        this.filters = filters;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getUrl_name() {
+        return url_name;
+    }
+
+    public void setUrl_name(String url_name) {
+        this.url_name = url_name;
+    }
 }

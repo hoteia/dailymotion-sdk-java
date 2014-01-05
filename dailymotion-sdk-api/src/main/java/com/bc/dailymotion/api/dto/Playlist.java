@@ -18,4 +18,100 @@ public class Playlist {
     String thumbnail_small_url;//	The URL of the first video thumbnail (80px by 60px).	No access_token required for reading.	Returns url.
     String thumbnail_url;//	The URL of the first video raw thumbnail (full size respecting ratio).	No access_token required for reading.	Returns url.
     int videos_total;//	The total number of videos in the playlist.	No access_token required for reading.	Returns number, min value: 0.
+
+    public Date getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(Date created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getThumbnail_large_url() {
+        return thumbnail_large_url;
+    }
+
+    public void setThumbnail_large_url(String thumbnail_large_url) {
+        this.thumbnail_large_url = thumbnail_large_url;
+    }
+
+    public String getThumbnail_medium_url() {
+        return thumbnail_medium_url;
+    }
+
+    public void setThumbnail_medium_url(String thumbnail_medium_url) {
+        this.thumbnail_medium_url = thumbnail_medium_url;
+    }
+
+    public String getThumbnail_small_url() {
+        return thumbnail_small_url;
+    }
+
+    public void setThumbnail_small_url(String thumbnail_small_url) {
+        this.thumbnail_small_url = thumbnail_small_url;
+    }
+
+    public String getThumbnail_url() {
+        return thumbnail_url;
+    }
+
+    public void setThumbnail_url(String thumbnail_url) {
+        this.thumbnail_url = thumbnail_url;
+    }
+
+    public int getVideos_total() {
+        return videos_total;
+    }
+
+    public void setVideos_total(int videos_total) {
+        this.videos_total = videos_total;
+    }
 }

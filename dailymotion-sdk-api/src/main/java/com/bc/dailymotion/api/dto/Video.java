@@ -133,4 +133,987 @@ public class Video {
     int views_last_week;//	The number of views in the last 7 sliding days.	No access_token required for reading.	Returns number, min value: 0.
     int views_total;//	The number of views on the video since its publication.	No access_token required for reading.	Returns number, min value: 0.
 
+    public boolean isThreeD() {
+        return threeD;
+    }
+
+    public void setThreeD(boolean threeD) {
+        this.threeD = threeD;
+    }
+
+    public String getAccess_error() {
+        return access_error;
+    }
+
+    public void setAccess_error(String access_error) {
+        this.access_error = access_error;
+    }
+
+    public boolean isAds() {
+        return ads;
+    }
+
+    public void setAds(boolean ads) {
+        this.ads = ads;
+    }
+
+    public boolean isAllow_comments() {
+        return allow_comments;
+    }
+
+    public void setAllow_comments(boolean allow_comments) {
+        this.allow_comments = allow_comments;
+    }
+
+    public boolean isAllow_embed() {
+        return allow_embed;
+    }
+
+    public void setAllow_embed(boolean allow_embed) {
+        this.allow_embed = allow_embed;
+    }
+
+    public boolean isAllowed_in_groups() {
+        return allowed_in_groups;
+    }
+
+    public void setAllowed_in_groups(boolean allowed_in_groups) {
+        this.allowed_in_groups = allowed_in_groups;
+    }
+
+    public boolean isAllowed_in_playlists() {
+        return allowed_in_playlists;
+    }
+
+    public void setAllowed_in_playlists(boolean allowed_in_playlists) {
+        this.allowed_in_playlists = allowed_in_playlists;
+    }
+
+    public double getAspect_ratio() {
+        return aspect_ratio;
+    }
+
+    public void setAspect_ratio(double aspect_ratio) {
+        this.aspect_ratio = aspect_ratio;
+    }
+
+    public int getAudience() {
+        return audience;
+    }
+
+    public void setAudience(int audience) {
+        this.audience = audience;
+    }
+
+    public List<Double> getAvailable_formats() {
+        return available_formats;
+    }
+
+    public void setAvailable_formats(List<Double> available_formats) {
+        this.available_formats = available_formats;
+    }
+
+    public int getBookmarks_total() {
+        return bookmarks_total;
+    }
+
+    public void setBookmarks_total(int bookmarks_total) {
+        this.bookmarks_total = bookmarks_total;
+    }
+
+    public boolean isBroadcasting() {
+        return broadcasting;
+    }
+
+    public void setBroadcasting(boolean broadcasting) {
+        this.broadcasting = broadcasting;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    public int getComments_total() {
+        return comments_total;
+    }
+
+    public void setComments_total(int comments_total) {
+        this.comments_total = comments_total;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Timestamp getCreated_after() {
+        return created_after;
+    }
+
+    public void setCreated_after(Timestamp created_after) {
+        this.created_after = created_after;
+    }
+
+    public Timestamp getCreated_before() {
+        return created_before;
+    }
+
+    public void setCreated_before(Timestamp created_before) {
+        this.created_before = created_before;
+    }
+
+    public Date getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(Date created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getEmbed_html() {
+        return embed_html;
+    }
+
+    public void setEmbed_html(String embed_html) {
+        this.embed_html = embed_html;
+    }
+
+    public String getEmbed_url() {
+        return embed_url;
+    }
+
+    public void setEmbed_url(String embed_url) {
+        this.embed_url = embed_url;
+    }
+
+    public int getEncoding_progress() {
+        return encoding_progress;
+    }
+
+    public void setEncoding_progress(int encoding_progress) {
+        this.encoding_progress = encoding_progress;
+    }
+
+    public Date getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Date end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getEvent_delete() {
+        return event_delete;
+    }
+
+    public void setEvent_delete(String event_delete) {
+        this.event_delete = event_delete;
+    }
+
+    public String getEvent_live_offair() {
+        return event_live_offair;
+    }
+
+    public void setEvent_live_offair(String event_live_offair) {
+        this.event_live_offair = event_live_offair;
+    }
+
+    public String getEvent_live_onair() {
+        return event_live_onair;
+    }
+
+    public void setEvent_live_onair(String event_live_onair) {
+        this.event_live_onair = event_live_onair;
+    }
+
+    public String getEvent_modify() {
+        return event_modify;
+    }
+
+    public void setEvent_modify(String event_modify) {
+        this.event_modify = event_modify;
+    }
+
+    public boolean isExplicit() {
+        return explicit;
+    }
+
+    public void setExplicit(boolean explicit) {
+        this.explicit = explicit;
+    }
+
+    public String getFilmstrip_small_url() {
+        return filmstrip_small_url;
+    }
+
+    public void setFilmstrip_small_url(String filmstrip_small_url) {
+        this.filmstrip_small_url = filmstrip_small_url;
+    }
+
+    public String getFilters() {
+        return filters;
+    }
+
+    public void setFilters(String filters) {
+        this.filters = filters;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public List<String> getGeoblocking() {
+        return geoblocking;
+    }
+
+    public void setGeoblocking(List<String> geoblocking) {
+        this.geoblocking = geoblocking;
+    }
+
+    public List<Double> getGeoloc() {
+        return geoloc;
+    }
+
+    public void setGeoloc(List<Double> geoloc) {
+        this.geoloc = geoloc;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
+
+    public String getIsrc() {
+        return isrc;
+    }
+
+    public void setIsrc(String isrc) {
+        this.isrc = isrc;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public boolean isLive_ad_break() {
+        return live_ad_break;
+    }
+
+    public void setLive_ad_break(boolean live_ad_break) {
+        this.live_ad_break = live_ad_break;
+    }
+
+    public String getLive_frag_publish_url() {
+        return live_frag_publish_url;
+    }
+
+    public void setLive_frag_publish_url(String live_frag_publish_url) {
+        this.live_frag_publish_url = live_frag_publish_url;
+    }
+
+    public String getLive_publish_url() {
+        return live_publish_url;
+    }
+
+    public void setLive_publish_url(String live_publish_url) {
+        this.live_publish_url = live_publish_url;
+    }
+
+    public List<String> getMediablocking() {
+        return mediablocking;
+    }
+
+    public void setMediablocking(List<String> mediablocking) {
+        this.mediablocking = mediablocking;
+    }
+
+    public String getMetadata_credit_actors() {
+        return metadata_credit_actors;
+    }
+
+    public void setMetadata_credit_actors(String metadata_credit_actors) {
+        this.metadata_credit_actors = metadata_credit_actors;
+    }
+
+    public String getMetadata_credit_director() {
+        return metadata_credit_director;
+    }
+
+    public void setMetadata_credit_director(String metadata_credit_director) {
+        this.metadata_credit_director = metadata_credit_director;
+    }
+
+    public String getMetadata_genre() {
+        return metadata_genre;
+    }
+
+    public void setMetadata_genre(String metadata_genre) {
+        this.metadata_genre = metadata_genre;
+    }
+
+    public String getMetadata_original_language() {
+        return metadata_original_language;
+    }
+
+    public void setMetadata_original_language(String metadata_original_language) {
+        this.metadata_original_language = metadata_original_language;
+    }
+
+    public String getMetadata_original_title() {
+        return metadata_original_title;
+    }
+
+    public void setMetadata_original_title(String metadata_original_title) {
+        this.metadata_original_title = metadata_original_title;
+    }
+
+    public String getMetadata_released() {
+        return metadata_released;
+    }
+
+    public void setMetadata_released(String metadata_released) {
+        this.metadata_released = metadata_released;
+    }
+
+    public String getMetadata_show_episod() {
+        return metadata_show_episod;
+    }
+
+    public void setMetadata_show_episod(String metadata_show_episod) {
+        this.metadata_show_episod = metadata_show_episod;
+    }
+
+    public String getMetadata_show_season() {
+        return metadata_show_season;
+    }
+
+    public void setMetadata_show_season(String metadata_show_season) {
+        this.metadata_show_season = metadata_show_season;
+    }
+
+    public String getMetadata_visa() {
+        return metadata_visa;
+    }
+
+    public void setMetadata_visa(String metadata_visa) {
+        this.metadata_visa = metadata_visa;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public boolean isModerated() {
+        return moderated;
+    }
+
+    public void setModerated(boolean moderated) {
+        this.moderated = moderated;
+    }
+
+    public Timestamp getModified_after() {
+        return modified_after;
+    }
+
+    public void setModified_after(Timestamp modified_after) {
+        this.modified_after = modified_after;
+    }
+
+    public Timestamp getModified_before() {
+        return modified_before;
+    }
+
+    public void setModified_before(Timestamp modified_before) {
+        this.modified_before = modified_before;
+    }
+
+    public Timestamp getModified_time() {
+        return modified_time;
+    }
+
+    public void setModified_time(Timestamp modified_time) {
+        this.modified_time = modified_time;
+    }
+
+    public String getMuyap() {
+        return muyap;
+    }
+
+    public void setMuyap(String muyap) {
+        this.muyap = muyap;
+    }
+
+    public boolean isOnair() {
+        return onair;
+    }
+
+    public void setOnair(boolean onair) {
+        this.onair = onair;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public boolean isPaywall() {
+        return paywall;
+    }
+
+    public void setPaywall(boolean paywall) {
+        this.paywall = paywall;
+    }
+
+    public boolean isPoster() {
+        return poster;
+    }
+
+    public void setPoster(boolean poster) {
+        this.poster = poster;
+    }
+
+    public String getPoster_135x180_url() {
+        return poster_135x180_url;
+    }
+
+    public void setPoster_135x180_url(String poster_135x180_url) {
+        this.poster_135x180_url = poster_135x180_url;
+    }
+
+    public String getPoster_180x240_url() {
+        return poster_180x240_url;
+    }
+
+    public void setPoster_180x240_url(String poster_180x240_url) {
+        this.poster_180x240_url = poster_180x240_url;
+    }
+
+    public String getPoster_270x360_url() {
+        return poster_270x360_url;
+    }
+
+    public void setPoster_270x360_url(String poster_270x360_url) {
+        this.poster_270x360_url = poster_270x360_url;
+    }
+
+    public String getPoster_360x480_url() {
+        return poster_360x480_url;
+    }
+
+    public void setPoster_360x480_url(String poster_360x480_url) {
+        this.poster_360x480_url = poster_360x480_url;
+    }
+
+    public String getPoster_45x60_url() {
+        return poster_45x60_url;
+    }
+
+    public void setPoster_45x60_url(String poster_45x60_url) {
+        this.poster_45x60_url = poster_45x60_url;
+    }
+
+    public String getPoster_90x120_url() {
+        return poster_90x120_url;
+    }
+
+    public void setPoster_90x120_url(String poster_90x120_url) {
+        this.poster_90x120_url = poster_90x120_url;
+    }
+
+    public String getPoster_url() {
+        return poster_url;
+    }
+
+    public void setPoster_url(String poster_url) {
+        this.poster_url = poster_url;
+    }
+
+    public String getPrice_details() {
+        return price_details;
+    }
+
+    public void setPrice_details(String price_details) {
+        this.price_details = price_details;
+    }
+
+    public boolean isPrivate_() {
+        return private_;
+    }
+
+    public void setPrivate_(boolean private_) {
+        this.private_ = private_;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getRatings_total() {
+        return ratings_total;
+    }
+
+    public void setRatings_total(int ratings_total) {
+        this.ratings_total = ratings_total;
+    }
+
+    public String getRecurrence() {
+        return recurrence;
+    }
+
+    public void setRecurrence(String recurrence) {
+        this.recurrence = recurrence;
+    }
+
+    public int getRental_duration() {
+        return rental_duration;
+    }
+
+    public void setRental_duration(int rental_duration) {
+        this.rental_duration = rental_duration;
+    }
+
+    public float getRental_price() {
+        return rental_price;
+    }
+
+    public void setRental_price(float rental_price) {
+        this.rental_price = rental_price;
+    }
+
+    public String getRental_price_formatted() {
+        return rental_price_formatted;
+    }
+
+    public void setRental_price_formatted(String rental_price_formatted) {
+        this.rental_price_formatted = rental_price_formatted;
+    }
+
+    public int getRental_start_time() {
+        return rental_start_time;
+    }
+
+    public void setRental_start_time(int rental_start_time) {
+        this.rental_start_time = rental_start_time;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSharing_urls() {
+        return sharing_urls;
+    }
+
+    public void setSharing_urls(String sharing_urls) {
+        this.sharing_urls = sharing_urls;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getSoundtrack_info() {
+        return soundtrack_info;
+    }
+
+    public void setSoundtrack_info(String soundtrack_info) {
+        this.soundtrack_info = soundtrack_info;
+    }
+
+    public Date getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Date start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStream_h264_hd1080_url() {
+        return stream_h264_hd1080_url;
+    }
+
+    public void setStream_h264_hd1080_url(String stream_h264_hd1080_url) {
+        this.stream_h264_hd1080_url = stream_h264_hd1080_url;
+    }
+
+    public String getStream_h264_hd_url() {
+        return stream_h264_hd_url;
+    }
+
+    public void setStream_h264_hd_url(String stream_h264_hd_url) {
+        this.stream_h264_hd_url = stream_h264_hd_url;
+    }
+
+    public String getStream_h264_hq_url() {
+        return stream_h264_hq_url;
+    }
+
+    public void setStream_h264_hq_url(String stream_h264_hq_url) {
+        this.stream_h264_hq_url = stream_h264_hq_url;
+    }
+
+    public String getStream_h264_l1_url() {
+        return stream_h264_l1_url;
+    }
+
+    public void setStream_h264_l1_url(String stream_h264_l1_url) {
+        this.stream_h264_l1_url = stream_h264_l1_url;
+    }
+
+    public String getStream_h264_l2_url() {
+        return stream_h264_l2_url;
+    }
+
+    public void setStream_h264_l2_url(String stream_h264_l2_url) {
+        this.stream_h264_l2_url = stream_h264_l2_url;
+    }
+
+    public String getStream_h264_ld_url() {
+        return stream_h264_ld_url;
+    }
+
+    public void setStream_h264_ld_url(String stream_h264_ld_url) {
+        this.stream_h264_ld_url = stream_h264_ld_url;
+    }
+
+    public String getStream_h264_url() {
+        return stream_h264_url;
+    }
+
+    public void setStream_h264_url(String stream_h264_url) {
+        this.stream_h264_url = stream_h264_url;
+    }
+
+    public String getStream_hls_url() {
+        return stream_hls_url;
+    }
+
+    public void setStream_hls_url(String stream_hls_url) {
+        this.stream_hls_url = stream_hls_url;
+    }
+
+    public String getStream_live_hds_url() {
+        return stream_live_hds_url;
+    }
+
+    public void setStream_live_hds_url(String stream_live_hds_url) {
+        this.stream_live_hds_url = stream_live_hds_url;
+    }
+
+    public String getStream_live_hls_url() {
+        return stream_live_hls_url;
+    }
+
+    public void setStream_live_hls_url(String stream_live_hls_url) {
+        this.stream_live_hls_url = stream_live_hls_url;
+    }
+
+    public String getStream_live_rtmp_url() {
+        return stream_live_rtmp_url;
+    }
+
+    public void setStream_live_rtmp_url(String stream_live_rtmp_url) {
+        this.stream_live_rtmp_url = stream_live_rtmp_url;
+    }
+
+    public String getStream_premium_preview_hls_url() {
+        return stream_premium_preview_hls_url;
+    }
+
+    public void setStream_premium_preview_hls_url(String stream_premium_preview_hls_url) {
+        this.stream_premium_preview_hls_url = stream_premium_preview_hls_url;
+    }
+
+    public String getStream_premium_preview_mp4_url() {
+        return stream_premium_preview_mp4_url;
+    }
+
+    public void setStream_premium_preview_mp4_url(String stream_premium_preview_mp4_url) {
+        this.stream_premium_preview_mp4_url = stream_premium_preview_mp4_url;
+    }
+
+    public String getStream_premium_preview_web_url() {
+        return stream_premium_preview_web_url;
+    }
+
+    public void setStream_premium_preview_web_url(String stream_premium_preview_web_url) {
+        this.stream_premium_preview_web_url = stream_premium_preview_web_url;
+    }
+
+    public String getStream_source_url() {
+        return stream_source_url;
+    }
+
+    public void setStream_source_url(String stream_source_url) {
+        this.stream_source_url = stream_source_url;
+    }
+
+    public List<Strongtag> getStrongtags() {
+        return strongtags;
+    }
+
+    public void setStrongtags(List<Strongtag> strongtags) {
+        this.strongtags = strongtags;
+    }
+
+    public boolean isSvod() {
+        return svod;
+    }
+
+    public void setSvod(boolean svod) {
+        this.svod = svod;
+    }
+
+    public String getSwf_url() {
+        return swf_url;
+    }
+
+    public void setSwf_url(String swf_url) {
+        this.swf_url = swf_url;
+    }
+
+    public boolean isSync_allowed() {
+        return sync_allowed;
+    }
+
+    public void setSync_allowed(boolean sync_allowed) {
+        this.sync_allowed = sync_allowed;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public Date getTaken_time() {
+        return taken_time;
+    }
+
+    public void setTaken_time(Date taken_time) {
+        this.taken_time = taken_time;
+    }
+
+    public String getThumbnail_120_url() {
+        return thumbnail_120_url;
+    }
+
+    public void setThumbnail_120_url(String thumbnail_120_url) {
+        this.thumbnail_120_url = thumbnail_120_url;
+    }
+
+    public String getThumbnail_180_url() {
+        return thumbnail_180_url;
+    }
+
+    public void setThumbnail_180_url(String thumbnail_180_url) {
+        this.thumbnail_180_url = thumbnail_180_url;
+    }
+
+    public String getThumbnail_240_url() {
+        return thumbnail_240_url;
+    }
+
+    public void setThumbnail_240_url(String thumbnail_240_url) {
+        this.thumbnail_240_url = thumbnail_240_url;
+    }
+
+    public String getThumbnail_360_url() {
+        return thumbnail_360_url;
+    }
+
+    public void setThumbnail_360_url(String thumbnail_360_url) {
+        this.thumbnail_360_url = thumbnail_360_url;
+    }
+
+    public String getThumbnail_480_url() {
+        return thumbnail_480_url;
+    }
+
+    public void setThumbnail_480_url(String thumbnail_480_url) {
+        this.thumbnail_480_url = thumbnail_480_url;
+    }
+
+    public String getThumbnail_60_url() {
+        return thumbnail_60_url;
+    }
+
+    public void setThumbnail_60_url(String thumbnail_60_url) {
+        this.thumbnail_60_url = thumbnail_60_url;
+    }
+
+    public String getThumbnail_720_url() {
+        return thumbnail_720_url;
+    }
+
+    public void setThumbnail_720_url(String thumbnail_720_url) {
+        this.thumbnail_720_url = thumbnail_720_url;
+    }
+
+    public String getThumbnail_url() {
+        return thumbnail_url;
+    }
+
+    public void setThumbnail_url(String thumbnail_url) {
+        this.thumbnail_url = thumbnail_url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isTvod() {
+        return tvod;
+    }
+
+    public void setTvod(boolean tvod) {
+        this.tvod = tvod;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUpc() {
+        return upc;
+    }
+
+    public void setUpc(String upc) {
+        this.upc = upc;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getViews_last_day() {
+        return views_last_day;
+    }
+
+    public void setViews_last_day(int views_last_day) {
+        this.views_last_day = views_last_day;
+    }
+
+    public int getViews_last_hour() {
+        return views_last_hour;
+    }
+
+    public void setViews_last_hour(int views_last_hour) {
+        this.views_last_hour = views_last_hour;
+    }
+
+    public int getViews_last_month() {
+        return views_last_month;
+    }
+
+    public void setViews_last_month(int views_last_month) {
+        this.views_last_month = views_last_month;
+    }
+
+    public int getViews_last_week() {
+        return views_last_week;
+    }
+
+    public void setViews_last_week(int views_last_week) {
+        this.views_last_week = views_last_week;
+    }
+
+    public int getViews_total() {
+        return views_total;
+    }
+
+    public void setViews_total(int views_total) {
+        this.views_total = views_total;
+    }
 }
