@@ -30,10 +30,10 @@ public class DailymotionClientImplIntegTest {
         ReflectionTestUtils.setField(this.dailymotionClient, "proxyPort", 3128);
         ReflectionTestUtils.setField(this.dailymotionClient, "timeout", 5000);
 
-        ReflectionTestUtils.setField(this.dailymotionClient, "username", "calaagree");
-        ReflectionTestUtils.setField(this.dailymotionClient, "password", "warez01");
-        ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "d93e1e3b4e4066de0c2d");
-        ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "1fcd53738f30187af1ffc8a911d045f123739cd1");
+        ReflectionTestUtils.setField(this.dailymotionClient, "username", "zebasto");
+        ReflectionTestUtils.setField(this.dailymotionClient, "password", "zebasto");
+        ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "ce939ab3a375e06644ef");
+        ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "cbe45d5d34a3e4e0ef35663dc43c2a71a79949cb");
 
         this.dailymotionClient.afterPropertiesSet();
     }
