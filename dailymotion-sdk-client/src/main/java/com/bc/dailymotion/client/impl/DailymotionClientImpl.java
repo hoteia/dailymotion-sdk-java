@@ -7,10 +7,10 @@ import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.Endpoint.EndpointType;
 import com.bc.dailymotion.api.Response;
 import com.bc.dailymotion.client.DailymotionClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ning.http.client.AsyncHttpClientConfig;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.resthub.web.Client;
+import org.resthub.web.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +108,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     /**
      * Static logger used for traces
      */
-    private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClient.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClientImpl.class);
 
     /**
      * Method used to build a request and fetch the response of the Dailymotion API
@@ -126,6 +125,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         LOGGER.trace("[IN] doRequest with parameters {},{},{},{},{}", method, endPoint, type, id, params);
         try {
             String endpointUrl = (String) endPoint.getField(type.toString()).get(null);
+            LOGGER.debug("endpointUrl has value [{}]", endpointUrl);
+
+            Assert.notNull(endpointUrl, "Endpoint url not found !");
 
             String url;
             if (id != null) {
@@ -134,10 +136,11 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, endpointUrl);
             }
 
-            String body = this.callDailymotionAPI(method, url, params).getBody();
             Response<T> response = new Response<>();
-            return new ObjectMapper().readValue(body, response.getClass());
-        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+            response = JsonHelper.deserialize(this.callDailymotionAPI(method, url, params).getBody(), response.getClass());
+            LOGGER.trace("Response from URL {} is {}", url, response);
+            return response;
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -169,7 +172,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}/{1}/{2}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
             }
             Response<T> response = new Response<>();
-            return this.callDailymotionAPI(method, url, params).resource(response.getClass());
+            response = JsonHelper.deserialize(this.callDailymotionAPI(method, url, params).getBody(), response.getClass());
+            LOGGER.trace("Response from URL {} is {}", url, response);
+            return response;
         } catch (IllegalAccessException | NoSuchFieldException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
@@ -182,28 +187,28 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      *
      * @param method The HTTP Method used for the call
      * @param url    The url to use
+     * @param params The optional parameters
      * @return Returns the JSON response if any
      */
     private org.resthub.web.Response callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url, final Map<String, List<String>> params) {
         LOGGER.trace("[IN] callDailymotionAPI with parameters {}, {}, {}", method, url, params);
-        org.resthub.web.Response response;
 
         Client.RequestHolder requestHolder = this.httpClient.url(url);
-        params.forEach((key, value) -> {
-            requestHolder.setQueryParameter(key, this.arrayToString(value));
-        });
+        if (params != null) {
+            params.forEach((key, value) -> {
+                requestHolder.setQueryParameter(key, this.arrayToString(value));
+            });
+        }
 
         if (HttpMethod.GET.equals(method)) {
-            response = requestHolder.get();
+            return requestHolder.get();
         } else if (HttpMethod.POST.equals(method)) {
-            response = requestHolder.post();
+            return requestHolder.post();
         } else if (HttpMethod.DELETE.equals(method)) {
-            response = requestHolder.delete();
+            return requestHolder.delete();
         } else {
             throw new UnsupportedOperationException(MessageFormat.format("The given HttpMethod ({0}) isn't allowed here", method));
         }
-        LOGGER.trace("Response from URL {} is {}", url, response);
-        return response;
     }
 
     /**
@@ -242,6 +247,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         this.httpClient = new Client(builder);
         if (this.useProxy) {
             this.httpClient.setProxy(this.proxyHost, this.proxyPort);
+            LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
         }
         this.httpClient.setOAuth2(this.username, this.password, MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
     }

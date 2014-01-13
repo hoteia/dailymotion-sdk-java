@@ -1,5 +1,9 @@
 package com.bc.dailymotion.api;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +16,10 @@ public class Response<E> {
     private int total;
     private boolean has_more;
     private List<E> list;
+
+    public Response() {
+        this.list = new ArrayList<>();
+    }
 
     public int getPage() {
         return page;
@@ -59,5 +67,13 @@ public class Response<E> {
 
     public void setList(List<E> list) {
         this.list = list;
+    }
+
+    /**
+     * {@docRoot}
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 }

@@ -5,13 +5,6 @@ import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.Response;
 import com.bc.dailymotion.api.dto.Video;
 import org.fest.assertions.api.Assertions;
-import org.mockito.Answers;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.resthub.web.Client;
-import org.resthub.web.Http;
-import org.resthub.web.JsonHelper;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,31 +13,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
-
 /**
  * Created by Bastien on 05/01/2014.
  */
-public class DailymotionClientImplTest {
-    @InjectMocks
-    private DailymotionClientImpl dailymotionClient;
+public class DailymotionClientImplIntegTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Client httpClient;
+    private DailymotionClientImpl dailymotionClient;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        this.dailymotionClient = new DailymotionClientImpl();
+
         ReflectionTestUtils.setField(this.dailymotionClient, "dailymotionRootUrl", "https://api.dailymotion.com");
-        ReflectionTestUtils.setField(this.dailymotionClient, "useProxy", false);
-        ReflectionTestUtils.setField(this.dailymotionClient, "proxyHost", "");
-        ReflectionTestUtils.setField(this.dailymotionClient, "proxyPort", 0);
+        ReflectionTestUtils.setField(this.dailymotionClient, "useProxy", true);
+        ReflectionTestUtils.setField(this.dailymotionClient, "proxyHost", "proxy.priv.atos.fr");
+        ReflectionTestUtils.setField(this.dailymotionClient, "proxyPort", 3128);
         ReflectionTestUtils.setField(this.dailymotionClient, "timeout", 5000);
 
-        ReflectionTestUtils.setField(this.dailymotionClient, "username", "toto");
-        ReflectionTestUtils.setField(this.dailymotionClient, "password", "toto");
-        ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "0000000000000000000");
-        ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "000000000000000000000000000000000000");
+        ReflectionTestUtils.setField(this.dailymotionClient, "username", "calaagree");
+        ReflectionTestUtils.setField(this.dailymotionClient, "password", "warez01");
+        ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "d93e1e3b4e4066de0c2d");
+        ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "1fcd53738f30187af1ffc8a911d045f123739cd1");
 
         this.dailymotionClient.afterPropertiesSet();
     }
@@ -64,18 +53,12 @@ public class DailymotionClientImplTest {
         videoResponse.setPage(1);
         videoResponse.setList(videoList);
 
-        org.resthub.web.Response response = mock(org.resthub.web.Response.class, RETURNS_DEEP_STUBS);
-        when(this.httpClient.url("https://api.dailymotion.com/videos").get()).thenReturn(response);
-        when(response.getBody()).thenReturn(JsonHelper.serialize(videoResponse));
-        when(response.getStatus()).thenReturn(Http.OK);
-
         // When
-        Response<Video> actualResponse = this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
+        Response<Video> actualResponse = this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ME);
 
         // Then
-        verify(this.httpClient, times(2)).url("https://api.dailymotion.com/videos");
         Assertions.assertThat(actualResponse).isNotNull();
-        Assertions.assertThat(actualResponse.getList()).hasSize(3);
+        //Assertions.assertThat(actualResponse.getList()).hasSize(3);
     }
 
     @Test

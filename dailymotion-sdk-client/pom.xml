@@ -17,14 +17,22 @@
             <groupId>com.bc.dailymotion</groupId>
             <artifactId>dailymotion-sdk-api</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.resthub</groupId>
             <artifactId>resthub-web-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.resthub</groupId>
+            <artifactId>resthub-test</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
         <dependency>
             <groupId>net.java.loci</groupId>
             <artifactId>jsr308-all</artifactId>

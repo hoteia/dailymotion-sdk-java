@@ -96,22 +96,15 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
             </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>1.0.13</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <!--Others dependencies -->
         <dependency>
-            <groupId>org.resthub</groupId>
-            <artifactId>resthub-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
     </dependencies>
 
