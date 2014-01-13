@@ -14,7 +14,7 @@
     <!-- +++++++++++++++++++++ -->
     <!-- Loggers 'applicatifs' -->
     <!-- +++++++++++++++++++++ -->
-    <logger name="com.bc.dailymotion" additivity="false">
+    <logger name="com.bc.dailymotion.client" additivity="false">
         <level value="trace"/>
         <appender-ref ref="STDOUT"/>
     </logger>
@@ -23,18 +23,18 @@
     <!-- Frameworks -->
     <!-- ++++++++++ -->
     <logger name="org.resthub">
-        <level value="trace"/>
+        <level value="info"/>
         <appender-ref ref="STDOUT"/>
     </logger>
     <logger name="org.springframework">
-        <level value="debug"/>
+        <level value="info"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- ++++ -->
     <!-- ROOT -->
     <!-- ++++ -->
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

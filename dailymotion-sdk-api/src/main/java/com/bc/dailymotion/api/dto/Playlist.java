@@ -1,5 +1,8 @@
 package com.bc.dailymotion.api.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.Date;
 
 /**
@@ -113,5 +116,30 @@ public class Playlist {
 
     public void setVideos_total(int videos_total) {
         this.videos_total = videos_total;
+    }
+
+    /**
+     * {@docRoot}
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Playlist playlist = (Playlist) o;
+
+        if (id != null ? !id.equals(playlist.id) : playlist.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

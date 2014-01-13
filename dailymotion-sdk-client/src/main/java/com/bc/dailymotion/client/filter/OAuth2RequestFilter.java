@@ -22,19 +22,50 @@ import java.util.concurrent.TimeUnit;
  */
 public class OAuth2RequestFilter implements RequestFilter {
 
+    /**
+     *
+     */
     public static final String GRANT_TYPE_PARAMETER_NAME = "grant_type";
+
+    /**
+     *
+     */
     public static final String CLIENT_ID_PARAMETER_NAME = "client_id";
+
+    /**
+     *
+     */
     public static final String CLIENT_SECRET_PARAMETER_NAME = "client_secret";
+
+    /**
+     *
+     */
     public static final String USERNAME_PARAMETER_NAME = "username";
+
+    /**
+     *
+     */
     public static final String PASSWORD_PARAMETER_NAME = "password";
+
+    /**
+     *
+     */
     public static final String SCOPE_PARAMETER_NAME = "scope";
+
+    /**
+     *
+     */
     public static final String PASSWORD_PARAMETER_VALUE = "password";
+
     /**
      * Root URL for Dailymotion SDK
      */
     private String accessTokenEndPoint;
 
-    protected String scheme_name;
+    /**
+     * The scheme name used to put the token in headers
+     */
+    private String scheme_name;
 
     /**
      * Username used for the OAuth protocol
@@ -56,7 +87,10 @@ public class OAuth2RequestFilter implements RequestFilter {
      */
     private String clientSecret;
 
-    protected long acquireTime;
+    /**
+     * The time to acquire the token
+     */
+    private long acquireTime;
 
     /**
      * Indicate if we use a proxy to reach the Media Controller/CAS Service
@@ -73,7 +107,10 @@ public class OAuth2RequestFilter implements RequestFilter {
      */
     private int proxyPort;
 
-    protected OAuth2Token token;
+    /**
+     * The OAuth token that will be fetched
+     */
+    private OAuth2Token token;
 
     /**
      * Request filter that acquires an OAuth token if:
@@ -94,45 +131,35 @@ public class OAuth2RequestFilter implements RequestFilter {
         token = null;
     }
 
+    /**
+     * Sets the credentials of OAuth
+     *
+     * @param username The username to use with OAuth
+     * @param password The password to use with OAuth
+     */
     public void setCredentials(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    /**
+     * Sets the proxy to use. If useProxy is false, proxyHost and proxyPort will not be used
+     *
+     * @param useProxy  boolean used to set a proxy
+     * @param proxyHost The host of the proxy to use
+     * @param proxyPort The port of the proxy to use
+     */
     public void setProxy(boolean useProxy, String proxyHost, int proxyPort) {
         this.useProxy = useProxy;
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
     }
 
-    public String getAccessTokenEndPoint() {
-        return accessTokenEndPoint;
-    }
-
-    public void setAccessTokenEndPoint(String accessTokenEndPoint) {
-        this.accessTokenEndPoint = accessTokenEndPoint;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-    }
-
-    public String getSchemeName() {
-        return scheme_name;
-    }
-
+    /**
+     * Sets the scheme name used for the token authentication
+     *
+     * @param scheme_name The scheme name to set
+     */
     public void setSchemeName(String scheme_name) {
         this.scheme_name = scheme_name;
     }
@@ -140,6 +167,10 @@ public class OAuth2RequestFilter implements RequestFilter {
     /**
      * Retrieve the OAuth2.0 access token from the remote token endpoint
      * using pre-configured clientId/clientSecret.
+     *
+     * @param username The username to use with OAuth
+     * @param password The password to use with OAuth
+     * @return The OAuth2Token that has been retrieved
      */
     private OAuth2Token retrieveAccessToken(String username, String password) {
         AsyncHttpClient client = new AsyncHttpClient();
@@ -170,15 +201,20 @@ public class OAuth2RequestFilter implements RequestFilter {
         return token;
     }
 
-    /*
+    /**
      * Checks if the current token is expired, given the "Expires in" duration
      * information given in the token. It takes a 5 second security margin to
      * avoid token expiration.
+     *
+     * @return The boolean that shows of the token has expired
      */
     private boolean isTokenExpired() {
         return (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - acquireTime) > (token.getExpiresIn() - 5);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("rawtypes")
     public FilterContext filter(FilterContext ctx) throws FilterException {
@@ -189,18 +225,6 @@ public class OAuth2RequestFilter implements RequestFilter {
 
         ctx.getRequest().getHeaders().add(Http.AUTHORIZATION, scheme_name + " " + token.getAccessToken());
         return ctx;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public void setUseProxy(boolean useProxy) {
-        this.useProxy = useProxy;
-    }
-
-    public void setProxyPort(int proxyPort) {
-        this.proxyPort = proxyPort;
     }
 }
 

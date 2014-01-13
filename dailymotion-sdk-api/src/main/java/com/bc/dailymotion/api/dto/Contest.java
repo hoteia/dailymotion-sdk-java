@@ -1,5 +1,8 @@
 package com.bc.dailymotion.api.dto;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * Created by Bastien on 04/01/2014.
  */
@@ -48,5 +51,30 @@ public class Contest {
 
     public void setUrl_name(String url_name) {
         this.url_name = url_name;
+    }
+
+    /**
+     * {@docRoot}
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contest contest = (Contest) o;
+
+        if (id != null ? !id.equals(contest.id) : contest.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

@@ -1,5 +1,7 @@
 package com.bc.dailymotion.client.impl;
 
+import com.bc.dailymotion.api.Connection;
+import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.Response;
 import com.bc.dailymotion.api.connection.video.VideoComment;
 import com.bc.dailymotion.api.dto.Video;
@@ -17,12 +19,13 @@ import org.resthub.web.JsonHelper;
 import org.resthub.web.oauth2.OAuth2RequestFilter;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
 
 /**
@@ -49,75 +52,125 @@ public class DailymotionClientImplTest {
         ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "0000000000000000000");
         ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "000000000000000000000000000000000000");
         ReflectionTestUtils.setField(this.dailymotionClient, "scheme", "OAuth");
-
-        //this.dailymotionClient.afterPropertiesSet();
     }
 
-    @Test
-    public void testDoGet1() throws Exception {
-        // Given
-        List<Video> videoList = new ArrayList<>();
-        videoList.add(new Video());
-        videoList.add(new Video());
-        videoList.add(new Video());
+    private <T> Response<T> getResponseForType(Class<T> type) throws IllegalAccessException, InstantiationException {
+        List<T> list = asList(type.newInstance(), type.newInstance(), type.newInstance());
 
-        Response<Video> videoResponse = new Response<>();
-        videoResponse.setExplicit(false);
-        videoResponse.setHas_more(false);
-        videoResponse.setLimit(10);
-        videoResponse.setPage(1);
-        videoResponse.setList(videoList);
-        videoResponse.setTotal(videoList.size());
+        Response<T> response = new Response<>();
+        response.setExplicit(false);
+        response.setHas_more(false);
+        response.setLimit(10);
+        response.setPage(1);
+        response.setTotal(list.size());
+        response.setList(list);
+
+        return response;
+    }
+
+    @DataProvider(name = "doGetEndpoint")
+    private Object[][] doGetEndpoint() throws InstantiationException, IllegalAccessException {
+        return new Object[][]{
+                {1, Video.class, null, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, getResponseForType(Video.class)},
+                {1, Video.class, null, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, getResponseForType(Video.class)}
+        };
+    }
+
+    @DataProvider(name = "doGetConnection")
+    private Object[][] doGetConnection() throws InstantiationException, IllegalAccessException {
+        return new Object[][]{};
+    }
+
+    @Test(dataProvider = "doGetEndpoint")
+    public <T> void testDoGetEndpoint(int method, Class<T> tClass, Object[] params, String expectedUrl, Class<? extends Endpoint<T>> endpoint, EndpointType type, Response<T> expectedResponse) throws Exception {
+        // Given
+        List<T> list = asList(tClass.newInstance(), tClass.newInstance(), tClass.newInstance());
+
+        Response<T> tResponse = new Response<>();
+        tResponse.setExplicit(false);
+        tResponse.setHas_more(false);
+        tResponse.setLimit(10);
+        tResponse.setPage(1);
+        tResponse.setList(list);
+        tResponse.setTotal(list.size());
 
         OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
         org.resthub.web.Response response = mock(org.resthub.web.Response.class, RETURNS_DEEP_STUBS);
-        when(this.httpClient.url("https://api.dailymotion.com/videos").get()).thenReturn(response);
-        when(response.getBody()).thenReturn(JsonHelper.serialize(videoResponse));
+        when(this.httpClient.url(expectedUrl).get()).thenReturn(response);
+        when(response.getBody()).thenReturn(JsonHelper.serialize(tResponse));
         when(response.getStatus()).thenReturn(Http.OK);
         when(filter.getAccessTokenEndPoint()).thenReturn("my-token");
 
         // When
-        Response<Video> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL);
+        Response<T> actualResponse;
+        switch (method) {
+            case 1:
+                actualResponse = this.dailymotionClient.doGet(endpoint, type);
+                break;
+            case 2:
+                actualResponse = this.dailymotionClient.doGet(endpoint, type, (HashMap<String, List<String>>) params[0]);
+                break;
+            case 3:
+                actualResponse = this.dailymotionClient.doGet(endpoint, type, (String) params[0]);
+                break;
+            case 4:
+                actualResponse = this.dailymotionClient.doGet(endpoint, type, (String) params[0], (HashMap<String, List<String>>) params[1]);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
 
         // Then
-        verify(this.httpClient, times(2)).url("https://api.dailymotion.com/videos");
-        Assertions.assertThat(actualResponse).isNotNull();
-        Assertions.assertThat(actualResponse.getList()).hasSize(3);
+        verify(this.httpClient, times(2)).url(expectedUrl);
+        Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
     }
 
     @Test
-    public void testDoGet2() throws Exception {
-        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
-    }
+    public <E, T> void testDoGetConnection(int method, Class<T> tClass, Object[] params, String expectedUrl, Class<? extends Connection<E, T>> connection, ConnectionType type, Response<T> expectedResponse) throws Exception {
+        // Given
+        List<T> list = asList(tClass.newInstance(), tClass.newInstance(), tClass.newInstance());
 
-    @Test
-    public void testDoGet3() throws Exception {
-        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
-    }
+        Response<T> tResponse = new Response<>();
+        tResponse.setExplicit(false);
+        tResponse.setHas_more(false);
+        tResponse.setLimit(10);
+        tResponse.setPage(1);
+        tResponse.setList(list);
+        tResponse.setTotal(list.size());
 
-    @Test
-    public void testDoGet4() throws Exception {
-        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
-    }
+        OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
+        org.resthub.web.Response response = mock(org.resthub.web.Response.class, RETURNS_DEEP_STUBS);
+        when(this.httpClient.url(expectedUrl).get()).thenReturn(response);
+        when(response.getBody()).thenReturn(JsonHelper.serialize(tResponse));
+        when(response.getStatus()).thenReturn(Http.OK);
+        when(filter.getAccessTokenEndPoint()).thenReturn("my-token");
 
-    @Test
-    public void testDoGet5() throws Exception {
-        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot");
-    }
+        // When
+        Response<T> actualResponse;
+        switch (method) {
+            case 1:
+                actualResponse = this.dailymotionClient.doGet(connection, type, (String) params[0]);
+                break;
+            case 2:
+                actualResponse = this.dailymotionClient.doGet(connection, type, (String) params[0], (HashMap<String, List<String>>) params[1]);
+                break;
+            case 3:
+                actualResponse = this.dailymotionClient.doGet(connection, type, (String) params[0], (String) params[1]);
+                break;
+            case 4:
+                actualResponse = this.dailymotionClient.doGet(connection, type, (String) params[0], (String) params[1], (HashMap<String, List<String>>) params[2]);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
 
-    @Test
-    public void testDoGet6() throws Exception {
-        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
-    }
-
-    @Test
-    public void testDoGet7() throws Exception {
-        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", "tot");
-    }
-
-    @Test
-    public void testDoGet8() throws Exception {
-        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
+        // Then
+        verify(this.httpClient, times(2)).url(expectedUrl).get();
+        Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
     }
 
     @Test
