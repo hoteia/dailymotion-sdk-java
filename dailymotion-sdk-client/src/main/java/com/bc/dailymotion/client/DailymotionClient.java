@@ -2,10 +2,10 @@ package com.bc.dailymotion.client;
 
 import checkers.nullness.quals.NonNull;
 import com.bc.dailymotion.api.Connection;
-import com.bc.dailymotion.api.Connection.ConnectionType;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.Endpoint.EndpointType;
 import com.bc.dailymotion.api.Response;
+import com.bc.dailymotion.api.type.ConnectionType;
+import com.bc.dailymotion.api.type.EndpointType;
 
 import java.util.List;
 import java.util.Map;
@@ -32,7 +32,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
@@ -42,7 +42,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -53,7 +53,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -64,7 +64,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
@@ -76,7 +76,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param <E>        The parametrized type of the parent endpoint
      * @param <T>        The parametrized type of expected return type
@@ -88,7 +88,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
      * @param <E>        The parametrized type of the parent endpoint
@@ -101,7 +101,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param <E>        The parametrized type of the parent endpoint
@@ -114,7 +114,7 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
@@ -128,7 +128,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
@@ -138,7 +138,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -149,7 +149,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -160,7 +160,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
@@ -172,7 +172,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param <E>        The parametrized type of the parent endpoint
      * @param <T>        The parametrized type of expected return type
@@ -184,7 +184,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
      * @param <E>        The parametrized type of the parent endpoint
@@ -197,7 +197,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param <E>        The parametrized type of the parent endpoint
@@ -210,7 +210,7 @@ public interface DailymotionClient {
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
@@ -224,7 +224,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
@@ -234,7 +234,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -245,7 +245,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
@@ -256,7 +256,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.Endpoint.EndpointType}
+     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
      * @param <E>      The parametrized type of expected return type
@@ -268,7 +268,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param <E>        The parametrized type of the parent endpoint
      * @param <T>        The parametrized type of expected return type
@@ -280,7 +280,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
      * @param <E>        The parametrized type of the parent endpoint
@@ -293,7 +293,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param <E>        The parametrized type of the parent endpoint
@@ -306,7 +306,7 @@ public interface DailymotionClient {
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.Connection.ConnectionType}
+     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request

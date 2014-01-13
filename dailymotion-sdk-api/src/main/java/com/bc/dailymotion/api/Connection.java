@@ -1,64 +1,10 @@
 package com.bc.dailymotion.api;
 
-import com.bc.dailymotion.api.dto.*;
-
 /**
  * Created by Bastien on 05/01/2014.
  */
 public interface Connection<E, T> extends Endpoint<E> {
-    public enum ConnectionType{
-        ALL, ID
-    }
 
-    public interface VideoCommentConnection extends Connection<Video, Comment> {
-        static final String ALL = "comments";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoContestConnection extends Connection<Video, Contest> {
-        static final String ALL = "contests";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoGroupConnection extends Connection<Video, Group> {
-        static final String ALL = "groups";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoPlayListConnection extends Connection<Video, Playlist> {
-        static final String ALL = "playlists";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoRecordConnection extends Connection<Video, Record> {
-        static final String ALL = "records";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoRelatedConnection extends Connection<Video, Video> {
-        static final String ALL = "related";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoStrongtagConnection extends Connection<Video, Strongtag> {
-        static final String ALL = "strongtags";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface VideoSubtitleConnection extends Connection<Video, Subtitle> {
-        static final String ALL = "subtitles";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface ChannelVideoConnection extends Connection<Channel, Video> {
-        static final String ALL = "videos";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface PlaylistVideoConnection extends Connection<Playlist, Video> {
-        static final String ALL = "videos";
-        static final String ID = ALL + "/{0}";
-    }
 
     /*
 
@@ -78,24 +24,4 @@ subscriptions	The videos comming from user’s subscriptions.	No access_token re
 videos	The user’s uploaded video	No access_token required for reading. manage_videos scope required for writing.	A list of Video.
 The activities connection
      */
-
-    public interface ContestMemberConnection extends Connection<Contest, User> {
-        static final String ALL = "members";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface ContestVideoConnection extends Connection<Contest, Video> {
-        static final String ALL = "videos";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface GroupMemberConnection extends Connection<Group, User> {
-        static final String ALL = "members";
-        static final String ID = ALL + "/{0}";
-    }
-
-    public interface GroupVideoConnection extends Connection<Group, Video> {
-        static final String ALL = "videos";
-        static final String ID = ALL + "/{0}";
-    }
 }

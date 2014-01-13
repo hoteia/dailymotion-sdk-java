@@ -1,9 +1,11 @@
 package com.bc.dailymotion.client.impl;
 
-import com.bc.dailymotion.api.Connection;
-import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.Response;
+import com.bc.dailymotion.api.connection.video.VideoComment;
 import com.bc.dailymotion.api.dto.Video;
+import com.bc.dailymotion.api.endpoint.VideoEndpoint;
+import com.bc.dailymotion.api.type.ConnectionType;
+import com.bc.dailymotion.api.type.EndpointType;
 import org.fest.assertions.api.Assertions;
 import org.mockito.Answers;
 import org.mockito.InjectMocks;
@@ -46,8 +48,9 @@ public class DailymotionClientImplTest {
         ReflectionTestUtils.setField(this.dailymotionClient, "password", "toto");
         ReflectionTestUtils.setField(this.dailymotionClient, "clientId", "0000000000000000000");
         ReflectionTestUtils.setField(this.dailymotionClient, "clientSecret", "000000000000000000000000000000000000");
+        ReflectionTestUtils.setField(this.dailymotionClient, "scheme", "OAuth");
 
-        this.dailymotionClient.afterPropertiesSet();
+        //this.dailymotionClient.afterPropertiesSet();
     }
 
     @Test
@@ -64,6 +67,7 @@ public class DailymotionClientImplTest {
         videoResponse.setLimit(10);
         videoResponse.setPage(1);
         videoResponse.setList(videoList);
+        videoResponse.setTotal(videoList.size());
 
         OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
         org.resthub.web.Response response = mock(org.resthub.web.Response.class, RETURNS_DEEP_STUBS);
@@ -73,7 +77,7 @@ public class DailymotionClientImplTest {
         when(filter.getAccessTokenEndPoint()).thenReturn("my-token");
 
         // When
-        Response<Video> actualResponse = this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
+        Response<Video> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL);
 
         // Then
         verify(this.httpClient, times(2)).url("https://api.dailymotion.com/videos");
@@ -83,116 +87,116 @@ public class DailymotionClientImplTest {
 
     @Test
     public void testDoGet2() throws Exception {
-        this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, new HashMap<>());
+        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
     }
 
     @Test
     public void testDoGet3() throws Exception {
-        this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa");
+        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
     }
 
     @Test
     public void testDoGet4() throws Exception {
-        this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa", new HashMap<>());
+        this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
     }
 
     @Test
     public void testDoGet5() throws Exception {
-        this.dailymotionClient.doGet(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot");
+        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot");
     }
 
     @Test
     public void testDoGet6() throws Exception {
-        this.dailymotionClient.doGet(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", new HashMap<>());
+        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
     }
 
     @Test
     public void testDoGet7() throws Exception {
-        this.dailymotionClient.doGet(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot");
+        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", "tot");
     }
 
     @Test
     public void testDoGet8() throws Exception {
-        this.dailymotionClient.doGet(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot", new HashMap<>());
+        this.dailymotionClient.doGet(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
     }
 
     @Test
     public void testDoPost1() throws Exception {
-        this.dailymotionClient.doPost(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
+        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL);
     }
 
     @Test
     public void testDoPost2() throws Exception {
-        this.dailymotionClient.doPost(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, new HashMap<>());
+        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
     }
 
     @Test
     public void testDoPost3() throws Exception {
-        this.dailymotionClient.doPost(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa");
+        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
     }
 
     @Test
     public void testDoPost4() throws Exception {
-        this.dailymotionClient.doPost(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa", new HashMap<>());
+        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
     }
 
     @Test
     public void testDoPost5() throws Exception {
-        this.dailymotionClient.doPost(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot");
+        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot");
     }
 
     @Test
     public void testDoPost6() throws Exception {
-        this.dailymotionClient.doPost(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", new HashMap<>());
+        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
     }
 
     @Test
     public void testDoPost7() throws Exception {
-        this.dailymotionClient.doPost(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot");
+        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", "tot");
     }
 
     @Test
     public void testDoPost8() throws Exception {
-        this.dailymotionClient.doPost(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot", new HashMap<>());
+        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
     }
 
     @Test
     public void testDoDelete1() throws Exception {
-        this.dailymotionClient.doDelete(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
+        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL);
     }
 
     @Test
     public void testDoDelete2() throws Exception {
-        this.dailymotionClient.doDelete(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, new HashMap<>());
+        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
     }
 
     @Test
     public void testDoDelete3() throws Exception {
-        this.dailymotionClient.doDelete(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa");
+        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
     }
 
     @Test
     public void testDoDelete4() throws Exception {
-        this.dailymotionClient.doDelete(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL, "aaaaaa", new HashMap<>());
+        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
     }
 
     @Test
     public void testDoDelete5() throws Exception {
-        this.dailymotionClient.doDelete(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot");
+        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot");
     }
 
     @Test
     public void testDoDelete6() throws Exception {
-        this.dailymotionClient.doDelete(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", new HashMap<>());
+        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
     }
 
     @Test
     public void testDoDelete7() throws Exception {
-        this.dailymotionClient.doDelete(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot");
+        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", "tot");
     }
 
     @Test
     public void testDoDelete8() throws Exception {
-        this.dailymotionClient.doDelete(Connection.VideoCommentConnection.class, Connection.ConnectionType.ALL, "tot", "tot", new HashMap<>());
+        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
     }
 }

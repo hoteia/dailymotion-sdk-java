@@ -2,10 +2,10 @@ package com.bc.dailymotion.client.impl;
 
 import checkers.nullness.quals.NonNull;
 import com.bc.dailymotion.api.Connection;
-import com.bc.dailymotion.api.Connection.ConnectionType;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.Endpoint.EndpointType;
 import com.bc.dailymotion.api.Response;
+import com.bc.dailymotion.api.type.ConnectionType;
+import com.bc.dailymotion.api.type.EndpointType;
 import com.bc.dailymotion.client.DailymotionClient;
 import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
 import com.ning.http.client.AsyncHttpClientConfig;
@@ -112,6 +112,12 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClientImpl.class);
 
     /**
+     *
+     */
+    @Value("${dailymotion.auth.scheme}")
+    private String scheme;
+
+    /**
      * Method used to build a request and fetch the response of the Dailymotion API
      *
      * @param method   The HTTP Method used for the call
@@ -163,7 +169,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      */
     private <E, T> Response<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, String subId, Map<String, List<String>> params) {
         try {
-            String endpointUrl = (String) connection.getSuperclass().getField(Endpoint.EndpointType.ID.toString()).get(null);
+            String endpointUrl = (String) connection.getSuperclass().getField(EndpointType.ID.toString()).get(null);
             String connectionUrl = (String) connection.getField(type.toString()).get(null);
 
             String url;
@@ -245,9 +251,8 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
         OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
         filter.setCredentials(this.username, this.password);
-        filter.setUseProxy(this.useProxy);
-        filter.setProxyHost(this.proxyHost);
-        filter.setProxyPort(this.proxyPort);
+        filter.setProxy(this.useProxy, this.proxyHost, this.proxyPort);
+        filter.setSchemeName(this.scheme);
 
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setRequestTimeoutInMs(this.timeout);
@@ -257,8 +262,6 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             this.httpClient.setProxy(this.proxyHost, this.proxyPort);
             LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
         }
-
-        this.httpClient.setOAuth2(this.username, this.password, MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
     }
 
     /**

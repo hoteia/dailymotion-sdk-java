@@ -32,5 +32,6 @@
         <prop key="dailymotion.auth.password">my.super.password</prop>
         <prop key="dailymotion.auth.clientId">my.super.clientId</prop>
         <prop key="dailymotion.auth.clientSecret">my.super.clientSecret</prop>
+        <prop key="dailymotion.auth.scheme">OAuth</prop>
     </util:properties>
 </beans>

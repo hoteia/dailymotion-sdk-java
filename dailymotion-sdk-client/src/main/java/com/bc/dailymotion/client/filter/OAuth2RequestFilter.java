@@ -99,6 +99,12 @@ public class OAuth2RequestFilter implements RequestFilter {
         this.password = password;
     }
 
+    public void setProxy(boolean useProxy, String proxyHost, int proxyPort) {
+        this.useProxy = useProxy;
+        this.proxyHost = proxyHost;
+        this.proxyPort = proxyPort;
+    }
+
     public String getAccessTokenEndPoint() {
         return accessTokenEndPoint;
     }
@@ -137,7 +143,7 @@ public class OAuth2RequestFilter implements RequestFilter {
      */
     private OAuth2Token retrieveAccessToken(String username, String password) {
         AsyncHttpClient client = new AsyncHttpClient();
-        AsyncHttpClient.BoundRequestBuilder request = client.preparePost(this.accessTokenEndPoint + "/oauth/token");
+        AsyncHttpClient.BoundRequestBuilder request = client.preparePost(this.accessTokenEndPoint);
 
         if (this.useProxy) {
             request.setProxyServer(new ProxyServer(this.proxyHost, this.proxyPort));
@@ -157,11 +163,7 @@ public class OAuth2RequestFilter implements RequestFilter {
             response = request.execute().get();
             token = JsonHelper.deserialize(response.getResponseBody("UTF-8"), OAuth2Token.class);
             acquireTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
-        } catch (InterruptedException e) {
-            throw new SerializationException(e);
-        } catch (ExecutionException e) {
-            throw new SerializationException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException | IOException e) {
             throw new SerializationException(e);
         }
 
