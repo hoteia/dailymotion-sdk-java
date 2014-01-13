@@ -17,7 +17,7 @@ The Dailymotion Java SDK uses Maven as base project. You can import the client u
         <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
-### 2 Spring version
+### 2. Spring version
 
 The project uses spring4, and implements a basic client. You can inject the class that defines the methods to call the API.
 It as simple as the following lines of code :
