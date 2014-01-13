@@ -7,6 +7,7 @@ import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.Endpoint.EndpointType;
 import com.bc.dailymotion.api.Response;
 import com.bc.dailymotion.client.DailymotionClient;
+import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
 import com.ning.http.client.AsyncHttpClientConfig;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.resthub.web.Client;
@@ -242,13 +243,21 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         Assert.notNull(this.clientId);
         Assert.notNull(this.clientSecret);
 
+        OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
+        filter.setCredentials(this.username, this.password);
+        filter.setUseProxy(this.useProxy);
+        filter.setProxyHost(this.proxyHost);
+        filter.setProxyPort(this.proxyPort);
+
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setRequestTimeoutInMs(this.timeout);
+        builder.addRequestFilter(filter);
         this.httpClient = new Client(builder);
         if (this.useProxy) {
             this.httpClient.setProxy(this.proxyHost, this.proxyPort);
             LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
         }
+
         this.httpClient.setOAuth2(this.username, this.password, MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
     }
 

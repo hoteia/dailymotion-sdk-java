@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.resthub.web.Client;
 import org.resthub.web.Http;
 import org.resthub.web.JsonHelper;
+import org.resthub.web.oauth2.OAuth2RequestFilter;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -64,10 +65,12 @@ public class DailymotionClientImplTest {
         videoResponse.setPage(1);
         videoResponse.setList(videoList);
 
+        OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
         org.resthub.web.Response response = mock(org.resthub.web.Response.class, RETURNS_DEEP_STUBS);
         when(this.httpClient.url("https://api.dailymotion.com/videos").get()).thenReturn(response);
         when(response.getBody()).thenReturn(JsonHelper.serialize(videoResponse));
         when(response.getStatus()).thenReturn(Http.OK);
+        when(filter.getAccessTokenEndPoint()).thenReturn("my-token");
 
         // When
         Response<Video> actualResponse = this.dailymotionClient.doGet(Endpoint.VideoEndpoint.class, Endpoint.EndpointType.ALL);
