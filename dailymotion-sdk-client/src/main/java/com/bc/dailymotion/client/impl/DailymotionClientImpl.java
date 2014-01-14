@@ -155,7 +155,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     }
 
     /**
-     * Method used to build a request and fetch the response of the Dailymotion API
+     * Method used to build a request and fetch the response of the DailyMotion API
      *
      * @param method     The HTTP Method used for the call
      * @param connection The connection to call
@@ -190,7 +190,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     }
 
     /**
-     * Request content from Dailymotion using the given HTTP method with the given URL and Content
+     * Request content from DailyMotion using the given HTTP method with the given URL and Content
      *
      * @param method The HTTP Method used for the call
      * @param url    The url to use
@@ -240,14 +240,14 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        Assert.notNull(this.dailymotionRootUrl);
-        Assert.notNull(this.useProxy);
-        Assert.notNull(this.proxyHost);
-        Assert.notNull(this.proxyPort);
-        Assert.notNull(this.username);
-        Assert.notNull(this.password);
-        Assert.notNull(this.clientId);
-        Assert.notNull(this.clientSecret);
+        Assert.notNull(this.dailymotionRootUrl, "The DailyMotion root url is null");
+        Assert.notNull(this.useProxy, "The boolean useProxy is null");
+        Assert.notNull(this.proxyHost, "The proxyHost is null, if you don't use a proxy, set it to empty !");
+        Assert.notNull(this.proxyPort, "The proxyPort is null, if you don't use a proxy, set it to 0 !");
+        Assert.notNull(this.username, "The username is null");
+        Assert.notNull(this.password, "The password is null");
+        Assert.notNull(this.clientId, "The clientId is null, you need to get one on your DailyMotion account");
+        Assert.notNull(this.clientSecret, "The clientSecret is null, you need to get one on your DailyMotion account");
 
         OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
         filter.setCredentials(this.username, this.password);

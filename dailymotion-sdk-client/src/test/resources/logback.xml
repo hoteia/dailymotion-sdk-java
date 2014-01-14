@@ -23,7 +23,7 @@
     <!-- Frameworks -->
     <!-- ++++++++++ -->
     <logger name="org.resthub">
-        <level value="info"/>
+        <level value="debug"/>
         <appender-ref ref="STDOUT"/>
     </logger>
     <logger name="org.springframework">
@@ -34,7 +34,7 @@
     <!-- ++++ -->
     <!-- ROOT -->
     <!-- ++++ -->
-    <root level="info">
-        <appender-ref ref="STDOUT"/>
+    <root level="debug">
+    <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
