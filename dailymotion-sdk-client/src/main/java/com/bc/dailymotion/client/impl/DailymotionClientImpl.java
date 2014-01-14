@@ -1,17 +1,20 @@
 package com.bc.dailymotion.client.impl;
 
 import checkers.nullness.quals.NonNull;
+import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.Response;
 import com.bc.dailymotion.api.type.ConnectionType;
 import com.bc.dailymotion.api.type.EndpointType;
 import com.bc.dailymotion.client.DailymotionClient;
 import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ning.http.client.AsyncHttpClientConfig;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.resthub.web.Client;
 import org.resthub.web.JsonHelper;
+import org.resthub.web.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -19,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
@@ -112,7 +116,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClientImpl.class);
 
     /**
-     *
+     * Scheme used for OAuth
      */
     @Value("${dailymotion.auth.scheme}")
     private String scheme;
@@ -128,7 +132,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param <T>      The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <T> Response<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Endpoint<T>> endPoint, @NonNull EndpointType type, String id, Map<String, List<String>> params) {
+    private <T> ApiResponse<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Endpoint<T>> endPoint, @NonNull EndpointType type, String id, Map<String, List<String>> params) {
         LOGGER.trace("[IN] doRequest with parameters {},{},{},{},{}", method, endPoint, type, id, params);
         try {
             String endpointUrl = (String) endPoint.getField(type.toString()).get(null);
@@ -143,11 +147,14 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, endpointUrl);
             }
 
-            Response<T> response = new Response<>();
-            response = JsonHelper.deserialize(this.callDailymotionAPI(method, url, params).getBody(), response.getClass());
-            LOGGER.trace("Response from URL {} is {}", url, response);
-            return response;
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+            Response response = this.callDailymotionAPI(method, url, params);
+            Assert.notNull(response, "Response from WS is null");
+
+            JsonHelper helper = new JsonHelper();
+            ApiResponse<T> apiResponse = helper.getObjectMapper().reader(ApiResponse.class).readValue(response.getBody());
+            LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
+            return apiResponse;
+        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -167,7 +174,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param <T>        The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <E, T> Response<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, String subId, Map<String, List<String>> params) {
+    private <E, T> ApiResponse<T> doRequest(@NonNull final HttpMethod method, @NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, String subId, Map<String, List<String>> params) {
         try {
             String endpointUrl = (String) connection.getSuperclass().getField(EndpointType.ID.toString()).get(null);
             String connectionUrl = (String) connection.getField(type.toString()).get(null);
@@ -178,11 +185,15 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             } else {
                 url = MessageFormat.format("{0}/{1}/{2}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
             }
-            Response<T> response = new Response<>();
-            response = JsonHelper.deserialize(this.callDailymotionAPI(method, url, params).getBody(), response.getClass());
-            LOGGER.trace("Response from URL {} is {}", url, response);
-            return response;
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+
+            Response response = this.callDailymotionAPI(method, url, params);
+            Assert.notNull(response, "Response from WS is null");
+
+            JsonHelper helper = new JsonHelper();
+            ApiResponse<T> apiResponse = helper.getObjectMapper().reader(ApiResponse.class).readValue(response.getBody());
+            LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
+            return apiResponse;
+        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -197,7 +208,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param params The optional parameters
      * @return Returns the JSON response if any
      */
-    private org.resthub.web.Response callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url, final Map<String, List<String>> params) {
+    private Response callDailymotionAPI(@NonNull final HttpMethod method, @NonNull final String url, final Map<String, List<String>> params) {
         LOGGER.trace("[IN] callDailymotionAPI with parameters {}, {}, {}", method, url, params);
 
         Client.RequestHolder requestHolder = this.httpClient.url(url);
@@ -268,7 +279,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
+    public <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
         return this.doRequest(HttpMethod.GET, endPoint, type, null, null);
     }
 
@@ -276,7 +287,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, endPoint, type, null, params);
     }
 
@@ -284,7 +295,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
+    public <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
         return this.doRequest(HttpMethod.GET, endPoint, type, id, null);
     }
 
@@ -292,7 +303,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, endPoint, type, id, params);
     }
 
@@ -300,7 +311,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
+    public <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
         return this.doRequest(HttpMethod.GET, connection, type, id, null, null);
     }
 
@@ -308,7 +319,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, connection, type, id, null, params);
     }
 
@@ -316,7 +327,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
+    public <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
         return this.doRequest(HttpMethod.GET, connection, type, id, subId, null);
     }
 
@@ -324,7 +335,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.GET, connection, type, id, subId, params);
     }
 
@@ -332,7 +343,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
+    public <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
         return this.doRequest(HttpMethod.POST, endPoint, type, null, null);
     }
 
@@ -340,7 +351,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.POST, endPoint, type, null, params);
     }
 
@@ -348,7 +359,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
+    public <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
         return this.doRequest(HttpMethod.POST, endPoint, type, id, null);
     }
 
@@ -356,7 +367,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.POST, endPoint, type, id, params);
     }
 
@@ -364,7 +375,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
+    public <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
         return this.doRequest(HttpMethod.POST, connection, type, id, null, null);
     }
 
@@ -372,7 +383,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.POST, connection, type, id, null, params);
     }
 
@@ -380,7 +391,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
+    public <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
         return this.doRequest(HttpMethod.POST, connection, type, id, subId, null);
     }
 
@@ -388,7 +399,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.POST, connection, type, id, subId, params);
     }
 
@@ -396,7 +407,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
+    public <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type) {
         return this.doRequest(HttpMethod.DELETE, endPoint, type, null, null);
     }
 
@@ -404,7 +415,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.DELETE, endPoint, type, null, params);
     }
 
@@ -412,7 +423,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
+    public <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id) {
         return this.doRequest(HttpMethod.DELETE, endPoint, type, id, null);
     }
 
@@ -420,7 +431,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E> Response<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.DELETE, endPoint, type, id, params);
     }
 
@@ -428,7 +439,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
+    public <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id) {
         return this.doRequest(HttpMethod.DELETE, connection, type, id, null, null);
     }
 
@@ -436,7 +447,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.DELETE, connection, type, id, null, params);
     }
 
@@ -444,7 +455,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
+    public <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId) {
         return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, null);
     }
 
@@ -452,7 +463,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public <E, T> Response<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
+    public <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params) {
         return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, params);
     }
 }

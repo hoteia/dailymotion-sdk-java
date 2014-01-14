@@ -1,6 +1,6 @@
 package com.bc.dailymotion.client.impl;
 
-import com.bc.dailymotion.api.Response;
+import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.connection.video.VideoComment;
 import com.bc.dailymotion.api.dto.Video;
 import com.bc.dailymotion.api.endpoint.VideoEndpoint;
@@ -43,7 +43,7 @@ public class DailymotionClientImplIntegTest {
     @Test
     public void testDoGet1() throws Exception {
         // Given
-        Response<Video> videoResponse = new Response<>();
+        ApiResponse<Video> videoResponse = new ApiResponse<>();
         videoResponse.setExplicit(false);
         videoResponse.setHas_more(false);
         videoResponse.setLimit(10);
@@ -52,7 +52,7 @@ public class DailymotionClientImplIntegTest {
         videoResponse.setList(new ArrayList<>());
 
         // When
-        Response<Video> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ME);
+        ApiResponse<Video> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.class, EndpointType.ME);
 
         // Then
         Assertions.assertThat(actualResponse).isEqualsToByComparingFields(videoResponse);

@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class Video {
 
+    @JsonProperty("3D")
     boolean threeD; //	A boolean indicating that the video is in 3D format (true) or not (false).	No access_token required for reading.	Returns boolean.
     String access_error; //	An error message explaining why the access to the video can’t be granted.	No access_token required for reading.	Returns dict, min size: 1, max size: 150.
     boolean ads; //	Defines is video accepts associated ads	No access_token required for reading.	Returns boolean.
