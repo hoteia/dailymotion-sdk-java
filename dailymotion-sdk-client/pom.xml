@@ -29,9 +29,5 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.java.loci</groupId>
-            <artifactId>jsr308-all</artifactId>
-        </dependency>
     </dependencies>
 </project>

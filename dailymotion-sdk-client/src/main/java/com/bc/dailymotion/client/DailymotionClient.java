@@ -1,6 +1,5 @@
 package com.bc.dailymotion.client;
 
-import checkers.nullness.quals.NonNull;
 import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
@@ -36,7 +35,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type);
+    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -47,7 +46,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -58,7 +57,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id);
+    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -70,7 +69,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -82,7 +81,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id);
+    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -95,7 +94,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -108,7 +107,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId);
+    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -122,7 +121,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -132,7 +131,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type);
+    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -143,7 +142,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -154,7 +153,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id);
+    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -166,7 +165,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -178,7 +177,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id);
+    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -191,7 +190,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -204,7 +203,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId);
+    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -218,7 +217,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -228,7 +227,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type);
+    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -239,7 +238,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -250,7 +249,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id);
+    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -262,7 +261,7 @@ public interface DailymotionClient {
      * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(@NonNull Class<? extends Endpoint<E>> endPoint, @NonNull EndpointType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -274,7 +273,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id);
+    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -287,7 +286,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -300,7 +299,7 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId);
+    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -314,5 +313,5 @@ public interface DailymotionClient {
      * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(@NonNull Class<? extends Connection<E, T>> connection, @NonNull ConnectionType type, @NonNull String id, @NonNull String subId, @NonNull Map<String, List<String>> params);
+    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
 }
