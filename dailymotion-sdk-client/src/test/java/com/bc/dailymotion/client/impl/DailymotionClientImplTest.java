@@ -89,7 +89,7 @@ public class DailymotionClientImplTest {
         return new Object[][]{};
     }
 
-    @Test(dataProvider = "doGetEndpoint", singleThreaded = true)
+    @Test(dataProvider = "doGetEndpoint")
     public <T> void testDoGetEndpoint(int method, Class<T> tClass, Object[] params, String expectedUrl, Class<? extends Endpoint<T>> endpoint, EndpointType type, ApiResponse<T> expectedResponse) throws Exception {
         // Given
         List<T> list = asList(tClass.newInstance(), tClass.newInstance(), tClass.newInstance());
@@ -131,9 +131,7 @@ public class DailymotionClientImplTest {
         }
 
         // Then
-        System.out.println(actualResponse);
-
-        //verify(this.httpClient).url(expectedUrl).get();
+        verify(this.httpClient, times(2)).url(expectedUrl);
         Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
         Assertions.assertThat(actualResponse.getList()).containsAll(expectedResponse.getList());
     }
@@ -180,87 +178,7 @@ public class DailymotionClientImplTest {
         }
 
         // Then
-        verify(this.httpClient).url(expectedUrl).get();
+        verify(this.httpClient, times(2)).url(expectedUrl).get();
         Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
-    }
-
-    @Test
-    public void testDoPost1() throws Exception {
-        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL);
-    }
-
-    @Test
-    public void testDoPost2() throws Exception {
-        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
-    }
-
-    @Test
-    public void testDoPost3() throws Exception {
-        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
-    }
-
-    @Test
-    public void testDoPost4() throws Exception {
-        this.dailymotionClient.doPost(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
-    }
-
-    @Test
-    public void testDoPost5() throws Exception {
-        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot");
-    }
-
-    @Test
-    public void testDoPost6() throws Exception {
-        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
-    }
-
-    @Test
-    public void testDoPost7() throws Exception {
-        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", "tot");
-    }
-
-    @Test
-    public void testDoPost8() throws Exception {
-        this.dailymotionClient.doPost(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
-    }
-
-    @Test
-    public void testDoDelete1() throws Exception {
-        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL);
-    }
-
-    @Test
-    public void testDoDelete2() throws Exception {
-        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, new HashMap<>());
-    }
-
-    @Test
-    public void testDoDelete3() throws Exception {
-        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, "aaaaaa");
-    }
-
-    @Test
-    public void testDoDelete4() throws Exception {
-        this.dailymotionClient.doDelete(VideoEndpoint.class, EndpointType.ALL, "aaaaaa", new HashMap<>());
-    }
-
-    @Test
-    public void testDoDelete5() throws Exception {
-        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot");
-    }
-
-    @Test
-    public void testDoDelete6() throws Exception {
-        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", new HashMap<>());
-    }
-
-    @Test
-    public void testDoDelete7() throws Exception {
-        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", "tot");
-    }
-
-    @Test
-    public void testDoDelete8() throws Exception {
-        this.dailymotionClient.doDelete(VideoComment.class, ConnectionType.ALL, "tot", "tot", new HashMap<>());
     }
 }
