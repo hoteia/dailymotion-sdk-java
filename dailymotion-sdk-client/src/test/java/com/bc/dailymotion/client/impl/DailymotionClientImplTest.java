@@ -4,10 +4,8 @@ import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.connection.video.VideoComment;
-import com.bc.dailymotion.api.dto.Group;
-import com.bc.dailymotion.api.dto.Video;
-import com.bc.dailymotion.api.endpoint.GroupEndpoint;
-import com.bc.dailymotion.api.endpoint.VideoEndpoint;
+import com.bc.dailymotion.api.dto.*;
+import com.bc.dailymotion.api.endpoint.*;
 import com.bc.dailymotion.api.type.ConnectionType;
 import com.bc.dailymotion.api.type.EndpointType;
 import org.fest.assertions.api.Assertions;
@@ -74,19 +72,49 @@ public class DailymotionClientImplTest {
     @DataProvider(name = "doGetEndpoint")
     private Object[][] doGetEndpoint() throws InstantiationException, IllegalAccessException {
         return new Object[][]{
-                {1, Video.class, null, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, getResponseForType(Video.class)},
-                {1, Video.class, null, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, getResponseForType(Video.class)},
-                {1, Group.class, null, "https://api.dailymotion.com/groups", GroupEndpoint.class, EndpointType.ALL, getResponseForType(Group.class)}
+                {1, Activity.class, null, "https://api.dailymotion.com/activities", ActivityEndpoint.class, EndpointType.ALL, this.getResponseForType(Activity.class)},
+                {2, Activity.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/activities", ActivityEndpoint.class, EndpointType.ALL, this.getResponseForType(Activity.class)},
+                {3, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ActivityEndpoint.class, EndpointType.ID, this.getResponseForType(Activity.class)},
+                {4, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activity/xabcdef", ActivityEndpoint.class, EndpointType.ID, this.getResponseForType(Activity.class)},
+                {1, Channel.class, null, "https://api.dailymotion.com/channels", ChannelEndpoint.class, EndpointType.ALL, this.getResponseForType(Channel.class)},
+                {2, Channel.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/channels", ChannelEndpoint.class, EndpointType.ALL, this.getResponseForType(Channel.class)},
+                {3, Channel.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef", ChannelEndpoint.class, EndpointType.ID, this.getResponseForType(Channel.class)},
+                {4, Channel.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/channel/xabcdef", ChannelEndpoint.class, EndpointType.ID, this.getResponseForType(Channel.class)},
+                {3, Comment.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/comment/xabcdef", CommentEndpoint.class, EndpointType.ID, this.getResponseForType(Comment.class)},
+                {4, Comment.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/comment/xabcdef", CommentEndpoint.class, EndpointType.ID, this.getResponseForType(Comment.class)},
+                {1, Contest.class, null, "https://api.dailymotion.com/contests", ContestEndpoint.class, EndpointType.ALL, this.getResponseForType(Contest.class)},
+                {2, Contest.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/contests", ContestEndpoint.class, EndpointType.ALL, this.getResponseForType(Contest.class)},
+                {3, Contest.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/contest/xabcdef", ContestEndpoint.class, EndpointType.ID, this.getResponseForType(Contest.class)},
+                {4, Contest.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/contest/xabcdef", ContestEndpoint.class, EndpointType.ID, this.getResponseForType(Contest.class)},
+                {1, Group.class, null, "https://api.dailymotion.com/groups", GroupEndpoint.class, EndpointType.ALL, this.getResponseForType(Group.class)},
+                {1, Group.class, null, "https://api.dailymotion.com/me/groups", GroupEndpoint.class, EndpointType.ME, this.getResponseForType(Group.class)},
+                {2, Group.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/groups", GroupEndpoint.class, EndpointType.ALL, this.getResponseForType(Group.class)},
+                {2, Group.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/me/groups", GroupEndpoint.class, EndpointType.ME, this.getResponseForType(Group.class)},
+                {3, Group.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/group/xabcdef", GroupEndpoint.class, EndpointType.ID, this.getResponseForType(Group.class)},
+                {4, Group.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/group/xabcdef", GroupEndpoint.class, EndpointType.ID, this.getResponseForType(Group.class)},
+                {1, Playlist.class, null, "https://api.dailymotion.com/playlists", PlaylistEndpoint.class, EndpointType.ALL, this.getResponseForType(Playlist.class)},
+                {1, Playlist.class, null, "https://api.dailymotion.com/me/playlists", PlaylistEndpoint.class, EndpointType.ME, this.getResponseForType(Playlist.class)},
+                {2, Playlist.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/playlists", PlaylistEndpoint.class, EndpointType.ALL, this.getResponseForType(Playlist.class)},
+                {2, Playlist.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/me/playlists", PlaylistEndpoint.class, EndpointType.ME, this.getResponseForType(Playlist.class)},
+                {3, Playlist.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/playlist/xabcdef", PlaylistEndpoint.class, EndpointType.ID, this.getResponseForType(Playlist.class)},
+                {4, Playlist.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/playlist/xabcdef", PlaylistEndpoint.class, EndpointType.ID, this.getResponseForType(Playlist.class)},
+                {3, Record.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/record/xabcdef", RecordEndpoint.class, EndpointType.ID, this.getResponseForType(Record.class)},
+                {4, Record.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/record/xabcdef", RecordEndpoint.class, EndpointType.ID, this.getResponseForType(Record.class)},
+                {3, Strongtag.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/strongtag/xabcdef", StrongtagEndpoint.class, EndpointType.ID, this.getResponseForType(Strongtag.class)},
+                {4, Strongtag.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/strongtag/xabcdef", StrongtagEndpoint.class, EndpointType.ID, this.getResponseForType(Strongtag.class)},
+                {3, Subtitle.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/subtitle/xabcdef", SubtitleEndpoint.class, EndpointType.ID, this.getResponseForType(Subtitle.class)},
+                {4, Subtitle.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/subtitle/xabcdef", SubtitleEndpoint.class, EndpointType.ID, this.getResponseForType(Subtitle.class)},
+                {1, User.class, null, "https://api.dailymotion.com/users", UserEndpoint.class, EndpointType.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/users", UserEndpoint.class, EndpointType.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef", UserEndpoint.class, EndpointType.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef", UserEndpoint.class, EndpointType.ID, this.getResponseForType(User.class)},
+                {1, Video.class, null, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, this.getResponseForType(Video.class)},
+                {1, Video.class, null, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/videos", VideoEndpoint.class, EndpointType.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/me/videos", VideoEndpoint.class, EndpointType.ME, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef", VideoEndpoint.class, EndpointType.ID, this.getResponseForType(Video.class)},
         };
-    }
-
-    @DataProvider(name = "doGetConnection")
-    private Object[][] doGetConnection() throws InstantiationException, IllegalAccessException {
-        return new Object[][]{};
     }
 
     @Test(dataProvider = "doGetEndpoint")
@@ -134,6 +162,11 @@ public class DailymotionClientImplTest {
         verify(this.httpClient, times(2)).url(expectedUrl);
         Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
         Assertions.assertThat(actualResponse.getList()).containsAll(expectedResponse.getList());
+    }
+
+    @DataProvider(name = "doGetConnection")
+    private Object[][] doGetConnection() throws InstantiationException, IllegalAccessException {
+        return new Object[][]{};
     }
 
     @Test
