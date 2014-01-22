@@ -73,6 +73,4 @@ other issues [here][issues].
 Continuous integration
 ----------------------
 
-.. image:: https://secure.travis-ci.org/bcecchinato/dailymotion-sdk-java.png?branch=master
-   :alt: Build Status
-   :target: http://travis-ci.org/bcecchinato/dailymotion-sdk-java
+![ScreenShot](https://secure.travis-ci.org/bcecchinato/dailymotion-sdk-java.png?branch=master)
