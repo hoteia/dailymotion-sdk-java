@@ -73,4 +73,4 @@ other issues [here][issues].
 Continuous integration
 ----------------------
 
-![ScreenShot](https://secure.travis-ci.org/bcecchinato/dailymotion-sdk-java.png?branch=master)
+This project uses Travis CI (https://travis-ci.org/bcecchinato/dailymotion-sdk-java), curent status is : ![ScreenShot](https://secure.travis-ci.org/bcecchinato/dailymotion-sdk-java.png?branch=master)
