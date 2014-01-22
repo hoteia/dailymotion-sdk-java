@@ -69,3 +69,10 @@ We are relying on the [GitHub issues tracker][issues] linked from above for feed
 other issues [here][issues].
 
 [issues]: http://github.com/bcecchinato/dailymotion-sdk-java/issues
+
+Continuous integration
+----------------------
+
+.. image:: https://secure.travis-ci.org/bcecchinato/dailymotion-sdk-java.png?branch=master
+   :alt: Build Status
+   :target: http://travis-ci.org/bcecchinato/dailymotion-sdk-java
