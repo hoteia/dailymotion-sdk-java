@@ -41,7 +41,7 @@ public class DailymotionClientImplWrongValuesTest {
     }
 
     @Test(dataProvider = "doRequestWrongEndpointType", expectedExceptions = IllegalArgumentException.class)
-    public <T> void testDoRequestWrongEndpointType(int method, Endpoint endpoint) {
+    public void testDoRequestWrongEndpointType(int method, Endpoint endpoint) {
         switch (method) {
             case 1:
                 this.dailymotionClient.doGet(endpoint);
