@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>DailyMotion JAVA SDK :: Bean API</name>
     <artifactId>dailymotion-sdk-api</artifactId>
 
     <dependencies>

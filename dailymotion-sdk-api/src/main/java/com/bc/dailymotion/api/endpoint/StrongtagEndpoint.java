@@ -6,6 +6,22 @@ import com.bc.dailymotion.api.dto.Strongtag;
 /**
  * Created by Bastien on 13/01/2014.
  */
-public interface StrongtagEndpoint extends Endpoint<Strongtag> {
-    static final String ID = "strongtag/{0}";
+public enum StrongtagEndpoint implements Endpoint {
+   ID("strongtag/{0}", Strongtag.class);
+
+    private String value;
+    private Class clazz;
+
+    public String getValue(){
+        return this.value;
+    }
+
+    public Class getClazz(){
+        return this.clazz;
+    }
+
+    private StrongtagEndpoint(String value, Class clazz) {
+        this.value = value;
+        this.clazz = clazz;
+    }
 }

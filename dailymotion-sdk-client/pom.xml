@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <name>DailyMotion JAVA SDK :: Client API</name>
     <artifactId>dailymotion-sdk-client</artifactId>
 
     <dependencies>

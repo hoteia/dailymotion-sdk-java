@@ -6,7 +6,23 @@ import com.bc.dailymotion.api.dto.Contest;
 /**
  * Created by Bastien on 13/01/2014.
  */
-public interface ContestEndpoint extends Endpoint<Contest> {
-    static final String ALL = "contests";
-    static final String ID = "contest/{0}";
+public enum ContestEndpoint implements Endpoint {
+   ALL("contests", Contest.class),
+   ID("contest/{0}", Contest.class);
+
+    private String value;
+    private Class clazz;
+
+    public String getValue(){
+        return this.value;
+    }
+
+    public Class getClazz(){
+        return this.clazz;
+    }
+
+    private ContestEndpoint(String value, Class clazz) {
+        this.value = value;
+        this.clazz = clazz;
+    }
 }

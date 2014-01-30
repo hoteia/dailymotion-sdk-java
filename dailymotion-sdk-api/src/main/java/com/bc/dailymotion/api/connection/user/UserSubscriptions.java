@@ -1,18 +1,16 @@
-package com.bc.dailymotion.api.connection.video;
+package com.bc.dailymotion.api.connection.user;
 
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.dto.Comment;
 import com.bc.dailymotion.api.dto.Video;
-import com.bc.dailymotion.api.endpoint.PlaylistEndpoint;
-import com.bc.dailymotion.api.endpoint.VideoEndpoint;
+import com.bc.dailymotion.api.endpoint.UserEndpoint;
 
 /**
- * Created by Bastien on 13/01/2014.
+ * Created by a528122 on 14/01/14.
  */
-public enum VideoComment implements Connection {
-    ALL("comments", Comment.class, VideoEndpoint.ID),
-    ID(ALL.value + "/{0}", Comment.class, VideoEndpoint.ID);
+public enum UserSubscriptions implements Connection {
+    ALL("comments", Video.class, UserEndpoint.ID),
+    ID(ALL.value + "/{0}", Video.class, UserEndpoint.ID);
 
     private String value;
     private Class clazz;
@@ -30,7 +28,7 @@ public enum VideoComment implements Connection {
         return this.parent;
     }
 
-    VideoComment(String value, Class clazz, Endpoint parent) {
+    UserSubscriptions(String value, Class clazz, Endpoint parent) {
         this.value = value;
         this.clazz = clazz;
         this.parent = parent;

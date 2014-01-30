@@ -3,8 +3,7 @@ package com.bc.dailymotion.client.impl;
 import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.type.ConnectionType;
-import com.bc.dailymotion.api.type.EndpointType;
+import com.bc.dailymotion.api.dto.*;
 import com.bc.dailymotion.client.DailymotionClient;
 import com.bc.dailymotion.client.exceptions.GenericErrorMessages;
 import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
@@ -120,23 +118,276 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private String scheme;
 
     /**
+     * Initialize the following components ;
+     * <ul>
+     * <li>HTTP Client for invocation of Rest Service</li>
+     * <li>Eventually use a Proxy</li>
+     * </ul>
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        Assert.notNull(this.dailymotionRootUrl, "The DailyMotion root url is null");
+        Assert.notNull(this.useProxy, "The boolean useProxy is null");
+        Assert.notNull(this.proxyHost, "The proxyHost is null, if you don't use a proxy, set it to empty !");
+        Assert.notNull(this.proxyPort, "The proxyPort is null, if you don't use a proxy, set it to 0 !");
+        Assert.notNull(this.username, "The username is null");
+        Assert.notNull(this.password, "The password is null");
+        Assert.notNull(this.clientId, "The clientId is null, you need to get one on your DailyMotion account");
+        Assert.notNull(this.clientSecret, "The clientSecret is null, you need to get one on your DailyMotion account");
+
+        OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
+        filter.setCredentials(this.username, this.password);
+        filter.setProxy(this.useProxy, this.proxyHost, this.proxyPort);
+        filter.setSchemeName(this.scheme);
+
+        AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
+        builder.setRequestTimeoutInMs(this.timeout);
+        builder.addRequestFilter(filter);
+        this.httpClient = new Client(builder);
+        if (this.useProxy) {
+            this.httpClient.setProxy(this.proxyHost, this.proxyPort);
+            LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Endpoint endPoint) {
+        Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.GET, endPoint, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.GET, endPoint, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Endpoint endPoint, String id) {
+        Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, endPoint, id, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, endPoint, id, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Connection connection, String id) {
+        Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, connection, id, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, connection, id, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Connection connection, String id, String subId) {
+        Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, connection, id, subId, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.GET, connection, id, subId, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Endpoint endPoint) {
+        Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.POST, endPoint, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.POST, endPoint, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Endpoint endPoint, String id) {
+        Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, endPoint, id, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, endPoint, id, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Connection connection, String id) {
+        Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, connection, id, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, connection, id, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Connection connection, String id, String subId) {
+        Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, connection, id, subId, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.POST, connection, id, subId, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Endpoint endPoint) {
+        Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.DELETE, endPoint, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Endpoint endPoint, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
+        return this.doRequest(HttpMethod.DELETE, endPoint, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Endpoint endPoint, String id) {
+        Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, endPoint, id, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Endpoint endPoint, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, endPoint, id, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Connection connection, String id) {
+        Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, connection, id, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Connection connection, String id, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, connection, id, null, params);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Connection connection, String id, String subId) {
+        Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, connection, id, subId, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ApiResponse<?> doDelete(Connection connection, String id, String subId, Map<String, List<String>> params) {
+        Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
+        return this.doRequest(HttpMethod.DELETE, connection, id, subId, params);
+    }
+
+    /**
      * Method used to build a request and fetch the response of the Dailymotion API
      *
      * @param method   The HTTP Method used for the call
      * @param endPoint The endpoint to call
-     * @param type     The type of request
      * @param id       The id to insert (can be null)
      * @param params   The optional parameters
-     * @param <T>      The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <T> ApiResponse<T> doRequest(final HttpMethod method, Class<? extends Endpoint<T>> endPoint, EndpointType type, String id, Map<String, List<String>> params) {
-        LOGGER.trace("[IN] doRequest with parameters {},{},{},{},{}", method, endPoint, type, id, params);
+    private ApiResponse<?> doRequest(final HttpMethod method, Endpoint endPoint, String id, Map<String, List<String>> params) {
+        LOGGER.trace("[IN] doRequest with parameters {},{}.{},{},{},{}", method, endPoint.getClass().getSimpleName(), endPoint, id, params);
         try {
-            String endpointUrl = (String) endPoint.getField(type.toString()).get(null);
-            LOGGER.debug("endpointUrl has value [{}]", endpointUrl);
+            String endpointUrl = endPoint.getValue();
+            Assert.notNull(endpointUrl, GenericErrorMessages.ENDPOINT_NOT_FOUND.toString());
 
-            Assert.notNull(endpointUrl, "Endpoint url not found !");
+            LOGGER.debug("endpointUrl has value [{}]", endpointUrl);
 
             String url;
             if (id != null) {
@@ -146,13 +397,14 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             }
 
             Response response = this.callDailymotionAPI(method, url, params);
-            Assert.notNull(response, "Response from WS is null");
+            Assert.notNull(response, GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
+            Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
 
-            JsonHelper helper = new JsonHelper();
-            ApiResponse<T> apiResponse = helper.getObjectMapper().reader(ApiResponse.class).readValue(response.getBody());
+            ApiResponse<?> apiResponse = this.buildResponse(endPoint.getClazz());
+            apiResponse = JsonHelper.deserialize(response.getBody(), apiResponse.getClass());
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
-        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+        } catch (ClassNotFoundException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -164,19 +416,21 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      *
      * @param method     The HTTP Method used for the call
      * @param connection The connection to call
-     * @param type       The type of request
      * @param id         The id to insert
      * @param subId      The second id to insert (can be null)
      * @param params     The optional parameters
-     * @param <E>        The parametrized type of the parent endpoint type
-     * @param <T>        The parametrized type of the expected return type
      * @return The response object containing a list of T elements
      */
-    private <E, T> ApiResponse<T> doRequest(final HttpMethod method, Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        LOGGER.trace("[IN] doRequest with parameters {},{},{},{},{},{}", method, connection, type, id, subId, params);
+    private ApiResponse<?> doRequest(final HttpMethod method, Connection connection, String id, String subId, Map<String, List<String>> params) {
+        LOGGER.trace("[IN] doRequest with parameters {},{}.{},{},{},{},{}", method, connection.getClass().getSimpleName(), connection, id, subId, params);
         try {
-            String endpointUrl = (String) connection.getSuperclass().getField(EndpointType.ID.toString()).get(null);
-            String connectionUrl = (String) connection.getField(type.toString()).get(null);
+            String endpointUrl = connection.getParent().getValue();
+            String connectionUrl = connection.getValue();
+
+            Assert.notNull(endpointUrl, GenericErrorMessages.ENDPOINT_NOT_FOUND.toString());
+            Assert.notNull(connectionUrl, GenericErrorMessages.CONNECTION_NOT_FOUND.toString());
+
+            LOGGER.debug("endpointUrl has value [{}] and connectionUrl has value [{}]", endpointUrl, connectionUrl);
 
             String url;
             if (subId != null) {
@@ -186,13 +440,14 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             }
 
             Response response = this.callDailymotionAPI(method, url, params);
-            Assert.notNull(response, "Response from WS is null");
+            Assert.notNull(response, GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
+            Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
 
-            JsonHelper helper = new JsonHelper();
-            ApiResponse<T> apiResponse = helper.getObjectMapper().reader(ApiResponse.class).readValue(response.getBody());
+            ApiResponse<?> apiResponse = this.buildResponse(connection.getClazz());
+            apiResponse = JsonHelper.deserialize(response.getBody(), apiResponse.getClass());
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
-        } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
+        } catch (ClassNotFoundException e) {
             LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
         }
 
@@ -242,257 +497,38 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     }
 
     /**
-     * Initialize the following components ;
-     * <ul>
-     * <li>HTTP Client for invocation of Rest Service</li>
-     * <li>Eventually use a Proxy</li>
-     * </ul>
+     * Method used to get ApiResponse class from given class
+     *
+     * @param clazz The class expected in response
+     * @return The ApiResponse class
+     * @throws ClassNotFoundException
      */
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        Assert.notNull(this.dailymotionRootUrl, "The DailyMotion root url is null");
-        Assert.notNull(this.useProxy, "The boolean useProxy is null");
-        Assert.notNull(this.proxyHost, "The proxyHost is null, if you don't use a proxy, set it to empty !");
-        Assert.notNull(this.proxyPort, "The proxyPort is null, if you don't use a proxy, set it to 0 !");
-        Assert.notNull(this.username, "The username is null");
-        Assert.notNull(this.password, "The password is null");
-        Assert.notNull(this.clientId, "The clientId is null, you need to get one on your DailyMotion account");
-        Assert.notNull(this.clientSecret, "The clientSecret is null, you need to get one on your DailyMotion account");
-
-        OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
-        filter.setCredentials(this.username, this.password);
-        filter.setProxy(this.useProxy, this.proxyHost, this.proxyPort);
-        filter.setSchemeName(this.scheme);
-
-        AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
-        builder.setRequestTimeoutInMs(this.timeout);
-        builder.addRequestFilter(filter);
-        this.httpClient = new Client(builder);
-        if (this.useProxy) {
-            this.httpClient.setProxy(this.proxyHost, this.proxyPort);
-            LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
+    private ApiResponse<?> buildResponse(Class clazz) throws ClassNotFoundException {
+        switch (clazz.getSimpleName()) {
+            case "Activity":
+                return new ApiResponse<Activity>();
+            case "Channel":
+                return new ApiResponse<Channel>();
+            case "Comment":
+                return new ApiResponse<Comment>();
+            case "Contest":
+                return new ApiResponse<Contest>();
+            case "Group":
+                return new ApiResponse<Group>();
+            case "Playlist":
+                return new ApiResponse<Playlist>();
+            case "Record":
+                return new ApiResponse<Record>();
+            case "Strongtag":
+                return new ApiResponse<Strongtag>();
+            case "Subtitle":
+                return new ApiResponse<Subtitle>();
+            case "User":
+                return new ApiResponse<User>();
+            case "Video":
+                return new ApiResponse<Video>();
+            default:
+                throw new ClassNotFoundException(MessageFormat.format("The given Class ({0}) isn't allowed here", clazz.getSimpleName()));
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type) {
-        Assert.noNullElements(new Object[]{endPoint, type}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.GET, endPoint, type, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.GET, endPoint, type, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id) {
-        Assert.noNullElements(new Object[]{endPoint, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, endPoint, type, id, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, endPoint, type, id, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id) {
-        Assert.noNullElements(new Object[]{connection, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, connection, type, id, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, connection, type, id, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, connection, type, id, subId, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.GET, connection, type, id, subId, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type) {
-        Assert.noNullElements(new Object[]{endPoint, type}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.POST, endPoint, type, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.POST, endPoint, type, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id) {
-        Assert.noNullElements(new Object[]{endPoint, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, endPoint, type, id, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, endPoint, type, id, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id) {
-        Assert.noNullElements(new Object[]{connection, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, connection, type, id, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, connection, type, id, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, connection, type, id, subId, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.POST, connection, type, id, subId, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type) {
-        Assert.noNullElements(new Object[]{endPoint, type}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, endPoint, type, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        Assert.isTrue(!type.equals(EndpointType.ID), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, endPoint, type, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id) {
-        Assert.noNullElements(new Object[]{endPoint, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, endPoint, type, id, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, endPoint, type, id, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id) {
-        Assert.noNullElements(new Object[]{connection, type, id}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, connection, type, id, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, connection, type, id, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, type, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.getMessage());
-        return this.doRequest(HttpMethod.DELETE, connection, type, id, subId, params);
     }
 }

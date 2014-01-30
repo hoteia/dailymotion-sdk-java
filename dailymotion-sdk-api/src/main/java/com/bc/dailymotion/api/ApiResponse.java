@@ -27,6 +27,10 @@ public class ApiResponse<E> {
         this.list = new ArrayList<>();
     }
 
+    public ApiResponse(Class<E> clazz) {
+        this.list = new ArrayList<>();
+    }
+
     public int getPage() {
         return page;
     }

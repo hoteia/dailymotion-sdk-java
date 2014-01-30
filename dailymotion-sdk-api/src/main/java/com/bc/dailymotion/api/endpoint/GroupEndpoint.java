@@ -6,8 +6,24 @@ import com.bc.dailymotion.api.dto.Group;
 /**
  * Created by Bastien on 13/01/2014.
  */
-public interface GroupEndpoint extends Endpoint<Group> {
-    static final String ALL = "groups";
-    static final String ID = "group/{0}";
-    static final String ME = "me/" + ALL;
+public enum GroupEndpoint implements Endpoint {
+    ALL("groups", Group.class),
+    ID("group/{0}", Group.class),
+    ME("me/" + ALL.value, ALL.clazz);
+
+    private String value;
+    private Class clazz;
+
+    public String getValue(){
+        return this.value;
+    }
+
+    public Class getClazz(){
+        return this.clazz;
+    }
+
+    private GroupEndpoint(String value, Class clazz) {
+        this.value = value;
+        this.clazz = clazz;
+    }
 }

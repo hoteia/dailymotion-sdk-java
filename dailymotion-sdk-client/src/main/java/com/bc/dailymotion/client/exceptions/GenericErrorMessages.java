@@ -5,6 +5,9 @@ package com.bc.dailymotion.client.exceptions;
  */
 public enum GenericErrorMessages {
     NO_NULL_ALLOWED("At least one of the given parameter is null"),
+    RESPONSE_BODY_IS_NULL("The response body is null"),
+    ENDPOINT_NOT_FOUND("Endpoint url is null or empty"),
+    CONNECTION_NOT_FOUND("Connection url is null or empty"),
     TYPE_ID_NOT_ALLOWED("The type ID isn't allowed for this method");
 
     private String message;

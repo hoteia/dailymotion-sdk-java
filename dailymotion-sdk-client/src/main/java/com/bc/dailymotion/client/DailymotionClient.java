@@ -3,8 +3,6 @@ package com.bc.dailymotion.client;
 import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
-import com.bc.dailymotion.api.type.ConnectionType;
-import com.bc.dailymotion.api.type.EndpointType;
 
 import java.util.List;
 import java.util.Map;
@@ -31,287 +29,227 @@ public interface DailymotionClient {
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type);
+    ApiResponse<?> doGet(Endpoint endPoint);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
+    ApiResponse<?> doGet(Endpoint endPoint, String id);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doGet(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
+    ApiResponse<?> doGet(Connection connection, String id);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
+    ApiResponse<?> doGet(Connection connection, String id, String subId);
 
     /**
      * Performs a GET HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doGet(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type);
+    ApiResponse<?> doPost(Endpoint endPoint);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
+    ApiResponse<?> doPost(Endpoint endPoint, String id);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doPost(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
+    ApiResponse<?> doPost(Connection connection, String id);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
+    ApiResponse<?> doPost(Connection connection, String id, String subId);
 
     /**
      * Performs a POST HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doPost(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type);
+    ApiResponse<?> doDelete(Endpoint endPoint);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Endpoint endPoint, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id);
+    ApiResponse<?> doDelete(Endpoint endPoint, String id);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param endPoint The endpoint to call
-     * @param type     The type of request see {@link com.bc.dailymotion.api.type.EndpointType}
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
-     * @param <E>      The parametrized type of expected return type
      * @return The response containing the list of E elements
      */
-    <E> ApiResponse<E> doDelete(Class<? extends Endpoint<E>> endPoint, EndpointType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Endpoint endPoint, String id, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id);
+    ApiResponse<?> doDelete(Connection connection, String id);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Connection connection, String id, Map<String, List<String>> params);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId);
+    ApiResponse<?> doDelete(Connection connection, String id, String subId);
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
      *
      * @param connection The connection to call
-     * @param type       The type of request see {@link com.bc.dailymotion.api.type.ConnectionType}
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
-     * @param <E>        The parametrized type of the parent endpoint
-     * @param <T>        The parametrized type of expected return type
      * @return The response containing the list of T elements
      */
-    <E, T> ApiResponse<T> doDelete(Class<? extends Connection<E, T>> connection, ConnectionType type, String id, String subId, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Connection connection, String id, String subId, Map<String, List<String>> params);
 }
