@@ -34,16 +34,16 @@ import java.util.Map;
  * And the following connection patterns :
  * <ul>
  * <li>/endpoint/{id}/connection</li>
- * <li>/endpoint/{id}/connection{subId}</li>
+ * <li>/endpoint/{id}/connection/{subId}</li>
  * </ul>
- * And also takes some optional parameters defined with a Map<String, List<String>>
+ * And also takes some optional parameters given in a map
  * Support the HTTP Methods :
  * <ul>
  * <li>GET</li>
  * <li>POST</li>
  * <li>PUT</li>
  * </ul>
- * More details on <url>http://www.dailymotion.com/doc/api/graph-api.html</url>
+ * @see <a href="http://www.dailymotion.com/doc/api/graph-api.html">http://www.dailymotion.com/doc/api/graph-api.html</a>
  */
 @Service(value = "dailymotionClient")
 public class DailymotionClientImpl implements DailymotionClient, InitializingBean {

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface of DailyMotion Client
+ * Implementation of DailyMotion Client
  * Handles the following URL patterns :
  * <ul>
  * <li>/endpoints</li>
@@ -18,10 +18,16 @@ import java.util.Map;
  * And the following connection patterns :
  * <ul>
  * <li>/endpoint/{id}/connection</li>
- * <li>/endpoint/{id}/connection{sudId}</li>
+ * <li>/endpoint/{id}/connection/{subId}</li>
  * </ul>
- * And also takes some optional parameters defined with a Map<String, List<String>>
- * More details on <url>http://www.dailymotion.com/doc/api/graph-api.html</url>
+ * And also takes some optional parameters given in a map
+ * Support the HTTP Methods :
+ * <ul>
+ * <li>GET</li>
+ * <li>POST</li>
+ * <li>PUT</li>
+ * </ul>
+ * @see <a href="http://www.dailymotion.com/doc/api/graph-api.html">http://www.dailymotion.com/doc/api/graph-api.html</a>
  */
 public interface DailymotionClient {
 
