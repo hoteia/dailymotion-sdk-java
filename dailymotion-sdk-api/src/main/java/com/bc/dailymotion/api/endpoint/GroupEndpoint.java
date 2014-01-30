@@ -11,17 +11,36 @@ public enum GroupEndpoint implements Endpoint {
     ID("group/{0}", Group.class),
     ME("me/" + ALL.value, ALL.clazz);
 
+    /**
+     * Defines the URL of the Endpoint
+     */
     private String value;
+
+    /**
+     * Defines the expected class returned in list
+     */
     private Class clazz;
 
-    public String getValue(){
+    /**
+     * {@inheritDoc}
+     */
+    public String getValue() {
         return this.value;
     }
 
-    public Class getClazz(){
+    /**
+     * {@inheritDoc}
+     */
+    public Class getClazz() {
         return this.clazz;
     }
 
+    /**
+     * Default constructor for the Endpoint
+     *
+     * @param value The url of the endpoint
+     * @param clazz The class that will be returned inside the list
+     */
     private GroupEndpoint(String value, Class clazz) {
         this.value = value;
         this.clazz = clazz;

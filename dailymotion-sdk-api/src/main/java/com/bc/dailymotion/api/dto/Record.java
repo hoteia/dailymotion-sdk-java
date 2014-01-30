@@ -10,75 +10,202 @@ import java.util.List;
  * Created by Bastien on 04/01/2014.
  */
 public class Record {
-    int duration; //	The duration of the record in seconds	No access_token required for reading. This field is writable.	Returns number, min value: 120, max value: 14400.
-    String id;//	The record object ID	No access_token required for reading.	Returns the object id.
-    User owner;//	The record’s owner	No access_token required for reading.	Return a user. You can request sub-fields by using owner.<sub-field> notation.
-    int periodicity;//	The delay between each new record in seconds.	No access_token required for reading. This field is writable.	Returns number, min value: 120.
-    String record_status;//	The record_status corresponds to the current state of the recording process. Changing the status to started will result in the instant beginning of the recording process, while changing this status from started to stopped will stop a recording session. The paused and resumed values are working the same way and allow the user to pause and then to resume a recording session.	No access_token required for reading. This field is writable.	Returns string, allowed values: started, resumed, paused, stopped.
-    List<String> recorded;//	Returns a list of video ids corresponding to the recorded videos from the given record id.	No access_token required for reading.	Returns array, min size: 1, max size: 150.
-    Date start_date;//	The date when the record has to start	No access_token required for reading. This field is writable.	Returns date.
-    String title;//	The title given to the record.	No access_token required for reading. This field is writable.	Returns string, min size: 1, max size: 1000.
+    /**
+     * The duration of the record in seconds
+     * No access_token required for reading. This field is writable.
+     * Returns number, min value: 120, max value: 14400.
+     */
+    private int duration;
 
+    /**
+     * The record object ID
+     * No access_token required for reading.
+     * Returns the object id.
+     */
+    private String id;
+
+    /**
+     * The record’s owner
+     * No access_token required for reading.
+     * Return a user. You can request sub-fields by using owner.<sub-field> notation.
+     */
+    private User owner;
+
+    /**
+     * The delay between each new record in seconds.
+     * No access_token required for reading. This field is writable.
+     * Returns number, min value: 120.
+     */
+    private int periodicity;
+
+    /**
+     * The record_status corresponds to the current state of the recording process. Changing the status to started will result in the instant beginning of the recording process, while changing this status from started to stopped will stop a recording session. The paused and resumed values are working the same way and allow the user to pause and then to resume a recording session.
+     * No access_token required for reading. This field is writable.
+     * Returns string, allowed values: started, resumed, paused, stopped.
+     */
+    private String record_status;
+
+    /**
+     * Returns a list of video ids corresponding to the recorded videos from the given record id.
+     * No access_token required for reading.
+     * Returns array, min size: 1, max size: 150.
+     */
+    private List<String> recorded;
+
+    /**
+     * The date when the record has to start
+     * No access_token required for reading. This field is writable.
+     * Returns date.
+     */
+    private Date start_date;
+
+    /**
+     * The title given to the record.
+     * No access_token required for reading. This field is writable.
+     * Returns string, min size: 1, max size: 1000.
+     */
+    private String title;
+
+    /**
+     * Returns the Duration
+     *
+     * @return the Duration
+     */
     public int getDuration() {
         return duration;
     }
 
+    /**
+     * Set the Duration
+     *
+     * @param duration the Duration to set
+     */
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
+    /**
+     * Returns the Id
+     *
+     * @return the Id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Set the Id
+     *
+     * @param id the Id to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Returns the Owner
+     *
+     * @return the Owner
+     */
     public User getOwner() {
         return owner;
     }
 
+    /**
+     * Set the Owner
+     *
+     * @param owner the Owner to set
+     */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
+    /**
+     * Returns the Periodicity
+     *
+     * @return the Periodicity
+     */
     public int getPeriodicity() {
         return periodicity;
     }
 
+    /**
+     * Set the Periodicity
+     *
+     * @param periodicity the Periodicity to set
+     */
     public void setPeriodicity(int periodicity) {
         this.periodicity = periodicity;
     }
 
+    /**
+     * Returns the Record_status
+     *
+     * @return the Record_status
+     */
     public String getRecord_status() {
         return record_status;
     }
 
+    /**
+     * Set the Record_status
+     *
+     * @param record_status the Record_status to set
+     */
     public void setRecord_status(String record_status) {
         this.record_status = record_status;
     }
 
+    /**
+     * Returns the Recorded
+     *
+     * @return the Recorded
+     */
     public List<String> getRecorded() {
         return recorded;
     }
 
+    /**
+     * Set the Recorded
+     *
+     * @param recorded the Recorded to set
+     */
     public void setRecorded(List<String> recorded) {
         this.recorded = recorded;
     }
 
+    /**
+     * Returns the Start_date
+     *
+     * @return the Start_date
+     */
     public Date getStart_date() {
         return start_date;
     }
 
+    /**
+     * Set the Start_date
+     *
+     * @param start_date the Start_date to set
+     */
     public void setStart_date(Date start_date) {
         this.start_date = start_date;
     }
 
+    /**
+     * Returns the Title
+     *
+     * @return the Title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Set the Title
+     *
+     * @param title the Title to set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
@@ -91,6 +218,9 @@ public class Record {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
+    /**
+     * {@docRoot}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,6 +233,9 @@ public class Record {
         return true;
     }
 
+    /**
+     * {@docRoot}
+     */
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;

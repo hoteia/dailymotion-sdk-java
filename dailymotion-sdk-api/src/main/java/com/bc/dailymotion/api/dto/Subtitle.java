@@ -7,30 +7,77 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * Created by Bastien on 04/01/2014.
  */
 public class Subtitle {
-    String id;//	The videosubtitle object ID	No access_token required for reading.	Returns the object id.
-    String language;//	The language of the subtitle	This field can be used as filter. No access_token required for reading.	Returns string, min size: 1, max size: 150.
-    String url;//	The URL of the subtitle, to play with the video	No access_token required for reading.	Returns string, min size: 1, max size: 150.
+    /**
+     * The videosubtitle object ID
+     * No access_token required for reading.
+     * Returns the object id.
+     */
+    private String id;
 
+    /**
+     * The language of the subtitle
+     * This field can be used as filter. No access_token required for reading.
+     * Returns string, min size: 1, max size: 150.
+     */
+    private String language;
+
+    /**
+     * The URL of the subtitle, to play with the video
+     * No access_token required for reading.
+     * Returns string, min size: 1, max size: 150.
+     */
+    private String url;
+
+    /**
+     * Returns the Id
+     *
+     * @return the Id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Set the Id
+     *
+     * @param id the Id to set
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Returns the Language
+     *
+     * @return the Language
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * Set the Language
+     *
+     * @param language the Language to set
+     */
     public void setLanguage(String language) {
         this.language = language;
     }
 
+    /**
+     * Returns the Url
+     *
+     * @return the Url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Set the Url
+     *
+     * @param url the Url to set
+     */
     public void setUrl(String url) {
         this.url = url;
     }
@@ -43,6 +90,9 @@ public class Subtitle {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.DEFAULT_STYLE);
     }
 
+    /**
+     * {@docRoot}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,6 +105,9 @@ public class Subtitle {
         return true;
     }
 
+    /**
+     * {@docRoot}
+     */
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
