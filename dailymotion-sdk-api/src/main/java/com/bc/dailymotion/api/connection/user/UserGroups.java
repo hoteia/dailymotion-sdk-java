@@ -9,7 +9,7 @@ import com.bc.dailymotion.api.endpoint.UserEndpoint;
  * Created by a528122 on 14/01/14.
  */
 public enum UserGroups implements Connection {
-    ALL("comments", Group.class, UserEndpoint.ID),
+    ALL("groups", Group.class, UserEndpoint.ID),
     ID(ALL.value + "/{0}", Group.class, UserEndpoint.ID);
 
     private String value;

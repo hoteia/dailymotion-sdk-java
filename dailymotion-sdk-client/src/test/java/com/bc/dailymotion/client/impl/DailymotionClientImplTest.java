@@ -10,6 +10,7 @@ import com.bc.dailymotion.api.connection.group.GroupMember;
 import com.bc.dailymotion.api.connection.group.GroupVideo;
 import com.bc.dailymotion.api.connection.playlist.PlaylistVideo;
 import com.bc.dailymotion.api.connection.user.*;
+import com.bc.dailymotion.api.connection.video.*;
 import com.bc.dailymotion.api.dto.*;
 import com.bc.dailymotion.api.endpoint.*;
 import org.fest.assertions.api.Assertions;
@@ -174,111 +175,149 @@ public class DailymotionClientImplTest {
         return new Object[][]{
                 // Channel connections
                 {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", ChannelVideo.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", ChannelVideo.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ChannelVideo.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ChannelVideo.ID, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/channel/xabcdef/videos", ChannelVideo.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos/xabcdef", ChannelVideo.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos/xabcdef", ChannelVideo.ID, this.getResponseForType(Video.class)},
 
                 // Contest connections
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", ContestMember.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", ContestMember.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ContestMember.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ContestMember.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/members", ContestMember.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/contest/xabcdef/members", ContestMember.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/members/xabcdef", ContestMember.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/members/xabcdef", ContestMember.ID, this.getResponseForType(User.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", ContestVideo.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", ContestVideo.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ContestVideo.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ContestVideo.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/videos", ContestVideo.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/contest/xabcdef/videos", ContestVideo.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/videos/xabcdef", ContestVideo.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/contest/xabcdef/videos/xabcdef", ContestVideo.ID, this.getResponseForType(Video.class)},
 
                 // Group connections
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", GroupMember.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", GroupMember.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", GroupMember.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", GroupMember.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/group/xabcdef/members", GroupMember.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/group/xabcdef/members", GroupMember.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/group/xabcdef/members/xabcdef", GroupMember.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/group/xabcdef/members/xabcdef", GroupMember.ID, this.getResponseForType(User.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", GroupVideo.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", GroupVideo.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", GroupVideo.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", GroupVideo.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/group/xabcdef/videos", GroupVideo.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/group/xabcdef/videos", GroupVideo.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/group/xabcdef/videos/xabcdef", GroupVideo.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/group/xabcdef/videos/xabcdef", GroupVideo.ID, this.getResponseForType(Video.class)},
 
                 // Playlist connections
-                {1, Playlist.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", PlaylistVideo.ALL, this.getResponseForType(Playlist.class)},
-                {2, Playlist.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", PlaylistVideo.ALL, this.getResponseForType(Playlist.class)},
-                {3, Playlist.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", PlaylistVideo.ID, this.getResponseForType(Playlist.class)},
-                {4, Playlist.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", PlaylistVideo.ID, this.getResponseForType(Playlist.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/playlist/xabcdef/videos", PlaylistVideo.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/playlist/xabcdef/videos", PlaylistVideo.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/playlist/xabcdef/videos/xabcdef", PlaylistVideo.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/playlist/xabcdef/videos/xabcdef", PlaylistVideo.ID, this.getResponseForType(Video.class)},
 
                 // User Connections
-                {1, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserActivities.ALL, this.getResponseForType(Activity.class)},
-                {2, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserActivities.ALL, this.getResponseForType(Activity.class)},
-                {3, Activity.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserActivities.ID, this.getResponseForType(Activity.class)},
-                {4, Activity.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserActivities.ID, this.getResponseForType(Activity.class)},
+                {1, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/activities", UserActivities.ALL, this.getResponseForType(Activity.class)},
+                {2, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/activities", UserActivities.ALL, this.getResponseForType(Activity.class)},
+                {3, Activity.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/activities/xabcdef", UserActivities.ID, this.getResponseForType(Activity.class)},
+                {4, Activity.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/activities/xabcdef", UserActivities.ID, this.getResponseForType(Activity.class)},
 
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserChildren.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserChildren.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserChildren.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserChildren.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/children", UserChildren.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/children", UserChildren.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/children/xabcdef", UserChildren.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/children/xabcdef", UserChildren.ID, this.getResponseForType(User.class)},
 
-                {1, Contest.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserContests.ALL, this.getResponseForType(Contest.class)},
-                {2, Contest.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserContests.ALL, this.getResponseForType(Contest.class)},
-                {3, Contest.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserContests.ID, this.getResponseForType(Contest.class)},
-                {4, Contest.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserContests.ID, this.getResponseForType(Contest.class)},
+                {1, Contest.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/contests", UserContests.ALL, this.getResponseForType(Contest.class)},
+                {2, Contest.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/contests", UserContests.ALL, this.getResponseForType(Contest.class)},
+                {3, Contest.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/contests/xabcdef", UserContests.ID, this.getResponseForType(Contest.class)},
+                {4, Contest.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/contests/xabcdef", UserContests.ID, this.getResponseForType(Contest.class)},
 
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFans.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFans.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFans.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFans.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/fans", UserFans.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/fans", UserFans.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/fans/xabcdef", UserFans.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/fans/xabcdef", UserFans.ID, this.getResponseForType(User.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFavorites.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFavorites.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFavorites.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFavorites.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/favorites", UserFavorites.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/favorites", UserFavorites.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/favorites/xabcdef", UserFavorites.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/favorites/xabcdef", UserFavorites.ID, this.getResponseForType(Video.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFeatures.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFeatures.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFeatures.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFeatures.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/features", UserFeatures.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/features", UserFeatures.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/features/xabcdef", UserFeatures.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/features/xabcdef", UserFeatures.ID, this.getResponseForType(Video.class)},
 
-                {1, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFeed.ALL, this.getResponseForType(Activity.class)},
-                {2, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFeed.ALL, this.getResponseForType(Activity.class)},
-                {3, Activity.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFeed.ID, this.getResponseForType(Activity.class)},
-                {4, Activity.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFeed.ID, this.getResponseForType(Activity.class)},
+                {1, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/feed", UserFeed.ALL, this.getResponseForType(Activity.class)},
+                {2, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/feed", UserFeed.ALL, this.getResponseForType(Activity.class)},
+                {3, Activity.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/feed/xabcdef", UserFeed.ID, this.getResponseForType(Activity.class)},
+                {4, Activity.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/feed/xabcdef", UserFeed.ID, this.getResponseForType(Activity.class)},
 
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFollowing.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFollowing.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFollowing.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFollowing.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/following", UserFollowing.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/following", UserFollowing.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/following/xabcdef", UserFollowing.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/following/xabcdef", UserFollowing.ID, this.getResponseForType(User.class)},
 
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserFriends.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserFriends.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFriends.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserFriends.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/friends", UserFriends.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/friends", UserFriends.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/friends/xabcdef", UserFriends.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/friends/xabcdef", UserFriends.ID, this.getResponseForType(User.class)},
 
-                {1, Group.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserGroups.ALL, this.getResponseForType(Group.class)},
-                {2, Group.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserGroups.ALL, this.getResponseForType(Group.class)},
-                {3, Group.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserGroups.ID, this.getResponseForType(Group.class)},
-                {4, Group.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserGroups.ID, this.getResponseForType(Group.class)},
+                {1, Group.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/groups", UserGroups.ALL, this.getResponseForType(Group.class)},
+                {2, Group.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/groups", UserGroups.ALL, this.getResponseForType(Group.class)},
+                {3, Group.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/groups/xabcdef", UserGroups.ID, this.getResponseForType(Group.class)},
+                {4, Group.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/groups/xabcdef", UserGroups.ID, this.getResponseForType(Group.class)},
 
-                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserOffers.ALL, this.getResponseForType(User.class)},
-                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserOffers.ALL, this.getResponseForType(User.class)},
-                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserOffers.ID, this.getResponseForType(User.class)},
-                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserOffers.ID, this.getResponseForType(User.class)},
+                {1, User.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/offers", UserOffers.ALL, this.getResponseForType(User.class)},
+                {2, User.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/offers", UserOffers.ALL, this.getResponseForType(User.class)},
+                {3, User.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/offers/xabcdef", UserOffers.ID, this.getResponseForType(User.class)},
+                {4, User.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/offers/xabcdef", UserOffers.ID, this.getResponseForType(User.class)},
 
-                {1, Playlist.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserPlaylists.ALL, this.getResponseForType(Playlist.class)},
-                {2, Playlist.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserPlaylists.ALL, this.getResponseForType(Playlist.class)},
-                {3, Playlist.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserPlaylists.ID, this.getResponseForType(Playlist.class)},
-                {4, Playlist.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserPlaylists.ID, this.getResponseForType(Playlist.class)},
+                {1, Playlist.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/playlists", UserPlaylists.ALL, this.getResponseForType(Playlist.class)},
+                {2, Playlist.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/playlists", UserPlaylists.ALL, this.getResponseForType(Playlist.class)},
+                {3, Playlist.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/playlists/xabcdef", UserPlaylists.ID, this.getResponseForType(Playlist.class)},
+                {4, Playlist.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/playlists/xabcdef", UserPlaylists.ID, this.getResponseForType(Playlist.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserSubscriptions.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserSubscriptions.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserSubscriptions.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserSubscriptions.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/subscriptions", UserSubscriptions.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/subscriptions", UserSubscriptions.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/subscriptions/xabcdef", UserSubscriptions.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/subscriptions/xabcdef", UserSubscriptions.ID, this.getResponseForType(Video.class)},
 
-                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/channel/xabcdef/videos", UserVideos.ALL, this.getResponseForType(Video.class)},
-                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activities", UserVideos.ALL, this.getResponseForType(Video.class)},
-                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserVideos.ID, this.getResponseForType(Video.class)},
-                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", UserVideos.ID, this.getResponseForType(Video.class)},
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/user/xabcdef/videos", UserVideos.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/user/xabcdef/videos", UserVideos.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/videos/xabcdef", UserVideos.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/user/xabcdef/videos/xabcdef", UserVideos.ID, this.getResponseForType(Video.class)},
 
                 // Video Connections
+                {1, Comment.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/comments", VideoComment.ALL, this.getResponseForType(Comment.class)},
+                {2, Comment.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/comments", VideoComment.ALL, this.getResponseForType(Comment.class)},
+                {3, Comment.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/comments/xabcdef", VideoComment.ID, this.getResponseForType(Comment.class)},
+                {4, Comment.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/comments/xabcdef", VideoComment.ID, this.getResponseForType(Comment.class)},
 
+                {1, Contest.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/contests", VideoContest.ALL, this.getResponseForType(Contest.class)},
+                {2, Contest.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/contests", VideoContest.ALL, this.getResponseForType(Contest.class)},
+                {3, Contest.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/contests/xabcdef", VideoContest.ID, this.getResponseForType(Contest.class)},
+                {4, Contest.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/contests/xabcdef", VideoContest.ID, this.getResponseForType(Contest.class)},
+
+                {1, Group.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/groups", VideoGroup.ALL, this.getResponseForType(Group.class)},
+                {2, Group.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/groups", VideoGroup.ALL, this.getResponseForType(Group.class)},
+                {3, Group.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/groups/xabcdef", VideoGroup.ID, this.getResponseForType(Group.class)},
+                {4, Group.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/groups/xabcdef", VideoGroup.ID, this.getResponseForType(Group.class)},
+
+                {1, Playlist.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/playlists", VideoPlayList.ALL, this.getResponseForType(Playlist.class)},
+                {2, Playlist.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/playlists", VideoPlayList.ALL, this.getResponseForType(Playlist.class)},
+                {3, Playlist.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/playlists/xabcdef", VideoPlayList.ID, this.getResponseForType(Playlist.class)},
+                {4, Playlist.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/playlists/xabcdef", VideoPlayList.ID, this.getResponseForType(Playlist.class)},
+
+                {1, Record.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/records", VideoRecord.ALL, this.getResponseForType(Record.class)},
+                {2, Record.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/records", VideoRecord.ALL, this.getResponseForType(Record.class)},
+                {3, Record.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/records/xabcdef", VideoRecord.ID, this.getResponseForType(Record.class)},
+                {4, Record.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/records/xabcdef", VideoRecord.ID, this.getResponseForType(Record.class)},
+
+                {1, Video.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/related", VideoRelated.ALL, this.getResponseForType(Video.class)},
+                {2, Video.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/related", VideoRelated.ALL, this.getResponseForType(Video.class)},
+                {3, Video.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/related/xabcdef", VideoRelated.ID, this.getResponseForType(Video.class)},
+                {4, Video.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/related/xabcdef", VideoRelated.ID, this.getResponseForType(Video.class)},
+
+                {1, Strongtag.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/strongtags", VideoStrongtag.ALL, this.getResponseForType(Strongtag.class)},
+                {2, Strongtag.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/strongtags", VideoStrongtag.ALL, this.getResponseForType(Strongtag.class)},
+                {3, Strongtag.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/strongtags/xabcdef", VideoStrongtag.ID, this.getResponseForType(Strongtag.class)},
+                {4, Strongtag.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/strongtags/xabcdef", VideoStrongtag.ID, this.getResponseForType(Strongtag.class)},
+
+                {1, Subtitle.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/video/xabcdef/subtitles", VideoSubtitle.ALL, this.getResponseForType(Subtitle.class)},
+                {2, Subtitle.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/video/xabcdef/subtitles", VideoSubtitle.ALL, this.getResponseForType(Subtitle.class)},
+                {3, Subtitle.class, new Object[]{"xabcdef", "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/subtitles/xabcdef", VideoSubtitle.ID, this.getResponseForType(Subtitle.class)},
+                {4, Subtitle.class, new Object[]{"xabcdef", new HashMap<>(), "xabcdef"}, "https://api.dailymotion.com/video/xabcdef/subtitles/xabcdef", VideoSubtitle.ID, this.getResponseForType(Subtitle.class)},
         };
     }
 
@@ -324,7 +363,7 @@ public class DailymotionClientImplTest {
         }
 
         // Then
-        //verify(this.httpClient).url(expectedUrl);
+        verify(this.httpClient).url(expectedUrl);
         Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
     }
 }

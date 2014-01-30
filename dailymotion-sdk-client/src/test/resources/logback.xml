@@ -15,7 +15,7 @@
     <!-- Loggers 'applicatifs' -->
     <!-- +++++++++++++++++++++ -->
     <logger name="com.bc.dailymotion.client" additivity="false">
-        <level value="trace"/>
+        <level value="debug"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
