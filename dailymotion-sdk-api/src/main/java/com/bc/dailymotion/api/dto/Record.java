@@ -226,12 +226,18 @@ public class Record {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Record record = (Record) o;
 
-        if (id != null ? !id.equals(record.id) : record.id != null) return false;
+        if (id != null ? !id.equals(record.id) : record.id != null) {
+            return false;
+        }
 
         return true;
     }

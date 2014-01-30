@@ -230,12 +230,18 @@ public class Activity {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Activity activity = (Activity) o;
 
-        if (id != null ? !id.equals(activity.id) : activity.id != null) return false;
+        if (id != null ? !id.equals(activity.id) : activity.id != null) {
+            return false;
+        }
 
         return true;
     }

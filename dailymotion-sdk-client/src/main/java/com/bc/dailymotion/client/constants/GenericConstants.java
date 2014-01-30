@@ -4,8 +4,8 @@ package com.bc.dailymotion.client.constants;
  * Created by a528122 on 16/01/14.
  */
 public enum GenericConstants {
-    TWO_PARAMETERS("{0}/{1}/{2}"),
-    THREE_PARAMETERS("{0}/{1}");
+    TWO_PARAMETERS("{0}/{1}"),
+    THREE_PARAMETERS("{0}/{1}/{2}");
 
     private String message;
 

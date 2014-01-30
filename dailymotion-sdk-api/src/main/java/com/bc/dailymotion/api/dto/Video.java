@@ -3156,12 +3156,18 @@ public class Video {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Video video = (Video) o;
 
-        if (id != null ? !id.equals(video.id) : video.id != null) return false;
+        if (id != null ? !id.equals(video.id) : video.id != null) {
+            return false;
+        }
 
         return true;
     }
