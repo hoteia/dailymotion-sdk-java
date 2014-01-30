@@ -17,7 +17,7 @@ public class Video {
      * No access_token required for reading.
      * Returns boolean.
      */
-    @JsonProperty("3D")
+    @JsonProperty(value = "3D")
     private boolean threeD;
 
     /**
@@ -25,7 +25,8 @@ public class Video {
      * No access_token required for reading.
      * Returns dict, min size: 1, max size: 150.
      */
-    private String access_error;
+    @JsonProperty(value = "access_error")
+    private String accessError;
 
     /**
      * Defines is video accepts associated ads
@@ -39,35 +40,40 @@ public class Video {
      * No access_token required for reading. This field is writable.
      * Returns boolean.
      */
-    private boolean allow_comments;
+    @JsonProperty(value = "allow_comments")
+    private boolean allowComments;
 
     /**
      * Tell if the video can be embeded outside of Dailymotion
      * No access_token required for reading.
      * Returns boolean.
      */
-    private boolean allow_embed;
+    @JsonProperty(value = "allow_embed")
+    private boolean allowEmbed;
 
     /**
      * is it possible to add this video to groups
      * No access_token required for reading. This field is writable.
      * Returns boolean.
      */
-    private boolean allowed_in_groups;
+    @JsonProperty(value = "allowed_in_groups")
+    private boolean allowedInGroups;
 
     /**
      * is it possible to add this video to playlists
      * No access_token required for reading. This field is writable.
      * Returns boolean.
      */
-    private boolean allowed_in_playlists;
+    @JsonProperty(value = "allowed_in_playlists")
+    private boolean allowedInPlaylists;
 
     /**
      * The aspect ratio of the video frame (i.e.: 1.33333 for 4/3, 1.77777 for 16/9...).
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private double aspect_ratio;
+    @JsonProperty(value = "aspect_ratio")
+    private double aspectRatio;
 
     /**
      * The current audience for a live event from the audience meter. Null if audience shouldn’t be accounted.
@@ -81,14 +87,16 @@ public class Video {
      * No access_token required for reading.
      * Returns array, min size: 1, max size: 150.
      */
-    private List<Double> available_formats;
+    @JsonProperty(value = "available_formats")
+    private List<Double> availableFormats;
 
     /**
      * The total number of times a video has been added to users’ favorites.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int bookmarks_total;
+    @JsonProperty(value = "bookmarks_total")
+    private int bookmarksTotal;
 
     /**
      * True if the live is privately available.
@@ -109,7 +117,8 @@ public class Video {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int comments_total;
+    @JsonProperty(value = "comments_total")
+    private int commentsTotal;
 
     /**
      * The country of the video (declarative, may be null).
@@ -123,21 +132,24 @@ public class Video {
      * This field can be used as filter but can’t be read nor written.
      * Returns date.
      */
-    private Timestamp created_after;
+    @JsonProperty(value = "created_after")
+    private Timestamp createdAfter;
 
     /**
      * Limit the result set to videos created before a specific timestamp
      * This field can be used as filter but can’t be read nor written.
      * Returns date.
      */
-    private Timestamp created_before;
+    @JsonProperty(value = "created_before")
+    private Timestamp createdBefore;
 
     /**
      * The date the video was uploaded to the site.
      * No access_token required for reading.
      * Returns date.
      */
-    private Date created_time;
+    @JsonProperty(value = "created_time")
+    private Date createdTime;
 
     /**
      * The description of the video.
@@ -158,56 +170,64 @@ public class Video {
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String embed_html;
+    @JsonProperty(value = "embed_html")
+    private String embedHtml;
 
     /**
      * The URL to embed the video.
      * No access_token required for reading.
      * Returns url.
      */
-    private String embed_url;
+    @JsonProperty(value = "embed_url")
+    private String embedUrl;
 
     /**
      * When the video status is processing, this parameter indicates a number between 0 and 100 corresponding to the percentage of encoding already completed. For other statuses this parameter is -1.
      * No access_token required for reading.
      * Returns number, min value: -1, max value: 100.
      */
-    private int encoding_progress;
+    @JsonProperty(value = "encoding_progress")
+    private int encodingProgress;
 
     /**
      * the end date of the stream
      * No access_token required for reading. This field is writable.
      * Returns date.
      */
-    private Date end_time;
+    @JsonProperty(value = "end_time")
+    private Date endTime;
 
     /**
      * The name of pushd event sent on video deletion
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_delete;
+    @JsonProperty(value = "event_delete")
+    private String eventDelete;
 
     /**
      * The name of pushd event sent on video deletion
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_live_offair;
+    @JsonProperty(value = "event_live_offair")
+    private String eventLiveOffair;
 
     /**
      * The name of pushd event sent on video modification
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_live_onair;
+    @JsonProperty(value = "event_live_onair")
+    private String eventLiveOnair;
 
     /**
      * The name of pushd event sent on video modification
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_modify;
+    @JsonProperty(value = "event_modify")
+    private String eventModify;
 
     /**
      * True if the video is explicit.
@@ -221,7 +241,8 @@ public class Video {
      * No access_token required for reading.
      * Returns url.
      */
-    private String filmstrip_small_url;
+    @JsonProperty(value = "filmstrip_small_url")
+    private String filmstripSmallUrl;
 
     /**
      * A list of filters available to reduce the result set.
@@ -284,21 +305,24 @@ public class Video {
      * manage_videos scope required for reading. manage_videos scope required for writing.
      * Returns boolean.
      */
-    private boolean live_ad_break;
+    @JsonProperty(value = "live_ad_break")
+    private boolean liveAdBreak;
 
     /**
      * The URL to publish fragmented live stream on (current logged user need to own the video in order to retrieve this field)
      * No access_token required for reading.
      * Returns url.
      */
-    private String live_frag_publish_url;
+    @JsonProperty(value = "live_frag_publish_url")
+    private String liveFragPublishUrl;
 
     /**
      * The URL to publish live source stream on (current logged user need to own the video in order to retrieve this field)
      * No access_token required for reading.
      * Returns url.
      */
-    private String live_publish_url;
+    @JsonProperty(value = "live_publish_url")
+    private String livePublishUrl;
 
     /**
      * The list of blocking rules per country and device to be applied on the video. Each rule has the following format : country/[country code]/media/[media id] Available country codes are : ar, at, br, ca, ch, cn, de, dk, es, fr, gb, gr, ie, in, it, js, jp, kr, mx, nl, pl, pr, pt, ro, ru, se, tr, us, other. Available medias id are : iptv, mobile, tvhz, web, other.
@@ -312,42 +336,48 @@ public class Video {
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_credit_actors;
+    @JsonProperty(value = "metadata_credit_actors")
+    private String metadataCreditActors;
 
     /**
      * director of the movie
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_credit_director;
+    @JsonProperty(value = "metadata_credit_director")
+    private String metadataCreditDirector;
 
     /**
      * Genre of the video
      * No access_token required for reading. This field is writable.
      * Returns string, allowed values: drama, comedy, realitytelevision, animation, documentary, sitcom, gameshow, sciencefiction, talkshow, fantasy, action, anime, adventure, soapopera, miniseries, news, crimefiction, romance, sports, variety, thriller, music.
      */
-    private String metadata_genre;
+    @JsonProperty(value = "metadata_genre")
+    private String metadataGenre;
 
     /**
      * Original language (ISO 3166) of the video
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_original_language;
+    @JsonProperty(value = "metadata_original_language")
+    private String metadataOriginalLanguage;
 
     /**
      * Original title of the video
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_original_title;
+    @JsonProperty(value = "metadata_original_title")
+    private String metadataOriginalTitle;
 
     /**
      * Date (RFC 822) of release or production
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_released;
+    @JsonProperty(value = "metadata_released")
+    private String metadataReleased;
 
     /**
      * e
@@ -355,21 +385,24 @@ public class Video {
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_show_episod;
+    @JsonProperty(value = "metadata_show_episod")
+    private String metadataShowEpisod;
 
     /**
      * show season number/name
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_show_season;
+    @JsonProperty(value = "metadata_show_season")
+    private String metadataShowSeason;
 
     /**
      * Visa number
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private String metadata_visa;
+    @JsonProperty(value = "metadata_visa")
+    private String metadataVisa;
 
     /**
      * The stream mode, can be vod, simulcast or live.
@@ -390,21 +423,24 @@ public class Video {
      * This field can be used as filter but can’t be read nor written.
      * Returns date.
      */
-    private Timestamp modified_after;
+    @JsonProperty(value = "modified_after")
+    private Timestamp modifiedAfter;
 
     /**
      * Limit the result set to videos modified before a specific timestamp
      * This field can be used as filter but can’t be read nor written.
      * Returns date.
      */
-    private Timestamp modified_before;
+    @JsonProperty(value = "modified_before")
+    private Timestamp modifiedBefore;
 
     /**
      * The date the video was last modified.
      * No access_token required for reading.
      * Returns date.
      */
-    private Timestamp modified_time;
+    @JsonProperty(value = "modified_time")
+    private Timestamp modifiedTime;
 
     /**
      * The detected MUYAP (Turkish Phonographic Industry Society Identifier) of the soundtrack
@@ -446,64 +482,72 @@ public class Video {
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_135x180_url;
+    @JsonProperty(value = "poster_135x180_url")
+    private String poster135x180Url;
 
     /**
      * The URL of the video poster (180x240).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_180x240_url;
+    @JsonProperty(value = "poster_180x240_url")
+    private String poster180x240Url;
 
     /**
      * The URL of the video poster (270x360).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_270x360_url;
+    @JsonProperty(value = "poster_270x360_url")
+    private String poster270x360Url;
 
     /**
      * The URL of the video poster (360x480).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_360x480_url;
+    @JsonProperty(value = "poster_360x480_url")
+    private String poster360x480Url;
 
     /**
      * The URL of the video poster (45x60).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_45x60_url;
+    @JsonProperty(value = "poster_45x60_url")
+    private String poster45x60Url;
 
     /**
      * The URL of the video poster (95x120).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_90x120_url;
+    @JsonProperty(value = "poster_90x120_url")
+    private String poster90x120Url;
 
     /**
      * The URL of the video poster (540x720).
      * No access_token required for reading.
      * Returns url.
      */
-    private String poster_url;
+    @JsonProperty(value = "poster_url")
+    private String posterUrl;
 
     /**
      * The price and duration for a tvod or svod video
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String price_details;
+    @JsonProperty(value = "price_details")
+    private String priceDetails;
 
     /**
      * True if the video is private.
      * This field can be used as filter. No access_token required for reading. This field is writable.
      * Returns boolean.
      */
-    @JsonProperty("private")
-    private boolean private_;
+    @JsonProperty(value = "private")
+    private boolean pRivate;
 
     /**
      * True if the video is published (may still wait for encoding, see status field for more info).
@@ -524,7 +568,8 @@ public class Video {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int ratings_total;
+    @JsonProperty(value = "ratings_total")
+    private int ratingsTotal;
 
     /**
      * The recurrence of the stream
@@ -532,33 +577,38 @@ public class Video {
      * Returns string, allowed values: once, daily, weekly.
      */
     private String recurrence;
+
     /**
      * The standard rental duration of the video in hours. Will be null if the video is not behind a paywall
      * No access_token required for reading. This field is writable.
      * Returns string, allowed values: 3, 24, 48.
      */
-    private int rental_duration;
+    @JsonProperty(value = "rental_duration")
+    private int rentalDuration;
 
     /**
      * The price as float in the current currency. Will be null if the video is not behind a paywall. See currency field of the /locale endpoint to get the current currency.
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 150.
      */
-    private float rental_price;
+    @JsonProperty(value = "rental_price")
+    private float rentalPrice;
 
     /**
      * The price, formatted with currency according to the request localization. Will be null if the video is not behind a paywall
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String rental_price_formatted;
+    @JsonProperty(value = "rental_price_formatted")
+    private String rentalPriceFormatted;
 
     /**
      * Timelapse of video free preview, in seconds
      * No access_token required for reading. This field is writable.
      * Returns number, min value: 0.
      */
-    private int rental_start_time;
+    @JsonProperty(value = "rental_start_time")
+    private int rentalStartTime;
 
     /**
      * Full text search for videos
@@ -566,12 +616,14 @@ public class Video {
      * Returns string, min size: 1, max size: 150.
      */
     private String search;
+
     /**
      * urls to share content in social networks
      * No access_token required for reading.
      * Returns dict, min size: 1, max size: 150.
      */
-    private String sharing_urls;
+    @JsonProperty(value = "sharing_urls")
+    private String sharingUrls;
 
     /**
      * Change result ordering
@@ -585,14 +637,16 @@ public class Video {
      * No access_token required for reading.
      * Returns dict, min size: 1, max size: 150.
      */
-    private String soundtrack_info;
+    @JsonProperty(value = "soundtrack_info")
+    private String soundtrackInfo;
 
     /**
      * The started time of the stream
      * No access_token required for reading. This field is writable.
      * Returns date.
      */
-    private Date start_time;
+    @JsonProperty(value = "start_time")
+    private Date startTime;
 
     /**
      * The state of the video. A video requires the published status to be watchable.
@@ -606,105 +660,120 @@ public class Video {
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_hd1080_url;
+    @JsonProperty(value = "stream_h264_hd1080_url")
+    private String streamH264Hd1080Url;
 
     /**
      * The URL of the high definition video (720p, 1.6Mbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_hd_url;
+    @JsonProperty(value = "stream_h264_hd_url")
+    private String streamH264HdUrl;
 
     /**
      * The URL of the high quality video (480p, 975kbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_hq_url;
+    @JsonProperty(value = "stream_h264_hq_url")
+    private String streamH264HqUrl;
 
     /**
      * The URL of the very low definition, low bandwidth video stream (144p, 60kbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_l1_url;
+    @JsonProperty(value = "stream_h264_l1_url")
+    private String streamH264L1Url;
 
     /**
      * The URL of the very low definition, higher bandwidth video stream (144p, 105kbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_l2_url;
+    @JsonProperty(value = "stream_h264_l2_url")
+    private String streamH264L2Url;
 
     /**
      * The URL of the low definition video stream (240p, 255kbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_ld_url;
+    @JsonProperty(value = "stream_h264_ld_url")
+    private String streamH264LdUrl;
 
     /**
      * The URL of the medium quality video (380p, 520kbps).
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_h264_url;
+    @JsonProperty(value = "stream_h264_url")
+    private String streamH264Url;
 
     /**
      * The URL of the adaptative bitrate manifest using Apple HTTP Live Streaming protocol.
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_hls_url;
+    @JsonProperty(value = "stream_hls_url")
+    private String streamHlsUrl;
 
     /**
      * The URL of the live using HTTP Dynamic Streaming protocol.
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_live_hds_url;
+    @JsonProperty(value = "stream_live_hds_url")
+    private String streamLiveHdsUrl;
 
     /**
      * The URL of the live using HTTP Live Streaming protocol.
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_live_hls_url;
+    @JsonProperty(value = "stream_live_hls_url")
+    private String streamLiveHlsUrl;
 
     /**
      * The URL of the live using RTMP protocol.
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_live_rtmp_url;
+    @JsonProperty(value = "stream_live_rtmp_url")
+    private String streamLiveRtmpUrl;
 
     /**
      * The URL of the free preview of premium content
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_premium_preview_hls_url;
+    @JsonProperty(value = "stream_premium_preview_hls_url")
+    private String streamPremiumPreviewHlsUrl;
 
     /**
      * The URL of the free preview of premium content
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_premium_preview_mp4_url;
+    @JsonProperty(value = "stream_premium_preview_mp4_url")
+    private String streamPremiumPreviewMp4Url;
 
     /**
      * The URL of the free preview of premium content
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_premium_preview_web_url;
+    @JsonProperty(value = "stream_premium_preview_web_url")
+    private String streamPremiumPreviewWebUrl;
 
     /**
      * The URL of the video source
      * No access_token required for reading.
      * Returns url.
      */
-    private String stream_source_url;
+    @JsonProperty(value = "stream_source_url")
+    private String streamSourceUrl;
 
     /**
      * The list of strong tags for the video.
@@ -721,18 +790,20 @@ public class Video {
     private boolean svod;
 
     /**
-     * The URL of the legacy SWF embed player (use this only to embed player into a flash movie, otherwise use ``embed_url)
+     * The URL of the legacy SWF embed player (use this only to embed player into a flash movie, otherwise use ``embedUrl)
      * No access_token required for reading.
      * Returns url.
      */
-    private String swf_url;
+    @JsonProperty(value = "swf_url")
+    private String swfUrl;
 
     /**
-     * sync_allowed
+     * syncAllowed
      * No access_token required for reading.
      * Returns boolean.
      */
-    private boolean sync_allowed;
+    @JsonProperty(value = "sync_allowed")
+    private boolean syncAllowed;
 
     /**
      * The list of tags for the video.
@@ -746,63 +817,72 @@ public class Video {
      * No access_token required for reading. This field is writable.
      * Returns date.
      */
-    private Date taken_time;
+    @JsonProperty(value = "taken_time")
+    private Date takenTime;
 
     /**
      * The URL of the video thumbnail (120px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_120_url;
+    @JsonProperty(value = "thumbnail_120_url")
+    private String thumbnail120Url;
 
     /**
      * The URL of the video thumbnail (180px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_180_url;
+    @JsonProperty(value = "thumbnail_180_url")
+    private String thumbnail180Url;
 
     /**
      * The URL of the video thumbnail (240px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_240_url;
+    @JsonProperty(value = "thumbnail_240_url")
+    private String thumbnail240Url;
 
     /**
      * The URL of the video thumbnail (360px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_360_url;
+    @JsonProperty(value = "thumbnail_360_url")
+    private String thumbnail360Url;
 
     /**
      * The URL of the video thumbnail (480px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_480_url;
+    @JsonProperty(value = "thumbnail_480_url")
+    private String thumbnail480Url;
 
     /**
      * The URL of the video thumbnail (60px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_60_url;
+    @JsonProperty(value = "thumbnail_60_url")
+    private String thumbnail60Url;
 
     /**
      * The URL of the video thumbnail (720px height).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_720_url;
+    @JsonProperty(value = "thumbnail_720_url")
+    private String thumbnail720Url;
 
     /**
      * The URL of the video raw thumbnail (full size respecting ratio). Some users have the right to change this value by providing an URL to a custom thumbnail. To extract the preview from a live stream, use extract: live
      * No access_token required for reading. This field is writable.
      * Returns url.
      */
-    private String thumbnail_url;
+    @JsonProperty(value = "thumbnail_url")
+    private String thumbnailUrl;
 
     /**
      * The title of the video.
@@ -844,35 +924,40 @@ public class Video {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_last_day;
+    @JsonProperty(value = "views_last_day")
+    private int viewsLastDay;
 
     /**
      * The number of views in the last sliding hour.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_last_hour;
+    @JsonProperty(value = "views_last_hour")
+    private int viewsLastHour;
 
     /**
      * The number of views in the last 30 sliding days.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_last_month;
+    @JsonProperty(value = "views_last_month")
+    private int viewsLastMonth;
 
     /**
      * The number of views in the last 7 sliding days.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_last_week;
+    @JsonProperty(value = "views_last_week")
+    private int viewsLastWeek;
 
     /**
      * The number of views on the video since its privateation.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_total;
+    @JsonProperty(value = "views_total")
+    private int viewsTotal;
 
     /**
      * Returns the threeD
@@ -897,17 +982,17 @@ public class Video {
      *
      * @return the Access_error
      */
-    public String getAccess_error() {
-        return access_error;
+    public String getAccessError() {
+        return accessError;
     }
 
     /**
      * Set the Access_error
      *
-     * @param access_error the Access_error to set
+     * @param accessError the Access_error to set
      */
-    public void setAccess_error(String access_error) {
-        this.access_error = access_error;
+    public void setAccessError(String accessError) {
+        this.accessError = accessError;
     }
 
     /**
@@ -929,75 +1014,75 @@ public class Video {
     }
 
     /**
-     * Returns the allow_comments
+     * Returns the allowComments
      *
-     * @return the allow_comments
+     * @return the allowComments
      */
-    public boolean isAllow_comments() {
-        return allow_comments;
+    public boolean isAllowComments() {
+        return allowComments;
     }
 
     /**
      * Set the Allow_comments
      *
-     * @param allow_comments the Allow_comments to set
+     * @param allowComments the Allow_comments to set
      */
-    public void setAllow_comments(boolean allow_comments) {
-        this.allow_comments = allow_comments;
+    public void setAllowComments(boolean allowComments) {
+        this.allowComments = allowComments;
     }
 
     /**
-     * Returns the allow_embed
+     * Returns the allowEmbed
      *
-     * @return the allow_embed
+     * @return the allowEmbed
      */
-    public boolean isAllow_embed() {
-        return allow_embed;
+    public boolean isAllowEmbed() {
+        return allowEmbed;
     }
 
     /**
      * Set the Allow_embed
      *
-     * @param allow_embed the Allow_embed to set
+     * @param allowEmbed the Allow_embed to set
      */
-    public void setAllow_embed(boolean allow_embed) {
-        this.allow_embed = allow_embed;
+    public void setAllowEmbed(boolean allowEmbed) {
+        this.allowEmbed = allowEmbed;
     }
 
     /**
-     * Returns the allowed_in_groups
+     * Returns the allowedInGroups
      *
-     * @return the allowed_in_groups
+     * @return the allowedInGroups
      */
-    public boolean isAllowed_in_groups() {
-        return allowed_in_groups;
+    public boolean isAllowedInGroups() {
+        return allowedInGroups;
     }
 
     /**
      * Set the Allowed_in_groups
      *
-     * @param allowed_in_groups the Allowed_in_groups to set
+     * @param allowedInGroups the Allowed_in_groups to set
      */
-    public void setAllowed_in_groups(boolean allowed_in_groups) {
-        this.allowed_in_groups = allowed_in_groups;
+    public void setAllowedInGroups(boolean allowedInGroups) {
+        this.allowedInGroups = allowedInGroups;
     }
 
     /**
-     * Returns the allowed_in_playlists
+     * Returns the allowedInPlaylists
      *
-     * @return the allowed_in_playlists
+     * @return the allowedInPlaylists
      */
-    public boolean isAllowed_in_playlists() {
-        return allowed_in_playlists;
+    public boolean isAllowedInPlaylists() {
+        return allowedInPlaylists;
     }
 
     /**
      * Set the Allowed_in_playlists
      *
-     * @param allowed_in_playlists the Allowed_in_playlists to set
+     * @param allowedInPlaylists the Allowed_in_playlists to set
      */
-    public void setAllowed_in_playlists(boolean allowed_in_playlists) {
-        this.allowed_in_playlists = allowed_in_playlists;
+    public void setAllowedInPlaylists(boolean allowedInPlaylists) {
+        this.allowedInPlaylists = allowedInPlaylists;
     }
 
     /**
@@ -1005,17 +1090,17 @@ public class Video {
      *
      * @return the Aspect_ratio
      */
-    public double getAspect_ratio() {
-        return aspect_ratio;
+    public double getAspectRatio() {
+        return aspectRatio;
     }
 
     /**
      * Set the Aspect_ratio
      *
-     * @param aspect_ratio the Aspect_ratio to set
+     * @param aspectRatio the Aspect_ratio to set
      */
-    public void setAspect_ratio(double aspect_ratio) {
-        this.aspect_ratio = aspect_ratio;
+    public void setAspectRatio(double aspectRatio) {
+        this.aspectRatio = aspectRatio;
     }
 
     /**
@@ -1041,17 +1126,17 @@ public class Video {
      *
      * @return the Available_formats
      */
-    public List<Double> getAvailable_formats() {
-        return available_formats;
+    public List<Double> getAvailableFormats() {
+        return availableFormats;
     }
 
     /**
      * Set the Available_formats
      *
-     * @param available_formats the Available_formats to set
+     * @param availableFormats the Available_formats to set
      */
-    public void setAvailable_formats(List<Double> available_formats) {
-        this.available_formats = available_formats;
+    public void setAvailableFormats(List<Double> availableFormats) {
+        this.availableFormats = availableFormats;
     }
 
     /**
@@ -1059,17 +1144,17 @@ public class Video {
      *
      * @return the Bookmarks_total
      */
-    public int getBookmarks_total() {
-        return bookmarks_total;
+    public int getBookmarksTotal() {
+        return bookmarksTotal;
     }
 
     /**
      * Set the Bookmarks_total
      *
-     * @param bookmarks_total the Bookmarks_total to set
+     * @param bookmarksTotal the Bookmarks_total to set
      */
-    public void setBookmarks_total(int bookmarks_total) {
-        this.bookmarks_total = bookmarks_total;
+    public void setBookmarksTotal(int bookmarksTotal) {
+        this.bookmarksTotal = bookmarksTotal;
     }
 
     public boolean isBroadcasting() {
@@ -1108,17 +1193,17 @@ public class Video {
      *
      * @return the Comments_total
      */
-    public int getComments_total() {
-        return comments_total;
+    public int getCommentsTotal() {
+        return commentsTotal;
     }
 
     /**
      * Set the Comments_total
      *
-     * @param comments_total the Comments_total to set
+     * @param commentsTotal the Comments_total to set
      */
-    public void setComments_total(int comments_total) {
-        this.comments_total = comments_total;
+    public void setCommentsTotal(int commentsTotal) {
+        this.commentsTotal = commentsTotal;
     }
 
     /**
@@ -1144,17 +1229,17 @@ public class Video {
      *
      * @return the Created_after
      */
-    public Timestamp getCreated_after() {
-        return created_after;
+    public Timestamp getCreatedAfter() {
+        return createdAfter;
     }
 
     /**
      * Set the Created_after
      *
-     * @param created_after the Created_after to set
+     * @param createdAfter the Created_after to set
      */
-    public void setCreated_after(Timestamp created_after) {
-        this.created_after = created_after;
+    public void setCreatedAfter(Timestamp createdAfter) {
+        this.createdAfter = createdAfter;
     }
 
     /**
@@ -1162,17 +1247,17 @@ public class Video {
      *
      * @return the Created_before
      */
-    public Timestamp getCreated_before() {
-        return created_before;
+    public Timestamp getCreatedBefore() {
+        return createdBefore;
     }
 
     /**
      * Set the Created_before
      *
-     * @param created_before the Created_before to set
+     * @param createdBefore the Created_before to set
      */
-    public void setCreated_before(Timestamp created_before) {
-        this.created_before = created_before;
+    public void setCreatedBefore(Timestamp createdBefore) {
+        this.createdBefore = createdBefore;
     }
 
     /**
@@ -1180,17 +1265,17 @@ public class Video {
      *
      * @return the Created_time
      */
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     /**
      * Set the Created_time
      *
-     * @param created_time the Created_time to set
+     * @param createdTime the Created_time to set
      */
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     /**
@@ -1234,17 +1319,17 @@ public class Video {
      *
      * @return the Embed_html
      */
-    public String getEmbed_html() {
-        return embed_html;
+    public String getEmbedHtml() {
+        return embedHtml;
     }
 
     /**
      * Set the Embed_html
      *
-     * @param embed_html the Embed_html to set
+     * @param embedHtml the Embed_html to set
      */
-    public void setEmbed_html(String embed_html) {
-        this.embed_html = embed_html;
+    public void setEmbedHtml(String embedHtml) {
+        this.embedHtml = embedHtml;
     }
 
     /**
@@ -1252,17 +1337,17 @@ public class Video {
      *
      * @return the Embed_url
      */
-    public String getEmbed_url() {
-        return embed_url;
+    public String getEmbedUrl() {
+        return embedUrl;
     }
 
     /**
      * Set the Embed_url
      *
-     * @param embed_url the Embed_url to set
+     * @param embedUrl the Embed_url to set
      */
-    public void setEmbed_url(String embed_url) {
-        this.embed_url = embed_url;
+    public void setEmbedUrl(String embedUrl) {
+        this.embedUrl = embedUrl;
     }
 
     /**
@@ -1270,17 +1355,17 @@ public class Video {
      *
      * @return the Encoding_progress
      */
-    public int getEncoding_progress() {
-        return encoding_progress;
+    public int getEncodingProgress() {
+        return encodingProgress;
     }
 
     /**
      * Set the Encoding_progress
      *
-     * @param encoding_progress the Encoding_progress to set
+     * @param encodingProgress the Encoding_progress to set
      */
-    public void setEncoding_progress(int encoding_progress) {
-        this.encoding_progress = encoding_progress;
+    public void setEncodingProgress(int encodingProgress) {
+        this.encodingProgress = encodingProgress;
     }
 
     /**
@@ -1288,17 +1373,17 @@ public class Video {
      *
      * @return the End_time
      */
-    public Date getEnd_time() {
-        return end_time;
+    public Date getEndTime() {
+        return endTime;
     }
 
     /**
      * Set the End_time
      *
-     * @param end_time the End_time to set
+     * @param endTime the End_time to set
      */
-    public void setEnd_time(Date end_time) {
-        this.end_time = end_time;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     /**
@@ -1306,17 +1391,17 @@ public class Video {
      *
      * @return the Event_delete
      */
-    public String getEvent_delete() {
-        return event_delete;
+    public String getEventDelete() {
+        return eventDelete;
     }
 
     /**
      * Set the Event_delete
      *
-     * @param event_delete the Event_delete to set
+     * @param eventDelete the Event_delete to set
      */
-    public void setEvent_delete(String event_delete) {
-        this.event_delete = event_delete;
+    public void setEventDelete(String eventDelete) {
+        this.eventDelete = eventDelete;
     }
 
     /**
@@ -1324,17 +1409,17 @@ public class Video {
      *
      * @return the Event_live_offair
      */
-    public String getEvent_live_offair() {
-        return event_live_offair;
+    public String getEventLiveOffair() {
+        return eventLiveOffair;
     }
 
     /**
      * Set the Event_live_offair
      *
-     * @param event_live_offair the Event_live_offair to set
+     * @param eventLiveOffair the Event_live_offair to set
      */
-    public void setEvent_live_offair(String event_live_offair) {
-        this.event_live_offair = event_live_offair;
+    public void setEventLiveOffair(String eventLiveOffair) {
+        this.eventLiveOffair = eventLiveOffair;
     }
 
     /**
@@ -1342,17 +1427,17 @@ public class Video {
      *
      * @return the Event_live_onair
      */
-    public String getEvent_live_onair() {
-        return event_live_onair;
+    public String getEventLiveOnair() {
+        return eventLiveOnair;
     }
 
     /**
      * Set the Event_live_onair
      *
-     * @param event_live_onair the Event_live_onair to set
+     * @param eventLiveOnair the Event_live_onair to set
      */
-    public void setEvent_live_onair(String event_live_onair) {
-        this.event_live_onair = event_live_onair;
+    public void setEventLiveOnair(String eventLiveOnair) {
+        this.eventLiveOnair = eventLiveOnair;
     }
 
     /**
@@ -1360,17 +1445,17 @@ public class Video {
      *
      * @return the Event_modify
      */
-    public String getEvent_modify() {
-        return event_modify;
+    public String getEventModify() {
+        return eventModify;
     }
 
     /**
      * Set the Event_modify
      *
-     * @param event_modify the Event_modify to set
+     * @param eventModify the Event_modify to set
      */
-    public void setEvent_modify(String event_modify) {
-        this.event_modify = event_modify;
+    public void setEventModify(String eventModify) {
+        this.eventModify = eventModify;
     }
 
     /**
@@ -1396,17 +1481,17 @@ public class Video {
      *
      * @return the Filmstrip_small_url
      */
-    public String getFilmstrip_small_url() {
-        return filmstrip_small_url;
+    public String getFilmstripSmallUrl() {
+        return filmstripSmallUrl;
     }
 
     /**
      * Set the Filmstrip_small_url
      *
-     * @param filmstrip_small_url the Filmstrip_small_url to set
+     * @param filmstripSmallUrl the Filmstrip_small_url to set
      */
-    public void setFilmstrip_small_url(String filmstrip_small_url) {
-        this.filmstrip_small_url = filmstrip_small_url;
+    public void setFilmstripSmallUrl(String filmstripSmallUrl) {
+        this.filmstripSmallUrl = filmstripSmallUrl;
     }
 
     /**
@@ -1554,21 +1639,21 @@ public class Video {
     }
 
     /**
-     * Returns the live_ad_break
+     * Returns the liveAdBreak
      *
-     * @return the live_ad_break
+     * @return the liveAdBreak
      */
-    public boolean isLive_ad_break() {
-        return live_ad_break;
+    public boolean isLiveAdBreak() {
+        return liveAdBreak;
     }
 
     /**
      * Set the Live_ad_break
      *
-     * @param live_ad_break the Live_ad_break to set
+     * @param liveAdBreak the Live_ad_break to set
      */
-    public void setLive_ad_break(boolean live_ad_break) {
-        this.live_ad_break = live_ad_break;
+    public void setLiveAdBreak(boolean liveAdBreak) {
+        this.liveAdBreak = liveAdBreak;
     }
 
     /**
@@ -1576,17 +1661,17 @@ public class Video {
      *
      * @return the Live_frag_publish_url
      */
-    public String getLive_frag_publish_url() {
-        return live_frag_publish_url;
+    public String getLiveFragPublishUrl() {
+        return liveFragPublishUrl;
     }
 
     /**
      * Set the Live_frag_publish_url
      *
-     * @param live_frag_publish_url the Live_frag_publish_url to set
+     * @param liveFragPublishUrl the Live_frag_publish_url to set
      */
-    public void setLive_frag_publish_url(String live_frag_publish_url) {
-        this.live_frag_publish_url = live_frag_publish_url;
+    public void setLiveFragPublishUrl(String liveFragPublishUrl) {
+        this.liveFragPublishUrl = liveFragPublishUrl;
     }
 
     /**
@@ -1594,17 +1679,17 @@ public class Video {
      *
      * @return the Live_publish_url
      */
-    public String getLive_publish_url() {
-        return live_publish_url;
+    public String getLivePublishUrl() {
+        return livePublishUrl;
     }
 
     /**
      * Set the Live_publish_url
      *
-     * @param live_publish_url the Live_publish_url to set
+     * @param livePublishUrl the Live_publish_url to set
      */
-    public void setLive_publish_url(String live_publish_url) {
-        this.live_publish_url = live_publish_url;
+    public void setLivePublishUrl(String livePublishUrl) {
+        this.livePublishUrl = livePublishUrl;
     }
 
     /**
@@ -1630,17 +1715,17 @@ public class Video {
      *
      * @return the Metadata_credit_actors
      */
-    public String getMetadata_credit_actors() {
-        return metadata_credit_actors;
+    public String getMetadataCreditActors() {
+        return metadataCreditActors;
     }
 
     /**
      * Set the Metadata_credit_actors
      *
-     * @param metadata_credit_actors the Metadata_credit_actors to set
+     * @param metadataCreditActors the Metadata_credit_actors to set
      */
-    public void setMetadata_credit_actors(String metadata_credit_actors) {
-        this.metadata_credit_actors = metadata_credit_actors;
+    public void setMetadataCreditActors(String metadataCreditActors) {
+        this.metadataCreditActors = metadataCreditActors;
     }
 
     /**
@@ -1648,17 +1733,17 @@ public class Video {
      *
      * @return the Metadata_credit_director
      */
-    public String getMetadata_credit_director() {
-        return metadata_credit_director;
+    public String getMetadataCreditDirector() {
+        return metadataCreditDirector;
     }
 
     /**
      * Set the Metadata_credit_director
      *
-     * @param metadata_credit_director the Metadata_credit_director to set
+     * @param metadataCreditDirector the Metadata_credit_director to set
      */
-    public void setMetadata_credit_director(String metadata_credit_director) {
-        this.metadata_credit_director = metadata_credit_director;
+    public void setMetadataCreditDirector(String metadataCreditDirector) {
+        this.metadataCreditDirector = metadataCreditDirector;
     }
 
     /**
@@ -1666,17 +1751,17 @@ public class Video {
      *
      * @return the Metadata_genre
      */
-    public String getMetadata_genre() {
-        return metadata_genre;
+    public String getMetadataGenre() {
+        return metadataGenre;
     }
 
     /**
      * Set the Metadata_genre
      *
-     * @param metadata_genre the Metadata_genre to set
+     * @param metadataGenre the Metadata_genre to set
      */
-    public void setMetadata_genre(String metadata_genre) {
-        this.metadata_genre = metadata_genre;
+    public void setMetadataGenre(String metadataGenre) {
+        this.metadataGenre = metadataGenre;
     }
 
     /**
@@ -1684,17 +1769,17 @@ public class Video {
      *
      * @return the Metadata_original_language
      */
-    public String getMetadata_original_language() {
-        return metadata_original_language;
+    public String getMetadataOriginalLanguage() {
+        return metadataOriginalLanguage;
     }
 
     /**
      * Set the Metadata_original_language
      *
-     * @param metadata_original_language the Metadata_original_language to set
+     * @param metadataOriginalLanguage the Metadata_original_language to set
      */
-    public void setMetadata_original_language(String metadata_original_language) {
-        this.metadata_original_language = metadata_original_language;
+    public void setMetadataOriginalLanguage(String metadataOriginalLanguage) {
+        this.metadataOriginalLanguage = metadataOriginalLanguage;
     }
 
     /**
@@ -1702,17 +1787,17 @@ public class Video {
      *
      * @return the Metadata_original_title
      */
-    public String getMetadata_original_title() {
-        return metadata_original_title;
+    public String getMetadataOriginalTitle() {
+        return metadataOriginalTitle;
     }
 
     /**
      * Set the Metadata_original_title
      *
-     * @param metadata_original_title the Metadata_original_title to set
+     * @param metadataOriginalTitle the Metadata_original_title to set
      */
-    public void setMetadata_original_title(String metadata_original_title) {
-        this.metadata_original_title = metadata_original_title;
+    public void setMetadataOriginalTitle(String metadataOriginalTitle) {
+        this.metadataOriginalTitle = metadataOriginalTitle;
     }
 
     /**
@@ -1720,17 +1805,17 @@ public class Video {
      *
      * @return the Metadata_released
      */
-    public String getMetadata_released() {
-        return metadata_released;
+    public String getMetadataReleased() {
+        return metadataReleased;
     }
 
     /**
      * Set the Metadata_released
      *
-     * @param metadata_released the Metadata_released to set
+     * @param metadataReleased the Metadata_released to set
      */
-    public void setMetadata_released(String metadata_released) {
-        this.metadata_released = metadata_released;
+    public void setMetadataReleased(String metadataReleased) {
+        this.metadataReleased = metadataReleased;
     }
 
     /**
@@ -1738,17 +1823,17 @@ public class Video {
      *
      * @return the Metadata_show_episod
      */
-    public String getMetadata_show_episod() {
-        return metadata_show_episod;
+    public String getMetadataShowEpisod() {
+        return metadataShowEpisod;
     }
 
     /**
      * Set the Metadata_show_episod
      *
-     * @param metadata_show_episod the Metadata_show_episod to set
+     * @param metadataShowEpisod the Metadata_show_episod to set
      */
-    public void setMetadata_show_episod(String metadata_show_episod) {
-        this.metadata_show_episod = metadata_show_episod;
+    public void setMetadataShowEpisod(String metadataShowEpisod) {
+        this.metadataShowEpisod = metadataShowEpisod;
     }
 
     /**
@@ -1756,17 +1841,17 @@ public class Video {
      *
      * @return the Metadata_show_season
      */
-    public String getMetadata_show_season() {
-        return metadata_show_season;
+    public String getMetadataShowSeason() {
+        return metadataShowSeason;
     }
 
     /**
      * Set the Metadata_show_season
      *
-     * @param metadata_show_season the Metadata_show_season to set
+     * @param metadataShowSeason the Metadata_show_season to set
      */
-    public void setMetadata_show_season(String metadata_show_season) {
-        this.metadata_show_season = metadata_show_season;
+    public void setMetadataShowSeason(String metadataShowSeason) {
+        this.metadataShowSeason = metadataShowSeason;
     }
 
     /**
@@ -1774,17 +1859,17 @@ public class Video {
      *
      * @return the Metadata_visa
      */
-    public String getMetadata_visa() {
-        return metadata_visa;
+    public String getMetadataVisa() {
+        return metadataVisa;
     }
 
     /**
      * Set the Metadata_visa
      *
-     * @param metadata_visa the Metadata_visa to set
+     * @param metadataVisa the Metadata_visa to set
      */
-    public void setMetadata_visa(String metadata_visa) {
-        this.metadata_visa = metadata_visa;
+    public void setMetadataVisa(String metadataVisa) {
+        this.metadataVisa = metadataVisa;
     }
 
     /**
@@ -1828,17 +1913,17 @@ public class Video {
      *
      * @return the Modified_after
      */
-    public Timestamp getModified_after() {
-        return modified_after;
+    public Timestamp getModifiedAfter() {
+        return modifiedAfter;
     }
 
     /**
      * Set the Modified_after
      *
-     * @param modified_after the Modified_after to set
+     * @param modifiedAfter the Modified_after to set
      */
-    public void setModified_after(Timestamp modified_after) {
-        this.modified_after = modified_after;
+    public void setModifiedAfter(Timestamp modifiedAfter) {
+        this.modifiedAfter = modifiedAfter;
     }
 
     /**
@@ -1846,17 +1931,17 @@ public class Video {
      *
      * @return the Modified_before
      */
-    public Timestamp getModified_before() {
-        return modified_before;
+    public Timestamp getModifiedBefore() {
+        return modifiedBefore;
     }
 
     /**
      * Set the Modified_before
      *
-     * @param modified_before the Modified_before to set
+     * @param modifiedBefore the Modified_before to set
      */
-    public void setModified_before(Timestamp modified_before) {
-        this.modified_before = modified_before;
+    public void setModifiedBefore(Timestamp modifiedBefore) {
+        this.modifiedBefore = modifiedBefore;
     }
 
     /**
@@ -1864,17 +1949,17 @@ public class Video {
      *
      * @return the Modified_time
      */
-    public Timestamp getModified_time() {
-        return modified_time;
+    public Timestamp getModifiedTime() {
+        return modifiedTime;
     }
 
     /**
      * Set the Modified_time
      *
-     * @param modified_time the Modified_time to set
+     * @param modifiedTime the Modified_time to set
      */
-    public void setModified_time(Timestamp modified_time) {
-        this.modified_time = modified_time;
+    public void setModifiedTime(Timestamp modifiedTime) {
+        this.modifiedTime = modifiedTime;
     }
 
     /**
@@ -1972,17 +2057,17 @@ public class Video {
      *
      * @return the Poster_135x180_url
      */
-    public String getPoster_135x180_url() {
-        return poster_135x180_url;
+    public String getPoster135x180Url() {
+        return poster135x180Url;
     }
 
     /**
      * Set the Poster_135x180_url
      *
-     * @param poster_135x180_url the Poster_135x180_url to set
+     * @param poster135x180Url the Poster_135x180_url to set
      */
-    public void setPoster_135x180_url(String poster_135x180_url) {
-        this.poster_135x180_url = poster_135x180_url;
+    public void setPoster135x180Url(String poster135x180Url) {
+        this.poster135x180Url = poster135x180Url;
     }
 
     /**
@@ -1990,17 +2075,17 @@ public class Video {
      *
      * @return the Poster_180x240_url
      */
-    public String getPoster_180x240_url() {
-        return poster_180x240_url;
+    public String getPoster180x240Url() {
+        return poster180x240Url;
     }
 
     /**
      * Set the Poster_180x240_url
      *
-     * @param poster_180x240_url the Poster_180x240_url to set
+     * @param poster180x240Url the Poster_180x240_url to set
      */
-    public void setPoster_180x240_url(String poster_180x240_url) {
-        this.poster_180x240_url = poster_180x240_url;
+    public void setPoster180x240Url(String poster180x240Url) {
+        this.poster180x240Url = poster180x240Url;
     }
 
     /**
@@ -2008,17 +2093,17 @@ public class Video {
      *
      * @return the Poster_270x360_url
      */
-    public String getPoster_270x360_url() {
-        return poster_270x360_url;
+    public String getPoster270x360Url() {
+        return poster270x360Url;
     }
 
     /**
      * Set the Poster_270x360_url
      *
-     * @param poster_270x360_url the Poster_270x360_url to set
+     * @param poster270x360Url the Poster_270x360_url to set
      */
-    public void setPoster_270x360_url(String poster_270x360_url) {
-        this.poster_270x360_url = poster_270x360_url;
+    public void setPoster270x360Url(String poster270x360Url) {
+        this.poster270x360Url = poster270x360Url;
     }
 
     /**
@@ -2026,17 +2111,17 @@ public class Video {
      *
      * @return the Poster_360x480_url
      */
-    public String getPoster_360x480_url() {
-        return poster_360x480_url;
+    public String getPoster360x480Url() {
+        return poster360x480Url;
     }
 
     /**
      * Set the Poster_360x480_url
      *
-     * @param poster_360x480_url the Poster_360x480_url to set
+     * @param poster360x480Url the Poster_360x480_url to set
      */
-    public void setPoster_360x480_url(String poster_360x480_url) {
-        this.poster_360x480_url = poster_360x480_url;
+    public void setPoster360x480Url(String poster360x480Url) {
+        this.poster360x480Url = poster360x480Url;
     }
 
     /**
@@ -2044,17 +2129,17 @@ public class Video {
      *
      * @return the Poster_45x60_url
      */
-    public String getPoster_45x60_url() {
-        return poster_45x60_url;
+    public String getPoster45x60Url() {
+        return poster45x60Url;
     }
 
     /**
      * Set the Poster_45x60_url
      *
-     * @param poster_45x60_url the Poster_45x60_url to set
+     * @param poster45x60Url the Poster_45x60_url to set
      */
-    public void setPoster_45x60_url(String poster_45x60_url) {
-        this.poster_45x60_url = poster_45x60_url;
+    public void setPoster45x60Url(String poster45x60Url) {
+        this.poster45x60Url = poster45x60Url;
     }
 
     /**
@@ -2062,17 +2147,17 @@ public class Video {
      *
      * @return the Poster_90x120_url
      */
-    public String getPoster_90x120_url() {
-        return poster_90x120_url;
+    public String getPoster90x120Url() {
+        return poster90x120Url;
     }
 
     /**
      * Set the Poster_90x120_url
      *
-     * @param poster_90x120_url the Poster_90x120_url to set
+     * @param poster90x120Url the Poster_90x120_url to set
      */
-    public void setPoster_90x120_url(String poster_90x120_url) {
-        this.poster_90x120_url = poster_90x120_url;
+    public void setPoster90x120Url(String poster90x120Url) {
+        this.poster90x120Url = poster90x120Url;
     }
 
     /**
@@ -2080,17 +2165,17 @@ public class Video {
      *
      * @return the Poster_url
      */
-    public String getPoster_url() {
-        return poster_url;
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     /**
      * Set the Poster_url
      *
-     * @param poster_url the Poster_url to set
+     * @param posterUrl the Poster_url to set
      */
-    public void setPoster_url(String poster_url) {
-        this.poster_url = poster_url;
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
     /**
@@ -2098,30 +2183,30 @@ public class Video {
      *
      * @return the Price_details
      */
-    public String getPrice_details() {
-        return price_details;
+    public String getPriceDetails() {
+        return priceDetails;
     }
 
     /**
      * Set the Price_details
      *
-     * @param price_details the Price_details to set
+     * @param priceDetails the Price_details to set
      */
-    public void setPrice_details(String price_details) {
-        this.price_details = price_details;
+    public void setPriceDetails(String priceDetails) {
+        this.priceDetails = priceDetails;
     }
 
-    public boolean isPrivate_() {
-        return private_;
+    public boolean ispRivate() {
+        return pRivate;
     }
 
     /**
      * Set the Private_
      *
-     * @param private_ the Private_ to set
+     * @param pRivate the Private_ to set
      */
-    public void setPrivate_(boolean private_) {
-        this.private_ = private_;
+    public void setpRivate(boolean pRivate) {
+        this.pRivate = pRivate;
     }
 
     public boolean isPublished() {
@@ -2160,17 +2245,17 @@ public class Video {
      *
      * @return the Ratings_total
      */
-    public int getRatings_total() {
-        return ratings_total;
+    public int getRatingsTotal() {
+        return ratingsTotal;
     }
 
     /**
      * Set the Ratings_total
      *
-     * @param ratings_total the Ratings_total to set
+     * @param ratingsTotal the Ratings_total to set
      */
-    public void setRatings_total(int ratings_total) {
-        this.ratings_total = ratings_total;
+    public void setRatingsTotal(int ratingsTotal) {
+        this.ratingsTotal = ratingsTotal;
     }
 
     /**
@@ -2196,17 +2281,17 @@ public class Video {
      *
      * @return the Rental_duration
      */
-    public int getRental_duration() {
-        return rental_duration;
+    public int getRentalDuration() {
+        return rentalDuration;
     }
 
     /**
      * Set the Rental_duration
      *
-     * @param rental_duration the Rental_duration to set
+     * @param rentalDuration the Rental_duration to set
      */
-    public void setRental_duration(int rental_duration) {
-        this.rental_duration = rental_duration;
+    public void setRentalDuration(int rentalDuration) {
+        this.rentalDuration = rentalDuration;
     }
 
     /**
@@ -2214,17 +2299,17 @@ public class Video {
      *
      * @return the Rental_price
      */
-    public float getRental_price() {
-        return rental_price;
+    public float getRentalPrice() {
+        return rentalPrice;
     }
 
     /**
      * Set the Rental_price
      *
-     * @param rental_price the Rental_price to set
+     * @param rentalPrice the Rental_price to set
      */
-    public void setRental_price(float rental_price) {
-        this.rental_price = rental_price;
+    public void setRentalPrice(float rentalPrice) {
+        this.rentalPrice = rentalPrice;
     }
 
     /**
@@ -2232,17 +2317,17 @@ public class Video {
      *
      * @return the Rental_price_formatted
      */
-    public String getRental_price_formatted() {
-        return rental_price_formatted;
+    public String getRentalPriceFormatted() {
+        return rentalPriceFormatted;
     }
 
     /**
      * Set the Rental_price_formatted
      *
-     * @param rental_price_formatted the Rental_price_formatted to set
+     * @param rentalPriceFormatted the Rental_price_formatted to set
      */
-    public void setRental_price_formatted(String rental_price_formatted) {
-        this.rental_price_formatted = rental_price_formatted;
+    public void setRentalPriceFormatted(String rentalPriceFormatted) {
+        this.rentalPriceFormatted = rentalPriceFormatted;
     }
 
     /**
@@ -2250,17 +2335,17 @@ public class Video {
      *
      * @return the Rental_start_time
      */
-    public int getRental_start_time() {
-        return rental_start_time;
+    public int getRentalStartTime() {
+        return rentalStartTime;
     }
 
     /**
      * Set the Rental_start_time
      *
-     * @param rental_start_time the Rental_start_time to set
+     * @param rentalStartTime the Rental_start_time to set
      */
-    public void setRental_start_time(int rental_start_time) {
-        this.rental_start_time = rental_start_time;
+    public void setRentalStartTime(int rentalStartTime) {
+        this.rentalStartTime = rentalStartTime;
     }
 
     /**
@@ -2286,17 +2371,17 @@ public class Video {
      *
      * @return the Sharing_urls
      */
-    public String getSharing_urls() {
-        return sharing_urls;
+    public String getSharingUrls() {
+        return sharingUrls;
     }
 
     /**
      * Set the Sharing_urls
      *
-     * @param sharing_urls the Sharing_urls to set
+     * @param sharingUrls the Sharing_urls to set
      */
-    public void setSharing_urls(String sharing_urls) {
-        this.sharing_urls = sharing_urls;
+    public void setSharingUrls(String sharingUrls) {
+        this.sharingUrls = sharingUrls;
     }
 
     /**
@@ -2322,17 +2407,17 @@ public class Video {
      *
      * @return the Soundtrack_info
      */
-    public String getSoundtrack_info() {
-        return soundtrack_info;
+    public String getSoundtrackInfo() {
+        return soundtrackInfo;
     }
 
     /**
      * Set the Soundtrack_info
      *
-     * @param soundtrack_info the Soundtrack_info to set
+     * @param soundtrackInfo the Soundtrack_info to set
      */
-    public void setSoundtrack_info(String soundtrack_info) {
-        this.soundtrack_info = soundtrack_info;
+    public void setSoundtrackInfo(String soundtrackInfo) {
+        this.soundtrackInfo = soundtrackInfo;
     }
 
     /**
@@ -2340,17 +2425,17 @@ public class Video {
      *
      * @return the Start_time
      */
-    public Date getStart_time() {
-        return start_time;
+    public Date getStartTime() {
+        return startTime;
     }
 
     /**
      * Set the Start_time
      *
-     * @param start_time the Start_time to set
+     * @param startTime the Start_time to set
      */
-    public void setStart_time(Date start_time) {
-        this.start_time = start_time;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     /**
@@ -2376,17 +2461,17 @@ public class Video {
      *
      * @return the Stream_h264_hd1080_url
      */
-    public String getStream_h264_hd1080_url() {
-        return stream_h264_hd1080_url;
+    public String getStreamH264Hd1080Url() {
+        return streamH264Hd1080Url;
     }
 
     /**
      * Set the Stream_h264_hd1080_url
      *
-     * @param stream_h264_hd1080_url the Stream_h264_hd1080_url to set
+     * @param streamH264Hd1080Url the Stream_h264_hd1080_url to set
      */
-    public void setStream_h264_hd1080_url(String stream_h264_hd1080_url) {
-        this.stream_h264_hd1080_url = stream_h264_hd1080_url;
+    public void setStreamH264Hd1080Url(String streamH264Hd1080Url) {
+        this.streamH264Hd1080Url = streamH264Hd1080Url;
     }
 
     /**
@@ -2394,17 +2479,17 @@ public class Video {
      *
      * @return the Stream_h264_hd_url
      */
-    public String getStream_h264_hd_url() {
-        return stream_h264_hd_url;
+    public String getStreamH264HdUrl() {
+        return streamH264HdUrl;
     }
 
     /**
      * Set the Stream_h264_hd_url
      *
-     * @param stream_h264_hd_url the Stream_h264_hd_url to set
+     * @param streamH264HdUrl the Stream_h264_hd_url to set
      */
-    public void setStream_h264_hd_url(String stream_h264_hd_url) {
-        this.stream_h264_hd_url = stream_h264_hd_url;
+    public void setStreamH264HdUrl(String streamH264HdUrl) {
+        this.streamH264HdUrl = streamH264HdUrl;
     }
 
     /**
@@ -2412,17 +2497,17 @@ public class Video {
      *
      * @return the Stream_h264_hq_url
      */
-    public String getStream_h264_hq_url() {
-        return stream_h264_hq_url;
+    public String getStreamH264HqUrl() {
+        return streamH264HqUrl;
     }
 
     /**
      * Set the Stream_h264_hq_url
      *
-     * @param stream_h264_hq_url the Stream_h264_hq_url to set
+     * @param streamH264HqUrl the Stream_h264_hq_url to set
      */
-    public void setStream_h264_hq_url(String stream_h264_hq_url) {
-        this.stream_h264_hq_url = stream_h264_hq_url;
+    public void setStreamH264HqUrl(String streamH264HqUrl) {
+        this.streamH264HqUrl = streamH264HqUrl;
     }
 
     /**
@@ -2430,17 +2515,17 @@ public class Video {
      *
      * @return the Stream_h264_l1_url
      */
-    public String getStream_h264_l1_url() {
-        return stream_h264_l1_url;
+    public String getStreamH264L1Url() {
+        return streamH264L1Url;
     }
 
     /**
      * Set the Stream_h264_l1_url
      *
-     * @param stream_h264_l1_url the Stream_h264_l1_url to set
+     * @param streamH264L1Url the Stream_h264_l1_url to set
      */
-    public void setStream_h264_l1_url(String stream_h264_l1_url) {
-        this.stream_h264_l1_url = stream_h264_l1_url;
+    public void setStreamH264L1Url(String streamH264L1Url) {
+        this.streamH264L1Url = streamH264L1Url;
     }
 
     /**
@@ -2448,17 +2533,17 @@ public class Video {
      *
      * @return the Stream_h264_l2_url
      */
-    public String getStream_h264_l2_url() {
-        return stream_h264_l2_url;
+    public String getStreamH264L2Url() {
+        return streamH264L2Url;
     }
 
     /**
      * Set the Stream_h264_l2_url
      *
-     * @param stream_h264_l2_url the Stream_h264_l2_url to set
+     * @param streamH264L2Url the Stream_h264_l2_url to set
      */
-    public void setStream_h264_l2_url(String stream_h264_l2_url) {
-        this.stream_h264_l2_url = stream_h264_l2_url;
+    public void setStreamH264L2Url(String streamH264L2Url) {
+        this.streamH264L2Url = streamH264L2Url;
     }
 
     /**
@@ -2466,17 +2551,17 @@ public class Video {
      *
      * @return the Stream_h264_ld_url
      */
-    public String getStream_h264_ld_url() {
-        return stream_h264_ld_url;
+    public String getStreamH264LdUrl() {
+        return streamH264LdUrl;
     }
 
     /**
      * Set the Stream_h264_ld_url
      *
-     * @param stream_h264_ld_url the Stream_h264_ld_url to set
+     * @param streamH264LdUrl the Stream_h264_ld_url to set
      */
-    public void setStream_h264_ld_url(String stream_h264_ld_url) {
-        this.stream_h264_ld_url = stream_h264_ld_url;
+    public void setStreamH264LdUrl(String streamH264LdUrl) {
+        this.streamH264LdUrl = streamH264LdUrl;
     }
 
     /**
@@ -2484,17 +2569,17 @@ public class Video {
      *
      * @return the Stream_h264_url
      */
-    public String getStream_h264_url() {
-        return stream_h264_url;
+    public String getStreamH264Url() {
+        return streamH264Url;
     }
 
     /**
      * Set the Stream_h264_url
      *
-     * @param stream_h264_url the Stream_h264_url to set
+     * @param streamH264Url the Stream_h264_url to set
      */
-    public void setStream_h264_url(String stream_h264_url) {
-        this.stream_h264_url = stream_h264_url;
+    public void setStreamH264Url(String streamH264Url) {
+        this.streamH264Url = streamH264Url;
     }
 
     /**
@@ -2502,17 +2587,17 @@ public class Video {
      *
      * @return the Stream_hls_url
      */
-    public String getStream_hls_url() {
-        return stream_hls_url;
+    public String getStreamHlsUrl() {
+        return streamHlsUrl;
     }
 
     /**
      * Set the Stream_hls_url
      *
-     * @param stream_hls_url the Stream_hls_url to set
+     * @param streamHlsUrl the Stream_hls_url to set
      */
-    public void setStream_hls_url(String stream_hls_url) {
-        this.stream_hls_url = stream_hls_url;
+    public void setStreamHlsUrl(String streamHlsUrl) {
+        this.streamHlsUrl = streamHlsUrl;
     }
 
     /**
@@ -2520,17 +2605,17 @@ public class Video {
      *
      * @return the Stream_live_hds_url
      */
-    public String getStream_live_hds_url() {
-        return stream_live_hds_url;
+    public String getStreamLiveHdsUrl() {
+        return streamLiveHdsUrl;
     }
 
     /**
      * Set the Stream_live_hds_url
      *
-     * @param stream_live_hds_url the Stream_live_hds_url to set
+     * @param streamLiveHdsUrl the Stream_live_hds_url to set
      */
-    public void setStream_live_hds_url(String stream_live_hds_url) {
-        this.stream_live_hds_url = stream_live_hds_url;
+    public void setStreamLiveHdsUrl(String streamLiveHdsUrl) {
+        this.streamLiveHdsUrl = streamLiveHdsUrl;
     }
 
     /**
@@ -2538,17 +2623,17 @@ public class Video {
      *
      * @return the Stream_live_hls_url
      */
-    public String getStream_live_hls_url() {
-        return stream_live_hls_url;
+    public String getStreamLiveHlsUrl() {
+        return streamLiveHlsUrl;
     }
 
     /**
      * Set the Stream_live_hls_url
      *
-     * @param stream_live_hls_url the Stream_live_hls_url to set
+     * @param streamLiveHlsUrl the Stream_live_hls_url to set
      */
-    public void setStream_live_hls_url(String stream_live_hls_url) {
-        this.stream_live_hls_url = stream_live_hls_url;
+    public void setStreamLiveHlsUrl(String streamLiveHlsUrl) {
+        this.streamLiveHlsUrl = streamLiveHlsUrl;
     }
 
     /**
@@ -2556,17 +2641,17 @@ public class Video {
      *
      * @return the Stream_live_rtmp_url
      */
-    public String getStream_live_rtmp_url() {
-        return stream_live_rtmp_url;
+    public String getStreamLiveRtmpUrl() {
+        return streamLiveRtmpUrl;
     }
 
     /**
      * Set the Stream_live_rtmp_url
      *
-     * @param stream_live_rtmp_url the Stream_live_rtmp_url to set
+     * @param streamLiveRtmpUrl the Stream_live_rtmp_url to set
      */
-    public void setStream_live_rtmp_url(String stream_live_rtmp_url) {
-        this.stream_live_rtmp_url = stream_live_rtmp_url;
+    public void setStreamLiveRtmpUrl(String streamLiveRtmpUrl) {
+        this.streamLiveRtmpUrl = streamLiveRtmpUrl;
     }
 
     /**
@@ -2574,17 +2659,17 @@ public class Video {
      *
      * @return the Stream_premium_preview_hls_url
      */
-    public String getStream_premium_preview_hls_url() {
-        return stream_premium_preview_hls_url;
+    public String getStreamPremiumPreviewHlsUrl() {
+        return streamPremiumPreviewHlsUrl;
     }
 
     /**
      * Set the Stream_premium_preview_hls_url
      *
-     * @param stream_premium_preview_hls_url the Stream_premium_preview_hls_url to set
+     * @param streamPremiumPreviewHlsUrl the Stream_premium_preview_hls_url to set
      */
-    public void setStream_premium_preview_hls_url(String stream_premium_preview_hls_url) {
-        this.stream_premium_preview_hls_url = stream_premium_preview_hls_url;
+    public void setStreamPremiumPreviewHlsUrl(String streamPremiumPreviewHlsUrl) {
+        this.streamPremiumPreviewHlsUrl = streamPremiumPreviewHlsUrl;
     }
 
     /**
@@ -2592,17 +2677,17 @@ public class Video {
      *
      * @return the Stream_premium_preview_mp4_url
      */
-    public String getStream_premium_preview_mp4_url() {
-        return stream_premium_preview_mp4_url;
+    public String getStreamPremiumPreviewMp4Url() {
+        return streamPremiumPreviewMp4Url;
     }
 
     /**
      * Set the Stream_premium_preview_mp4_url
      *
-     * @param stream_premium_preview_mp4_url the Stream_premium_preview_mp4_url to set
+     * @param streamPremiumPreviewMp4Url the Stream_premium_preview_mp4_url to set
      */
-    public void setStream_premium_preview_mp4_url(String stream_premium_preview_mp4_url) {
-        this.stream_premium_preview_mp4_url = stream_premium_preview_mp4_url;
+    public void setStreamPremiumPreviewMp4Url(String streamPremiumPreviewMp4Url) {
+        this.streamPremiumPreviewMp4Url = streamPremiumPreviewMp4Url;
     }
 
     /**
@@ -2610,17 +2695,17 @@ public class Video {
      *
      * @return the Stream_premium_preview_web_url
      */
-    public String getStream_premium_preview_web_url() {
-        return stream_premium_preview_web_url;
+    public String getStreamPremiumPreviewWebUrl() {
+        return streamPremiumPreviewWebUrl;
     }
 
     /**
      * Set the Stream_premium_preview_web_url
      *
-     * @param stream_premium_preview_web_url the Stream_premium_preview_web_url to set
+     * @param streamPremiumPreviewWebUrl the Stream_premium_preview_web_url to set
      */
-    public void setStream_premium_preview_web_url(String stream_premium_preview_web_url) {
-        this.stream_premium_preview_web_url = stream_premium_preview_web_url;
+    public void setStreamPremiumPreviewWebUrl(String streamPremiumPreviewWebUrl) {
+        this.streamPremiumPreviewWebUrl = streamPremiumPreviewWebUrl;
     }
 
     /**
@@ -2628,17 +2713,17 @@ public class Video {
      *
      * @return the Stream_source_url
      */
-    public String getStream_source_url() {
-        return stream_source_url;
+    public String getStreamSourceUrl() {
+        return streamSourceUrl;
     }
 
     /**
      * Set the Stream_source_url
      *
-     * @param stream_source_url the Stream_source_url to set
+     * @param streamSourceUrl the Stream_source_url to set
      */
-    public void setStream_source_url(String stream_source_url) {
-        this.stream_source_url = stream_source_url;
+    public void setStreamSourceUrl(String streamSourceUrl) {
+        this.streamSourceUrl = streamSourceUrl;
     }
 
     /**
@@ -2677,30 +2762,30 @@ public class Video {
      *
      * @return the Swf_url
      */
-    public String getSwf_url() {
-        return swf_url;
+    public String getSwfUrl() {
+        return swfUrl;
     }
 
     /**
      * Set the Swf_url
      *
-     * @param swf_url the Swf_url to set
+     * @param swfUrl the Swf_url to set
      */
-    public void setSwf_url(String swf_url) {
-        this.swf_url = swf_url;
+    public void setSwfUrl(String swfUrl) {
+        this.swfUrl = swfUrl;
     }
 
-    public boolean isSync_allowed() {
-        return sync_allowed;
+    public boolean isSyncAllowed() {
+        return syncAllowed;
     }
 
     /**
      * Set the Sync_allowed
      *
-     * @param sync_allowed the Sync_allowed to set
+     * @param syncAllowed the Sync_allowed to set
      */
-    public void setSync_allowed(boolean sync_allowed) {
-        this.sync_allowed = sync_allowed;
+    public void setSyncAllowed(boolean syncAllowed) {
+        this.syncAllowed = syncAllowed;
     }
 
     /**
@@ -2726,17 +2811,17 @@ public class Video {
      *
      * @return the Taken_time
      */
-    public Date getTaken_time() {
-        return taken_time;
+    public Date getTakenTime() {
+        return takenTime;
     }
 
     /**
      * Set the Taken_time
      *
-     * @param taken_time the Taken_time to set
+     * @param takenTime the Taken_time to set
      */
-    public void setTaken_time(Date taken_time) {
-        this.taken_time = taken_time;
+    public void setTakenTime(Date takenTime) {
+        this.takenTime = takenTime;
     }
 
     /**
@@ -2744,17 +2829,17 @@ public class Video {
      *
      * @return the Thumbnail_120_url
      */
-    public String getThumbnail_120_url() {
-        return thumbnail_120_url;
+    public String getThumbnail120Url() {
+        return thumbnail120Url;
     }
 
     /**
      * Set the Thumbnail_120_url
      *
-     * @param thumbnail_120_url the Thumbnail_120_url to set
+     * @param thumbnail120Url the Thumbnail_120_url to set
      */
-    public void setThumbnail_120_url(String thumbnail_120_url) {
-        this.thumbnail_120_url = thumbnail_120_url;
+    public void setThumbnail120Url(String thumbnail120Url) {
+        this.thumbnail120Url = thumbnail120Url;
     }
 
     /**
@@ -2762,17 +2847,17 @@ public class Video {
      *
      * @return the Thumbnail_180_url
      */
-    public String getThumbnail_180_url() {
-        return thumbnail_180_url;
+    public String getThumbnail180Url() {
+        return thumbnail180Url;
     }
 
     /**
      * Set the Thumbnail_180_url
      *
-     * @param thumbnail_180_url the Thumbnail_180_url to set
+     * @param thumbnail180Url the Thumbnail_180_url to set
      */
-    public void setThumbnail_180_url(String thumbnail_180_url) {
-        this.thumbnail_180_url = thumbnail_180_url;
+    public void setThumbnail180Url(String thumbnail180Url) {
+        this.thumbnail180Url = thumbnail180Url;
     }
 
     /**
@@ -2780,17 +2865,17 @@ public class Video {
      *
      * @return the Thumbnail_240_url
      */
-    public String getThumbnail_240_url() {
-        return thumbnail_240_url;
+    public String getThumbnail240Url() {
+        return thumbnail240Url;
     }
 
     /**
      * Set the Thumbnail_240_url
      *
-     * @param thumbnail_240_url the Thumbnail_240_url to set
+     * @param thumbnail240Url the Thumbnail_240_url to set
      */
-    public void setThumbnail_240_url(String thumbnail_240_url) {
-        this.thumbnail_240_url = thumbnail_240_url;
+    public void setThumbnail240Url(String thumbnail240Url) {
+        this.thumbnail240Url = thumbnail240Url;
     }
 
     /**
@@ -2798,17 +2883,17 @@ public class Video {
      *
      * @return the Thumbnail_360_url
      */
-    public String getThumbnail_360_url() {
-        return thumbnail_360_url;
+    public String getThumbnail360Url() {
+        return thumbnail360Url;
     }
 
     /**
      * Set the Thumbnail_360_url
      *
-     * @param thumbnail_360_url the Thumbnail_360_url to set
+     * @param thumbnail360Url the Thumbnail_360_url to set
      */
-    public void setThumbnail_360_url(String thumbnail_360_url) {
-        this.thumbnail_360_url = thumbnail_360_url;
+    public void setThumbnail360Url(String thumbnail360Url) {
+        this.thumbnail360Url = thumbnail360Url;
     }
 
     /**
@@ -2816,17 +2901,17 @@ public class Video {
      *
      * @return the Thumbnail_480_url
      */
-    public String getThumbnail_480_url() {
-        return thumbnail_480_url;
+    public String getThumbnail480Url() {
+        return thumbnail480Url;
     }
 
     /**
      * Set the Thumbnail_480_url
      *
-     * @param thumbnail_480_url the Thumbnail_480_url to set
+     * @param thumbnail480Url the Thumbnail_480_url to set
      */
-    public void setThumbnail_480_url(String thumbnail_480_url) {
-        this.thumbnail_480_url = thumbnail_480_url;
+    public void setThumbnail480Url(String thumbnail480Url) {
+        this.thumbnail480Url = thumbnail480Url;
     }
 
     /**
@@ -2834,17 +2919,17 @@ public class Video {
      *
      * @return the Thumbnail_60_url
      */
-    public String getThumbnail_60_url() {
-        return thumbnail_60_url;
+    public String getThumbnail60Url() {
+        return thumbnail60Url;
     }
 
     /**
      * Set the Thumbnail_60_url
      *
-     * @param thumbnail_60_url the Thumbnail_60_url to set
+     * @param thumbnail60Url the Thumbnail_60_url to set
      */
-    public void setThumbnail_60_url(String thumbnail_60_url) {
-        this.thumbnail_60_url = thumbnail_60_url;
+    public void setThumbnail60Url(String thumbnail60Url) {
+        this.thumbnail60Url = thumbnail60Url;
     }
 
     /**
@@ -2852,17 +2937,17 @@ public class Video {
      *
      * @return the Thumbnail_720_url
      */
-    public String getThumbnail_720_url() {
-        return thumbnail_720_url;
+    public String getThumbnail720Url() {
+        return thumbnail720Url;
     }
 
     /**
      * Set the Thumbnail_720_url
      *
-     * @param thumbnail_720_url the Thumbnail_720_url to set
+     * @param thumbnail720Url the Thumbnail_720_url to set
      */
-    public void setThumbnail_720_url(String thumbnail_720_url) {
-        this.thumbnail_720_url = thumbnail_720_url;
+    public void setThumbnail720Url(String thumbnail720Url) {
+        this.thumbnail720Url = thumbnail720Url;
     }
 
     /**
@@ -2870,17 +2955,17 @@ public class Video {
      *
      * @return the Thumbnail_url
      */
-    public String getThumbnail_url() {
-        return thumbnail_url;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
     /**
      * Set the Thumbnail_url
      *
-     * @param thumbnail_url the Thumbnail_url to set
+     * @param thumbnailUrl the Thumbnail_url to set
      */
-    public void setThumbnail_url(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     /**
@@ -2973,17 +3058,17 @@ public class Video {
      *
      * @return the Views_last_day
      */
-    public int getViews_last_day() {
-        return views_last_day;
+    public int getViewsLastDay() {
+        return viewsLastDay;
     }
 
     /**
      * Set the Views_last_day
      *
-     * @param views_last_day the Views_last_day to set
+     * @param viewsLastDay the Views_last_day to set
      */
-    public void setViews_last_day(int views_last_day) {
-        this.views_last_day = views_last_day;
+    public void setViewsLastDay(int viewsLastDay) {
+        this.viewsLastDay = viewsLastDay;
     }
 
     /**
@@ -2991,17 +3076,17 @@ public class Video {
      *
      * @return the Views_last_hour
      */
-    public int getViews_last_hour() {
-        return views_last_hour;
+    public int getViewsLastHour() {
+        return viewsLastHour;
     }
 
     /**
      * Set the Views_last_hour
      *
-     * @param views_last_hour the Views_last_hour to set
+     * @param viewsLastHour the Views_last_hour to set
      */
-    public void setViews_last_hour(int views_last_hour) {
-        this.views_last_hour = views_last_hour;
+    public void setViewsLastHour(int viewsLastHour) {
+        this.viewsLastHour = viewsLastHour;
     }
 
     /**
@@ -3009,17 +3094,17 @@ public class Video {
      *
      * @return the Views_last_month
      */
-    public int getViews_last_month() {
-        return views_last_month;
+    public int getViewsLastMonth() {
+        return viewsLastMonth;
     }
 
     /**
      * Set the Views_last_month
      *
-     * @param views_last_month the Views_last_month to set
+     * @param viewsLastMonth the Views_last_month to set
      */
-    public void setViews_last_month(int views_last_month) {
-        this.views_last_month = views_last_month;
+    public void setViewsLastMonth(int viewsLastMonth) {
+        this.viewsLastMonth = viewsLastMonth;
     }
 
     /**
@@ -3027,17 +3112,17 @@ public class Video {
      *
      * @return the Views_last_week
      */
-    public int getViews_last_week() {
-        return views_last_week;
+    public int getViewsLastWeek() {
+        return viewsLastWeek;
     }
 
     /**
      * Set the Views_last_week
      *
-     * @param views_last_week the Views_last_week to set
+     * @param viewsLastWeek the Views_last_week to set
      */
-    public void setViews_last_week(int views_last_week) {
-        this.views_last_week = views_last_week;
+    public void setViewsLastWeek(int viewsLastWeek) {
+        this.viewsLastWeek = viewsLastWeek;
     }
 
     /**
@@ -3045,17 +3130,17 @@ public class Video {
      *
      * @return the Views_total
      */
-    public int getViews_total() {
-        return views_total;
+    public int getViewsTotal() {
+        return viewsTotal;
     }
 
     /**
      * Set the Views_total
      *
-     * @param views_total the Views_total to set
+     * @param viewsTotal the Views_total to set
      */
-    public void setViews_total(int views_total) {
-        this.views_total = views_total;
+    public void setViewsTotal(int viewsTotal) {
+        this.viewsTotal = viewsTotal;
     }
 
     /**

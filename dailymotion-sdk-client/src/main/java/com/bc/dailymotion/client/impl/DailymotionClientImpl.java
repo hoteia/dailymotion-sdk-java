@@ -5,6 +5,7 @@ import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.dto.*;
 import com.bc.dailymotion.client.DailymotionClient;
+import com.bc.dailymotion.client.constants.GenericConstants;
 import com.bc.dailymotion.client.exceptions.GenericErrorMessages;
 import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
 import com.ning.http.client.AsyncHttpClientConfig;
@@ -135,7 +136,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         Assert.notNull(this.clientId, "The clientId is null, you need to get one on your DailyMotion account");
         Assert.notNull(this.clientSecret, "The clientSecret is null, you need to get one on your DailyMotion account");
 
-        OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
+        OAuth2RequestFilter filter = new OAuth2RequestFilter(MessageFormat.format(GenericConstants.TWO_PARAMETERS.toString(), this.dailymotionRootUrl, "oauth/token"), this.clientId, this.clientSecret);
         filter.setCredentials(this.username, this.password);
         filter.setProxy(this.useProxy, this.proxyHost, this.proxyPort);
         filter.setSchemeName(this.scheme);
@@ -391,9 +392,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
             String url;
             if (id != null) {
-                url = MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id));
+                url = MessageFormat.format(GenericConstants.TWO_PARAMETERS.toString(), this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id));
             } else {
-                url = MessageFormat.format("{0}/{1}", this.dailymotionRootUrl, endpointUrl);
+                url = MessageFormat.format(GenericConstants.TWO_PARAMETERS.toString(), this.dailymotionRootUrl, endpointUrl);
             }
 
             Response response = this.callDailymotionAPI(method, url, params);
@@ -405,7 +406,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
         } catch (ClassNotFoundException e) {
-            LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
+            LOGGER.error(GenericErrorMessages.ERROR_ON_DO_REQUEST.toString(), e);
         }
 
         return null;
@@ -434,9 +435,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
             String url;
             if (subId != null) {
-                url = MessageFormat.format("{0}/{1}/{2}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), MessageFormat.format(connectionUrl, subId));
+                url = MessageFormat.format(GenericConstants.THREE_PARAMETERS.toString(), this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), MessageFormat.format(connectionUrl, subId));
             } else {
-                url = MessageFormat.format("{0}/{1}/{2}", this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
+                url = MessageFormat.format(GenericConstants.THREE_PARAMETERS.toString(), this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
             }
 
             Response response = this.callDailymotionAPI(method, url, params);
@@ -448,7 +449,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
         } catch (ClassNotFoundException e) {
-            LOGGER.error("An error occurred in doRequest, exception thrown is ", e);
+            LOGGER.error(GenericErrorMessages.ERROR_ON_DO_REQUEST.toString(), e);
         }
 
         return null;
@@ -467,9 +468,9 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
         Client.RequestHolder requestHolder = this.httpClient.url(url);
         if (params != null) {
-            params.forEach((key, value) -> {
-                requestHolder.setQueryParameter(key, this.arrayToString(value));
-            });
+            for(Map.Entry<String, List<String>> entry : params.entrySet()){
+                requestHolder.setQueryParameter(entry.getKey(), this.arrayToString(entry.getValue()));
+            }
         }
 
         if (HttpMethod.GET.equals(method)) {

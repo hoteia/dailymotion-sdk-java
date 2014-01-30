@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -15,14 +16,16 @@ public class Activity {
      * No access_token required for reading.
      * Returns date.
      */
-    private Date created_time;
+    @JsonProperty(value = "created_time")
+    private Date createdTime;
 
     /**
      * Type of the sender object for the activity event
      * This field can be used as filter. No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String from_type;
+    @JsonProperty(value = "from_type")
+    private String fromType;
 
     /**
      * The activity_event object ID
@@ -36,28 +39,32 @@ public class Activity {
      * This field can be used as filter but can’t be read nor written.
      * Returns array, min size: 1, max size: 150.
      */
-    private List<String> ignore_tile_ids;
+    @JsonProperty(value = "ignore_tile_ids")
+    private List<String> ignoreTileIds;
 
     /**
      * Type of the object for the activity event
      * This field can be used as filter. No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String object_type;
+    @JsonProperty(value = "object_type")
+    private String objectType;
 
     /**
      * The activity object casted as video if it’s a video, null otherwise
      * No access_token required for reading.
-     * Return a video. You can request sub-fields by using object_video.<sub-field> notation.
+     * Return a video. You can request sub-fields by using objectVideo.<sub-field> notation.
      */
-    private Video object_video;
+    @JsonProperty(value = "object_video")
+    private Video objectVideo;
 
     /**
      * A list of tile ids to get activity from
      * This field can be used as filter but can’t be read nor written.
      * Returns array, min size: 1, max size: 150.
      */
-    private List<String> tile_ids;
+    @JsonProperty(value = "tile_ids")
+    private List<String> tileIds;
 
     /**
      * Activity event type
@@ -71,17 +78,17 @@ public class Activity {
      *
      * @return the Created_time
      */
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     /**
      * Set the Created_time
      *
-     * @param created_time the Created_time to set
+     * @param createdTime the Created_time to set
      */
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     /**
@@ -89,17 +96,17 @@ public class Activity {
      *
      * @return the From_type
      */
-    public String getFrom_type() {
-        return from_type;
+    public String getFromType() {
+        return fromType;
     }
 
     /**
      * Set the From_type
      *
-     * @param from_type the From_type to set
+     * @param fromType the From_type to set
      */
-    public void setFrom_type(String from_type) {
-        this.from_type = from_type;
+    public void setFromType(String fromType) {
+        this.fromType = fromType;
     }
 
     /**
@@ -125,17 +132,17 @@ public class Activity {
      *
      * @return the Ignore_tile_ids
      */
-    public List<String> getIgnore_tile_ids() {
-        return ignore_tile_ids;
+    public List<String> getIgnoreTileIds() {
+        return ignoreTileIds;
     }
 
     /**
      * Set the Ignore_tile_ids
      *
-     * @param ignore_tile_ids the Ignore_tile_ids to set
+     * @param ignoreTileIds the Ignore_tile_ids to set
      */
-    public void setIgnore_tile_ids(List<String> ignore_tile_ids) {
-        this.ignore_tile_ids = ignore_tile_ids;
+    public void setIgnoreTileIds(List<String> ignoreTileIds) {
+        this.ignoreTileIds = ignoreTileIds;
     }
 
     /**
@@ -143,17 +150,17 @@ public class Activity {
      *
      * @return the Object_type
      */
-    public String getObject_type() {
-        return object_type;
+    public String getObjectType() {
+        return objectType;
     }
 
     /**
      * Set the Object_type
      *
-     * @param object_type the Object_type to set
+     * @param objectType the Object_type to set
      */
-    public void setObject_type(String object_type) {
-        this.object_type = object_type;
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
     }
 
     /**
@@ -161,17 +168,17 @@ public class Activity {
      *
      * @return the Object_video
      */
-    public Video getObject_video() {
-        return object_video;
+    public Video getObjectVideo() {
+        return objectVideo;
     }
 
     /**
      * Set the Object_video
      *
-     * @param object_video the Object_video to set
+     * @param objectVideo the Object_video to set
      */
-    public void setObject_video(Video object_video) {
-        this.object_video = object_video;
+    public void setObjectVideo(Video objectVideo) {
+        this.objectVideo = objectVideo;
     }
 
     /**
@@ -179,17 +186,17 @@ public class Activity {
      *
      * @return the Tile_ids
      */
-    public List<String> getTile_ids() {
-        return tile_ids;
+    public List<String> getTileIds() {
+        return tileIds;
     }
 
     /**
      * Set the Tile_ids
      *
-     * @param tile_ids the Tile_ids to set
+     * @param tileIds the Tile_ids to set
      */
-    public void setTile_ids(List<String> tile_ids) {
-        this.tile_ids = tile_ids;
+    public void setTileIds(List<String> tileIds) {
+        this.tileIds = tileIds;
     }
 
     /**

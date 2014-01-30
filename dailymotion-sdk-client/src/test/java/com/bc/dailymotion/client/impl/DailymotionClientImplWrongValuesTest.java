@@ -9,6 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Bastien on 05/01/2014.
@@ -47,19 +48,19 @@ public class DailymotionClientImplWrongValuesTest {
                 this.dailymotionClient.doGet(endpoint);
                 break;
             case 2:
-                this.dailymotionClient.doGet(endpoint, new HashMap<>());
+                this.dailymotionClient.doGet(endpoint, new HashMap<String, List<String>>());
                 break;
             case 3:
                 this.dailymotionClient.doPost(endpoint);
                 break;
             case 4:
-                this.dailymotionClient.doPost(endpoint, new HashMap<>());
+                this.dailymotionClient.doPost(endpoint, new HashMap<String, List<String>>());
                 break;
             case 5:
                 this.dailymotionClient.doDelete(endpoint);
                 break;
             case 6:
-                this.dailymotionClient.doDelete(endpoint, new HashMap<>());
+                this.dailymotionClient.doDelete(endpoint, new HashMap<String, List<String>>());
                 break;
             default:
                 throw new UnknownError();

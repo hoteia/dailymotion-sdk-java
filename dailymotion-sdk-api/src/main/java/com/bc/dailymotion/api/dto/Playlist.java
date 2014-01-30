@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,7 +15,8 @@ public class Playlist {
      * No access_token required for reading.
      * Returns date.
      */
-    private Date created_time;
+    @JsonProperty(value = "created_time")
+    private Date createdTime;
 
     /**
      * The playlist’s description
@@ -63,52 +65,57 @@ public class Playlist {
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_large_url;
+    @JsonProperty(value = "thumbnail_large_url")
+    private String thumbnailLargeUrl;
 
     /**
      * The URL of the first video thumbnail (160px by 120px).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_medium_url;
+    @JsonProperty(value = "thumbnail_medium_url")
+    private String thumbnailMediumUrl;
 
     /**
      * The URL of the first video thumbnail (80px by 60px).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_small_url;
+    @JsonProperty(value = "thumbnail_small_url")
+    private String thumbnailSmallUrl;
 
     /**
      * The URL of the first video raw thumbnail (full size respecting ratio).
      * No access_token required for reading.
      * Returns url.
      */
-    private String thumbnail_url;
+    @JsonProperty(value = "thumbnail_url")
+    private String thumbnailUrl;
 
     /**
      * The total number of videos in the playlist.
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int videos_total;
+    @JsonProperty(value = "videos_total")
+    private int videosTotal;
 
     /**
      * Returns the Created_time
      *
      * @return the Created_time
      */
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     /**
      * Set the Created_time
      *
-     * @param created_time the Created_time to set
+     * @param createdTime the Created_time to set
      */
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     /**
@@ -224,17 +231,17 @@ public class Playlist {
      *
      * @return the Thumbnail_large_url
      */
-    public String getThumbnail_large_url() {
-        return thumbnail_large_url;
+    public String getThumbnailLargeUrl() {
+        return thumbnailLargeUrl;
     }
 
     /**
      * Set the Thumbnail_large_url
      *
-     * @param thumbnail_large_url the Thumbnail_large_url to set
+     * @param thumbnailLargeUrl the Thumbnail_large_url to set
      */
-    public void setThumbnail_large_url(String thumbnail_large_url) {
-        this.thumbnail_large_url = thumbnail_large_url;
+    public void setThumbnailLargeUrl(String thumbnailLargeUrl) {
+        this.thumbnailLargeUrl = thumbnailLargeUrl;
     }
 
     /**
@@ -242,17 +249,17 @@ public class Playlist {
      *
      * @return the Thumbnail_medium_url
      */
-    public String getThumbnail_medium_url() {
-        return thumbnail_medium_url;
+    public String getThumbnailMediumUrl() {
+        return thumbnailMediumUrl;
     }
 
     /**
      * Set the Thumbnail_medium_url
      *
-     * @param thumbnail_medium_url the Thumbnail_medium_url to set
+     * @param thumbnailMediumUrl the Thumbnail_medium_url to set
      */
-    public void setThumbnail_medium_url(String thumbnail_medium_url) {
-        this.thumbnail_medium_url = thumbnail_medium_url;
+    public void setThumbnailMediumUrl(String thumbnailMediumUrl) {
+        this.thumbnailMediumUrl = thumbnailMediumUrl;
     }
 
     /**
@@ -260,17 +267,17 @@ public class Playlist {
      *
      * @return the Thumbnail_small_url
      */
-    public String getThumbnail_small_url() {
-        return thumbnail_small_url;
+    public String getThumbnailSmallUrl() {
+        return thumbnailSmallUrl;
     }
 
     /**
      * Set the Thumbnail_small_url
      *
-     * @param thumbnail_small_url the Thumbnail_small_url to set
+     * @param thumbnailSmallUrl the Thumbnail_small_url to set
      */
-    public void setThumbnail_small_url(String thumbnail_small_url) {
-        this.thumbnail_small_url = thumbnail_small_url;
+    public void setThumbnailSmallUrl(String thumbnailSmallUrl) {
+        this.thumbnailSmallUrl = thumbnailSmallUrl;
     }
 
     /**
@@ -278,17 +285,17 @@ public class Playlist {
      *
      * @return the Thumbnail_url
      */
-    public String getThumbnail_url() {
-        return thumbnail_url;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
     /**
      * Set the Thumbnail_url
      *
-     * @param thumbnail_url the Thumbnail_url to set
+     * @param thumbnailUrl the Thumbnail_url to set
      */
-    public void setThumbnail_url(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     /**
@@ -296,17 +303,17 @@ public class Playlist {
      *
      * @return the Videos_total
      */
-    public int getVideos_total() {
-        return videos_total;
+    public int getVideosTotal() {
+        return videosTotal;
     }
 
     /**
      * Set the Videos_total
      *
-     * @param videos_total the Videos_total to set
+     * @param videosTotal the Videos_total to set
      */
-    public void setVideos_total(int videos_total) {
-        this.videos_total = videos_total;
+    public void setVideosTotal(int videosTotal) {
+        this.videosTotal = videosTotal;
     }
 
     /**

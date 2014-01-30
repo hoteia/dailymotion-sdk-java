@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -40,7 +41,8 @@ public class Contest {
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 35.
      */
-    private String url_name;
+    @JsonProperty(value = "url_name")
+    private String urlName;
 
     /**
      * Returns the Description
@@ -119,17 +121,17 @@ public class Contest {
      *
      * @return the Url_name
      */
-    public String getUrl_name() {
-        return url_name;
+    public String getUrlName() {
+        return urlName;
     }
 
     /**
      * Set the Url_name
      *
-     * @param url_name the Url_name to set
+     * @param urlName the Url_name to set
      */
-    public void setUrl_name(String url_name) {
-        this.url_name = url_name;
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
     }
 
     /**

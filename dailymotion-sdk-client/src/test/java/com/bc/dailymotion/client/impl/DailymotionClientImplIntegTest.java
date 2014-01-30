@@ -40,11 +40,11 @@ public class DailymotionClientImplIntegTest {
         // Given
         ApiResponse<Video> videoResponse = new ApiResponse<>();
         videoResponse.setExplicit(false);
-        videoResponse.setHas_more(false);
+        videoResponse.setHasMore(false);
         videoResponse.setLimit(10);
         videoResponse.setPage(1);
         videoResponse.setTotal(0);
-        videoResponse.setList(new ArrayList<>());
+        videoResponse.setList(new ArrayList<Video>());
 
         // When
         ApiResponse<?> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.ME);

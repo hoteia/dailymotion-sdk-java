@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -15,7 +16,9 @@ public class ApiResponse<E> {
     private int limit;
     private boolean explicit;
     private int total;
-    private boolean has_more;
+
+    @JsonProperty(value = "has_more")
+    private boolean hasMore;
 
     @JsonTypeInfo(property = "list", use = JsonTypeInfo.Id.CLASS)
     private List<E> list;
@@ -100,21 +103,21 @@ public class ApiResponse<E> {
     }
 
     /**
-     * Returns the has_more
+     * Returns the hasMore
      *
-     * @return the has_more
+     * @return the hasMore
      */
-    public boolean isHas_more() {
-        return has_more;
+    public boolean isHasMore() {
+        return hasMore;
     }
 
     /**
      * Set the Has_more
      *
-     * @param has_more the Has_more to set
+     * @param hasMore the Has_more to set
      */
-    public void setHas_more(boolean has_more) {
-        this.has_more = has_more;
+    public void setHasMore(boolean hasMore) {
+        this.hasMore = hasMore;
     }
 
     /**

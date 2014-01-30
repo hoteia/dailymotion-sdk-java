@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -39,11 +40,12 @@ public class Record {
     private int periodicity;
 
     /**
-     * The record_status corresponds to the current state of the recording process. Changing the status to started will result in the instant beginning of the recording process, while changing this status from started to stopped will stop a recording session. The paused and resumed values are working the same way and allow the user to pause and then to resume a recording session.
+     * The recordStatus corresponds to the current state of the recording process. Changing the status to started will result in the instant beginning of the recording process, while changing this status from started to stopped will stop a recording session. The paused and resumed values are working the same way and allow the user to pause and then to resume a recording session.
      * No access_token required for reading. This field is writable.
      * Returns string, allowed values: started, resumed, paused, stopped.
      */
-    private String record_status;
+    @JsonProperty(value = "record_status")
+    private String recordStatus;
 
     /**
      * Returns a list of video ids corresponding to the recorded videos from the given record id.
@@ -57,7 +59,8 @@ public class Record {
      * No access_token required for reading. This field is writable.
      * Returns date.
      */
-    private Date start_date;
+    @JsonProperty(value = "start_date")
+    private Date startDate;
 
     /**
      * The title given to the record.
@@ -143,17 +146,17 @@ public class Record {
      *
      * @return the Record_status
      */
-    public String getRecord_status() {
-        return record_status;
+    public String getRecordStatus() {
+        return recordStatus;
     }
 
     /**
      * Set the Record_status
      *
-     * @param record_status the Record_status to set
+     * @param recordStatus the Record_status to set
      */
-    public void setRecord_status(String record_status) {
-        this.record_status = record_status;
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
     }
 
     /**
@@ -179,17 +182,17 @@ public class Record {
      *
      * @return the Start_date
      */
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
     /**
      * Set the Start_date
      *
-     * @param start_date the Start_date to set
+     * @param startDate the Start_date to set
      */
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     /**

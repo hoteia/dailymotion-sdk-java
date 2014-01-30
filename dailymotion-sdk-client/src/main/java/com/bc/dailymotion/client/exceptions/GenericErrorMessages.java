@@ -8,6 +8,7 @@ public enum GenericErrorMessages {
     NO_EMPTY_ALLOWED("The given list is empty"),
     RESPONSE_BODY_IS_NULL("The response body is null"),
     ENDPOINT_NOT_FOUND("Endpoint url is null or empty"),
+    ERROR_ON_DO_REQUEST("An error occurred in doRequest, exception thrown is "),
     CONNECTION_NOT_FOUND("Connection url is null or empty"),
     TYPE_ID_NOT_ALLOWED("The type ID isn't allowed for this method");
 

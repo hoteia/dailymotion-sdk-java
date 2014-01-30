@@ -65,7 +65,7 @@ public class DailymotionClientImplTest {
 
         ApiResponse<T> response = new ApiResponse<>();
         response.setExplicit(false);
-        response.setHas_more(false);
+        response.setHasMore(false);
         response.setLimit(10);
         response.setPage(1);
         response.setTotal(list.size());
@@ -129,7 +129,7 @@ public class DailymotionClientImplTest {
 
         ApiResponse<T> tResponse = new ApiResponse<>();
         tResponse.setExplicit(false);
-        tResponse.setHas_more(false);
+        tResponse.setHasMore(false);
         tResponse.setLimit(10);
         tResponse.setPage(1);
         tResponse.setList(list);
@@ -328,7 +328,7 @@ public class DailymotionClientImplTest {
 
         ApiResponse<T> tResponse = new ApiResponse<>();
         tResponse.setExplicit(false);
-        tResponse.setHas_more(false);
+        tResponse.setHasMore(false);
         tResponse.setLimit(10);
         tResponse.setPage(1);
         tResponse.setList(list);

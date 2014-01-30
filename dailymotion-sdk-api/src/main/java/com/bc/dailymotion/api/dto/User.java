@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -21,77 +22,88 @@ public class User {
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_120_url;
+    @JsonProperty(value = "avatar_120_url")
+    private String avatar120Url;
 
     /**
      * The URL to the user’s avatar (190px by 190px).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_190_url;
+    @JsonProperty(value = "avatar_190_url")
+    private String avatar190Url;
 
     /**
      * The URL to the user’s avatar (240px by 240px).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_240_url;
+    @JsonProperty(value = "avatar_240_url")
+    private String avatar240Url;
 
     /**
      * The URL to the user’s avatar (square of 25px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_25_url;
+    @JsonProperty(value = "avatar_25_url")
+    private String avatar25Url;
 
     /**
      * The URL to the user’s avatar (square of 360px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_360_url;
+    @JsonProperty(value = "avatar_360_url")
+    private String avatar360Url;
 
     /**
      * The URL to the user’s avatar (square of 480px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_480_url;
+    @JsonProperty(value = "avatar_480_url")
+    private String avatar480Url;
 
     /**
      * The URL to the user’s avatar (square of 60px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_60_url;
+    @JsonProperty(value = "avatar_60_url")
+    private String avatar60Url;
 
     /**
      * The URL to the user’s avatar (square of 720px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_720_url;
+    @JsonProperty(value = "avatar_720_url")
+    private String avatar720Url;
 
     /**
      * The URL to the user’s avatar
      * This field is writable.
      * Returns url.
      */
-    private String avatar_url;
+    @JsonProperty(value = "avatar_url")
+    private String avatarUrl;
 
     /**
      * The URL to the user’s background (Max 1680px by 2000px).
      * No access_token required for reading. This field is writable.
      * Returns url.
      */
-    private String background_url;
+    @JsonProperty(value = "background_url")
+    private String backgroundUrl;
 
     /**
      * The URL to the user’s banner (Max 970px by 120px).
      * No access_token required for reading. This field is writable.
      * Returns url.
      */
-    private String banner_url;
+    @JsonProperty(value = "banner_url")
+    private String bannerUrl;
 
     /**
      * The user’s birthday
@@ -112,7 +124,8 @@ public class User {
      * No access_token required for reading.
      * Returns url.
      */
-    private String cleeng_popup_url;
+    @JsonProperty(value = "cleeng_popup_url")
+    private String cleengPopupUrl;
 
     /**
      * The country of the user
@@ -126,7 +139,8 @@ public class User {
      * No access_token required for reading.
      * Returns date.
      */
-    private Date created_time;
+    @JsonProperty(value = "created_time")
+    private Date createdTime;
 
     /**
      * The user’s description
@@ -147,49 +161,56 @@ public class User {
      * No access_token required for reading. This field is writable.
      * Returns boolean.
      */
-    private boolean email_notification;
+    @JsonProperty(value = "email_notification")
+    private boolean emailNotification;
 
     /**
      * The name of pushd event sent on user deletion
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_delete;
+    @JsonProperty(value = "event_delete")
+    private String eventDelete;
 
     /**
      * The name of pushd event sent on user modification
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_modify;
+    @JsonProperty(value = "event_modify")
+    private String eventModify;
 
     /**
      * The name of pushd event sent when user deletes a video
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_video_delete;
+    @JsonProperty(value = "event_video_delete")
+    private String eventVideoDelete;
 
     /**
      * The name of pushd event sent when user puts a live video off air
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_video_live_offair;
+    @JsonProperty(value = "event_video_live_offair")
+    private String eventVideoLiveOffair;
 
     /**
      * The name of pushd event sent when user puts a live video on air
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_video_live_onair;
+    @JsonProperty(value = "event_video_live_onair")
+    private String eventVideoLiveOnair;
 
     /**
      * The name of pushd event sent when user deletes a video
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String event_video_modify;
+    @JsonProperty(value = "event_video_modify")
+    private String eventVideoModify;
 
     /**
      * A list of filters availabe to reduce the result set.
@@ -203,7 +224,8 @@ public class User {
      * userinfo scope required for reading. userinfo scope required for writing.
      * Returns string, min size: 1, max size: 150.
      */
-    private String first_name;
+    @JsonProperty(value = "first_name")
+    private String firstName;
 
     /**
      * The user’s fullname
@@ -238,7 +260,8 @@ public class User {
      * userinfo scope required for reading. userinfo scope required for writing.
      * Returns string, min size: 1, max size: 150.
      */
-    private String last_name;
+    @JsonProperty(value = "last_name")
+    private String lastName;
 
     /**
      * Returns user’s limits like maximum allowed duration and size per uploaded video etc. This property can only be obtained for the currently logged user.
@@ -273,21 +296,24 @@ public class User {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int paywall_price;
+    @JsonProperty(value = "paywall_price")
+    private int paywallPrice;
 
     /**
      * The price of svod offer formatted with currency according to the request localization or null.
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String paywall_price_formatted;
+    @JsonProperty(value = "paywall_price_formatted")
+    private String paywallPriceFormatted;
 
     /**
      * The subscription type of the svod offer.
      * No access_token required for reading.
      * Returns string, min size: 1, max size: 150.
      */
-    private String paywall_subscription_type;
+    @JsonProperty(value = "paywall_subscription_type")
+    private String paywallSubscriptionType;
 
     /**
      * The phone number of the user
@@ -301,14 +327,16 @@ public class User {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int playlists_total;
+    @JsonProperty(value = "playlists_total")
+    private int playlistsTotal;
 
     /**
      * The zip of the user
      * userinfo scope required for reading. userinfo scope required for writing.
      * Returns string, min size: 1, max size: 150.
      */
-    private int post_code;
+    @JsonProperty(value = "post_code")
+    private int postCode;
 
     /**
      * The user’s fullname of username depending on user’s preference
@@ -364,7 +392,8 @@ public class User {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int videos_total;
+    @JsonProperty(value = "videos_total")
+    private int videosTotal;
 
     /**
      * Change the user’s video star
@@ -378,7 +407,8 @@ public class User {
      * No access_token required for reading.
      * Returns number, min value: 0.
      */
-    private int views_total;
+    @JsonProperty(value = "views_total")
+    private int viewsTotal;
 
     /**
      * Returns the Address
@@ -403,17 +433,17 @@ public class User {
      *
      * @return the Avatar_120_url
      */
-    public String getAvatar_120_url() {
-        return avatar_120_url;
+    public String getAvatar120Url() {
+        return avatar120Url;
     }
 
     /**
      * Set the Avatar_120_url
      *
-     * @param avatar_120_url the Avatar_120_url to set
+     * @param avatar120Url the Avatar_120_url to set
      */
-    public void setAvatar_120_url(String avatar_120_url) {
-        this.avatar_120_url = avatar_120_url;
+    public void setAvatar120Url(String avatar120Url) {
+        this.avatar120Url = avatar120Url;
     }
 
     /**
@@ -421,17 +451,17 @@ public class User {
      *
      * @return the Avatar_190_url
      */
-    public String getAvatar_190_url() {
-        return avatar_190_url;
+    public String getAvatar190Url() {
+        return avatar190Url;
     }
 
     /**
      * Set the Avatar_190_url
      *
-     * @param avatar_190_url the Avatar_190_url to set
+     * @param avatar190Url the Avatar_190_url to set
      */
-    public void setAvatar_190_url(String avatar_190_url) {
-        this.avatar_190_url = avatar_190_url;
+    public void setAvatar190Url(String avatar190Url) {
+        this.avatar190Url = avatar190Url;
     }
 
     /**
@@ -439,17 +469,17 @@ public class User {
      *
      * @return the Avatar_240_url
      */
-    public String getAvatar_240_url() {
-        return avatar_240_url;
+    public String getAvatar240Url() {
+        return avatar240Url;
     }
 
     /**
      * Set the Avatar_240_url
      *
-     * @param avatar_240_url the Avatar_240_url to set
+     * @param avatar240Url the Avatar_240_url to set
      */
-    public void setAvatar_240_url(String avatar_240_url) {
-        this.avatar_240_url = avatar_240_url;
+    public void setAvatar240Url(String avatar240Url) {
+        this.avatar240Url = avatar240Url;
     }
 
     /**
@@ -457,17 +487,17 @@ public class User {
      *
      * @return the Avatar_25_url
      */
-    public String getAvatar_25_url() {
-        return avatar_25_url;
+    public String getAvatar25Url() {
+        return avatar25Url;
     }
 
     /**
      * Set the Avatar_25_url
      *
-     * @param avatar_25_url the Avatar_25_url to set
+     * @param avatar25Url the Avatar_25_url to set
      */
-    public void setAvatar_25_url(String avatar_25_url) {
-        this.avatar_25_url = avatar_25_url;
+    public void setAvatar25Url(String avatar25Url) {
+        this.avatar25Url = avatar25Url;
     }
 
     /**
@@ -475,17 +505,17 @@ public class User {
      *
      * @return the Avatar_360_url
      */
-    public String getAvatar_360_url() {
-        return avatar_360_url;
+    public String getAvatar360Url() {
+        return avatar360Url;
     }
 
     /**
      * Set the Avatar_360_url
      *
-     * @param avatar_360_url the Avatar_360_url to set
+     * @param avatar360Url the Avatar_360_url to set
      */
-    public void setAvatar_360_url(String avatar_360_url) {
-        this.avatar_360_url = avatar_360_url;
+    public void setAvatar360Url(String avatar360Url) {
+        this.avatar360Url = avatar360Url;
     }
 
     /**
@@ -493,17 +523,17 @@ public class User {
      *
      * @return the Avatar_480_url
      */
-    public String getAvatar_480_url() {
-        return avatar_480_url;
+    public String getAvatar480Url() {
+        return avatar480Url;
     }
 
     /**
      * Set the Avatar_480_url
      *
-     * @param avatar_480_url the Avatar_480_url to set
+     * @param avatar480Url the Avatar_480_url to set
      */
-    public void setAvatar_480_url(String avatar_480_url) {
-        this.avatar_480_url = avatar_480_url;
+    public void setAvatar480Url(String avatar480Url) {
+        this.avatar480Url = avatar480Url;
     }
 
     /**
@@ -511,17 +541,17 @@ public class User {
      *
      * @return the Avatar_60_url
      */
-    public String getAvatar_60_url() {
-        return avatar_60_url;
+    public String getAvatar60Url() {
+        return avatar60Url;
     }
 
     /**
      * Set the Avatar_60_url
      *
-     * @param avatar_60_url the Avatar_60_url to set
+     * @param avatar60Url the Avatar_60_url to set
      */
-    public void setAvatar_60_url(String avatar_60_url) {
-        this.avatar_60_url = avatar_60_url;
+    public void setAvatar60Url(String avatar60Url) {
+        this.avatar60Url = avatar60Url;
     }
 
     /**
@@ -529,17 +559,17 @@ public class User {
      *
      * @return the Avatar_720_url
      */
-    public String getAvatar_720_url() {
-        return avatar_720_url;
+    public String getAvatar720Url() {
+        return avatar720Url;
     }
 
     /**
      * Set the Avatar_720_url
      *
-     * @param avatar_720_url the Avatar_720_url to set
+     * @param avatar720Url the Avatar_720_url to set
      */
-    public void setAvatar_720_url(String avatar_720_url) {
-        this.avatar_720_url = avatar_720_url;
+    public void setAvatar720Url(String avatar720Url) {
+        this.avatar720Url = avatar720Url;
     }
 
     /**
@@ -547,17 +577,17 @@ public class User {
      *
      * @return the Avatar_url
      */
-    public String getAvatar_url() {
-        return avatar_url;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
     /**
      * Set the Avatar_url
      *
-     * @param avatar_url the Avatar_url to set
+     * @param avatarUrl the Avatar_url to set
      */
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     /**
@@ -565,17 +595,17 @@ public class User {
      *
      * @return the Background_url
      */
-    public String getBackground_url() {
-        return background_url;
+    public String getBackgroundUrl() {
+        return backgroundUrl;
     }
 
     /**
      * Set the Background_url
      *
-     * @param background_url the Background_url to set
+     * @param backgroundUrl the Background_url to set
      */
-    public void setBackground_url(String background_url) {
-        this.background_url = background_url;
+    public void setBackgroundUrl(String backgroundUrl) {
+        this.backgroundUrl = backgroundUrl;
     }
 
     /**
@@ -583,17 +613,17 @@ public class User {
      *
      * @return the Banner_url
      */
-    public String getBanner_url() {
-        return banner_url;
+    public String getBannerUrl() {
+        return bannerUrl;
     }
 
     /**
      * Set the Banner_url
      *
-     * @param banner_url the Banner_url to set
+     * @param bannerUrl the Banner_url to set
      */
-    public void setBanner_url(String banner_url) {
-        this.banner_url = banner_url;
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     /**
@@ -637,17 +667,17 @@ public class User {
      *
      * @return the Cleeng_popup_url
      */
-    public String getCleeng_popup_url() {
-        return cleeng_popup_url;
+    public String getCleengPopupUrl() {
+        return cleengPopupUrl;
     }
 
     /**
      * Set the Cleeng_popup_url
      *
-     * @param cleeng_popup_url the Cleeng_popup_url to set
+     * @param cleengPopupUrl the Cleeng_popup_url to set
      */
-    public void setCleeng_popup_url(String cleeng_popup_url) {
-        this.cleeng_popup_url = cleeng_popup_url;
+    public void setCleengPopupUrl(String cleengPopupUrl) {
+        this.cleengPopupUrl = cleengPopupUrl;
     }
 
     /**
@@ -673,17 +703,17 @@ public class User {
      *
      * @return the Created_time
      */
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     /**
      * Set the Created_time
      *
-     * @param created_time the Created_time to set
+     * @param createdTime the Created_time to set
      */
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     /**
@@ -723,21 +753,21 @@ public class User {
     }
 
     /**
-     * Returns the email_notification
+     * Returns the emailNotification
      *
-     * @return the email_notification
+     * @return the emailNotification
      */
-    public boolean isEmail_notification() {
-        return email_notification;
+    public boolean isEmailNotification() {
+        return emailNotification;
     }
 
     /**
      * Set the Email_notification
      *
-     * @param email_notification the Email_notification to set
+     * @param emailNotification the Email_notification to set
      */
-    public void setEmail_notification(boolean email_notification) {
-        this.email_notification = email_notification;
+    public void setEmailNotification(boolean emailNotification) {
+        this.emailNotification = emailNotification;
     }
 
     /**
@@ -745,17 +775,17 @@ public class User {
      *
      * @return the Event_delete
      */
-    public String getEvent_delete() {
-        return event_delete;
+    public String getEventDelete() {
+        return eventDelete;
     }
 
     /**
      * Set the Event_delete
      *
-     * @param event_delete the Event_delete to set
+     * @param eventDelete the Event_delete to set
      */
-    public void setEvent_delete(String event_delete) {
-        this.event_delete = event_delete;
+    public void setEventDelete(String eventDelete) {
+        this.eventDelete = eventDelete;
     }
 
     /**
@@ -763,17 +793,17 @@ public class User {
      *
      * @return the Event_modify
      */
-    public String getEvent_modify() {
-        return event_modify;
+    public String getEventModify() {
+        return eventModify;
     }
 
     /**
      * Set the Event_modify
      *
-     * @param event_modify the Event_modify to set
+     * @param eventModify the Event_modify to set
      */
-    public void setEvent_modify(String event_modify) {
-        this.event_modify = event_modify;
+    public void setEventModify(String eventModify) {
+        this.eventModify = eventModify;
     }
 
     /**
@@ -781,17 +811,17 @@ public class User {
      *
      * @return the Event_video_delete
      */
-    public String getEvent_video_delete() {
-        return event_video_delete;
+    public String getEventVideoDelete() {
+        return eventVideoDelete;
     }
 
     /**
      * Set the Event_video_delete
      *
-     * @param event_video_delete the Event_video_delete to set
+     * @param eventVideoDelete the Event_video_delete to set
      */
-    public void setEvent_video_delete(String event_video_delete) {
-        this.event_video_delete = event_video_delete;
+    public void setEventVideoDelete(String eventVideoDelete) {
+        this.eventVideoDelete = eventVideoDelete;
     }
 
     /**
@@ -799,17 +829,17 @@ public class User {
      *
      * @return the Event_video_live_offair
      */
-    public String getEvent_video_live_offair() {
-        return event_video_live_offair;
+    public String getEventVideoLiveOffair() {
+        return eventVideoLiveOffair;
     }
 
     /**
      * Set the Event_video_live_offair
      *
-     * @param event_video_live_offair the Event_video_live_offair to set
+     * @param eventVideoLiveOffair the Event_video_live_offair to set
      */
-    public void setEvent_video_live_offair(String event_video_live_offair) {
-        this.event_video_live_offair = event_video_live_offair;
+    public void setEventVideoLiveOffair(String eventVideoLiveOffair) {
+        this.eventVideoLiveOffair = eventVideoLiveOffair;
     }
 
     /**
@@ -817,17 +847,17 @@ public class User {
      *
      * @return the Event_video_live_onair
      */
-    public String getEvent_video_live_onair() {
-        return event_video_live_onair;
+    public String getEventVideoLiveOnair() {
+        return eventVideoLiveOnair;
     }
 
     /**
      * Set the Event_video_live_onair
      *
-     * @param event_video_live_onair the Event_video_live_onair to set
+     * @param eventVideoLiveOnair the Event_video_live_onair to set
      */
-    public void setEvent_video_live_onair(String event_video_live_onair) {
-        this.event_video_live_onair = event_video_live_onair;
+    public void setEventVideoLiveOnair(String eventVideoLiveOnair) {
+        this.eventVideoLiveOnair = eventVideoLiveOnair;
     }
 
     /**
@@ -835,17 +865,17 @@ public class User {
      *
      * @return the Event_video_modify
      */
-    public String getEvent_video_modify() {
-        return event_video_modify;
+    public String getEventVideoModify() {
+        return eventVideoModify;
     }
 
     /**
      * Set the Event_video_modify
      *
-     * @param event_video_modify the Event_video_modify to set
+     * @param eventVideoModify the Event_video_modify to set
      */
-    public void setEvent_video_modify(String event_video_modify) {
-        this.event_video_modify = event_video_modify;
+    public void setEventVideoModify(String eventVideoModify) {
+        this.eventVideoModify = eventVideoModify;
     }
 
     /**
@@ -871,17 +901,17 @@ public class User {
      *
      * @return the First_name
      */
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
      * Set the First_name
      *
-     * @param first_name the First_name to set
+     * @param firstName the First_name to set
      */
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -961,17 +991,17 @@ public class User {
      *
      * @return the Last_name
      */
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
      * Set the Last_name
      *
-     * @param last_name the Last_name to set
+     * @param lastName the Last_name to set
      */
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -1051,17 +1081,17 @@ public class User {
      *
      * @return the Paywall_price
      */
-    public int getPaywall_price() {
-        return paywall_price;
+    public int getPaywallPrice() {
+        return paywallPrice;
     }
 
     /**
      * Set the Paywall_price
      *
-     * @param paywall_price the Paywall_price to set
+     * @param paywallPrice the Paywall_price to set
      */
-    public void setPaywall_price(int paywall_price) {
-        this.paywall_price = paywall_price;
+    public void setPaywallPrice(int paywallPrice) {
+        this.paywallPrice = paywallPrice;
     }
 
     /**
@@ -1069,17 +1099,17 @@ public class User {
      *
      * @return the Paywall_price_formatted
      */
-    public String getPaywall_price_formatted() {
-        return paywall_price_formatted;
+    public String getPaywallPriceFormatted() {
+        return paywallPriceFormatted;
     }
 
     /**
      * Set the Paywall_price_formatted
      *
-     * @param paywall_price_formatted the Paywall_price_formatted to set
+     * @param paywallPriceFormatted the Paywall_price_formatted to set
      */
-    public void setPaywall_price_formatted(String paywall_price_formatted) {
-        this.paywall_price_formatted = paywall_price_formatted;
+    public void setPaywallPriceFormatted(String paywallPriceFormatted) {
+        this.paywallPriceFormatted = paywallPriceFormatted;
     }
 
     /**
@@ -1087,17 +1117,17 @@ public class User {
      *
      * @return the Paywall_subscription_type
      */
-    public String getPaywall_subscription_type() {
-        return paywall_subscription_type;
+    public String getPaywallSubscriptionType() {
+        return paywallSubscriptionType;
     }
 
     /**
      * Set the Paywall_subscription_type
      *
-     * @param paywall_subscription_type the Paywall_subscription_type to set
+     * @param paywallSubscriptionType the Paywall_subscription_type to set
      */
-    public void setPaywall_subscription_type(String paywall_subscription_type) {
-        this.paywall_subscription_type = paywall_subscription_type;
+    public void setPaywallSubscriptionType(String paywallSubscriptionType) {
+        this.paywallSubscriptionType = paywallSubscriptionType;
     }
 
     /**
@@ -1123,17 +1153,17 @@ public class User {
      *
      * @return the Playlists_total
      */
-    public int getPlaylists_total() {
-        return playlists_total;
+    public int getPlaylistsTotal() {
+        return playlistsTotal;
     }
 
     /**
      * Set the Playlists_total
      *
-     * @param playlists_total the Playlists_total to set
+     * @param playlistsTotal the Playlists_total to set
      */
-    public void setPlaylists_total(int playlists_total) {
-        this.playlists_total = playlists_total;
+    public void setPlaylistsTotal(int playlistsTotal) {
+        this.playlistsTotal = playlistsTotal;
     }
 
     /**
@@ -1141,17 +1171,17 @@ public class User {
      *
      * @return the Post_code
      */
-    public int getPost_code() {
-        return post_code;
+    public int getPostCode() {
+        return postCode;
     }
 
     /**
      * Set the Post_code
      *
-     * @param post_code the Post_code to set
+     * @param postCode the Post_code to set
      */
-    public void setPost_code(int post_code) {
-        this.post_code = post_code;
+    public void setPostCode(int postCode) {
+        this.postCode = postCode;
     }
 
     /**
@@ -1285,17 +1315,17 @@ public class User {
      *
      * @return the Videos_total
      */
-    public int getVideos_total() {
-        return videos_total;
+    public int getVideosTotal() {
+        return videosTotal;
     }
 
     /**
      * Set the Videos_total
      *
-     * @param videos_total the Videos_total to set
+     * @param videosTotal the Videos_total to set
      */
-    public void setVideos_total(int videos_total) {
-        this.videos_total = videos_total;
+    public void setVideosTotal(int videosTotal) {
+        this.videosTotal = videosTotal;
     }
 
     /**
@@ -1321,17 +1351,17 @@ public class User {
      *
      * @return the Views_total
      */
-    public int getViews_total() {
-        return views_total;
+    public int getViewsTotal() {
+        return viewsTotal;
     }
 
     /**
      * Set the Views_total
      *
-     * @param views_total the Views_total to set
+     * @param viewsTotal the Views_total to set
      */
-    public void setViews_total(int views_total) {
-        this.views_total = views_total;
+    public void setViewsTotal(int viewsTotal) {
+        this.viewsTotal = viewsTotal;
     }
 
     /**

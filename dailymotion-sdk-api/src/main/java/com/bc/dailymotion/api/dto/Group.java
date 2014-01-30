@@ -1,5 +1,6 @@
 package com.bc.dailymotion.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,28 +15,32 @@ public class Group {
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_160_url;
+    @JsonProperty(value = "avatar_160_url")
+    private String avatar160Url;
 
     /**
      * The URL to the user’s avatar (square of 40px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_40_url;
+    @JsonProperty(value = "avatar_40_url")
+    private String avatar40Url;
 
     /**
      * The URL to the user’s avatar (square of 80px side length).
      * No access_token required for reading.
      * Returns url.
      */
-    private String avatar_80_url;
+    @JsonProperty(value = "avatar_80_url")
+    private String avatar80Url;
 
     /**
      * The date when the group has been created
      * No access_token required for reading.
      * Returns date.
      */
-    private Date created_time;
+    @JsonProperty(value = "created_time")
+    private Date createdTime;
 
     /**
      * The group’s description
@@ -91,24 +96,25 @@ public class Group {
      * No access_token required for reading. This field is writable.
      * Returns string, min size: 1, max size: 35.
      */
-    private String url_name;
+    @JsonProperty(value = "url_name")
+    private String urlName;
 
     /**
      * Returns the Avatar_160_url
      *
      * @return the Avatar_160_url
      */
-    public String getAvatar_160_url() {
-        return avatar_160_url;
+    public String getAvatar160Url() {
+        return avatar160Url;
     }
 
     /**
      * Set the Avatar_160_url
      *
-     * @param avatar_160_url the Avatar_160_url to set
+     * @param avatar160Url the Avatar_160_url to set
      */
-    public void setAvatar_160_url(String avatar_160_url) {
-        this.avatar_160_url = avatar_160_url;
+    public void setAvatar160Url(String avatar160Url) {
+        this.avatar160Url = avatar160Url;
     }
 
     /**
@@ -116,17 +122,17 @@ public class Group {
      *
      * @return the Avatar_40_url
      */
-    public String getAvatar_40_url() {
-        return avatar_40_url;
+    public String getAvatar40Url() {
+        return avatar40Url;
     }
 
     /**
      * Set the Avatar_40_url
      *
-     * @param avatar_40_url the Avatar_40_url to set
+     * @param avatar40Url the Avatar_40_url to set
      */
-    public void setAvatar_40_url(String avatar_40_url) {
-        this.avatar_40_url = avatar_40_url;
+    public void setAvatar40Url(String avatar40Url) {
+        this.avatar40Url = avatar40Url;
     }
 
     /**
@@ -134,17 +140,17 @@ public class Group {
      *
      * @return the Avatar_80_url
      */
-    public String getAvatar_80_url() {
-        return avatar_80_url;
+    public String getAvatar80Url() {
+        return avatar80Url;
     }
 
     /**
      * Set the Avatar_80_url
      *
-     * @param avatar_80_url the Avatar_80_url to set
+     * @param avatar80Url the Avatar_80_url to set
      */
-    public void setAvatar_80_url(String avatar_80_url) {
-        this.avatar_80_url = avatar_80_url;
+    public void setAvatar80Url(String avatar80Url) {
+        this.avatar80Url = avatar80Url;
     }
 
     /**
@@ -152,17 +158,17 @@ public class Group {
      *
      * @return the Created_time
      */
-    public Date getCreated_time() {
-        return created_time;
+    public Date getCreatedTime() {
+        return createdTime;
     }
 
     /**
      * Set the Created_time
      *
-     * @param created_time the Created_time to set
+     * @param createdTime the Created_time to set
      */
-    public void setCreated_time(Date created_time) {
-        this.created_time = created_time;
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
     }
 
     /**
@@ -296,17 +302,17 @@ public class Group {
      *
      * @return the Url_name
      */
-    public String getUrl_name() {
-        return url_name;
+    public String getUrlName() {
+        return urlName;
     }
 
     /**
      * Set the Url_name
      *
-     * @param url_name the Url_name to set
+     * @param urlName the Url_name to set
      */
-    public void setUrl_name(String url_name) {
-        this.url_name = url_name;
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
     }
 
     /**

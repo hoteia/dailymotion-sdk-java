@@ -65,7 +65,7 @@ public class OAuth2RequestFilter implements RequestFilter {
     /**
      * The scheme name used to put the token in headers
      */
-    private String scheme_name;
+    private String schemeName;
 
     /**
      * Username used for the OAuth protocol
@@ -158,10 +158,10 @@ public class OAuth2RequestFilter implements RequestFilter {
     /**
      * Sets the scheme name used for the token authentication
      *
-     * @param scheme_name The scheme name to set
+     * @param schemeName The scheme name to set
      */
-    public void setSchemeName(String scheme_name) {
-        this.scheme_name = scheme_name;
+    public void setSchemeName(String schemeName) {
+        this.schemeName = schemeName;
     }
 
     /**
@@ -189,16 +189,16 @@ public class OAuth2RequestFilter implements RequestFilter {
         request.addParameter(PASSWORD_PARAMETER_NAME, password);
 
         Response response;
-        OAuth2Token token;
+        OAuth2Token oAuth2Token;
         try {
             response = request.execute().get();
-            token = JsonHelper.deserialize(response.getResponseBody("UTF-8"), OAuth2Token.class);
+            oAuth2Token = JsonHelper.deserialize(response.getResponseBody("UTF-8"), OAuth2Token.class);
             acquireTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
         } catch (InterruptedException | ExecutionException | IOException e) {
             throw new SerializationException(e);
         }
 
-        return token;
+        return oAuth2Token;
     }
 
     /**
@@ -224,7 +224,7 @@ public class OAuth2RequestFilter implements RequestFilter {
         }
 
         if (token != null) {
-            ctx.getRequest().getHeaders().add(Http.AUTHORIZATION, scheme_name + " " + token.getAccessToken());
+            ctx.getRequest().getHeaders().add(Http.AUTHORIZATION, schemeName + " " + token.getAccessToken());
         }
         return ctx;
     }
