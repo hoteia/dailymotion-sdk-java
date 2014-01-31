@@ -183,7 +183,7 @@ public class Record {
      * @return the Start_date
      */
     public Date getStartDate() {
-        return startDate;
+        return this.startDate != null ? new Date(this.startDate.getTime()) : null;
     }
 
     /**
@@ -192,7 +192,7 @@ public class Record {
      * @param startDate the Start_date to set
      */
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = startDate != null ? new Date(startDate.getTime()) : null;
     }
 
     /**

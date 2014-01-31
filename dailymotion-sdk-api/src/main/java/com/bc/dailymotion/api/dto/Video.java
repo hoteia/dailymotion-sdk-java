@@ -416,7 +416,7 @@ public class Video {
      * No access_token required for reading.
      * Returns boolean.
      */
-    boolean moderated;
+    private boolean moderated;
 
     /**
      * Limit the result set to videos modified after a specific timestamp
@@ -1266,7 +1266,7 @@ public class Video {
      * @return the Created_time
      */
     public Date getCreatedTime() {
-        return createdTime;
+        return this.createdTime != null ? new Date(this.createdTime.getTime()) : null;
     }
 
     /**
@@ -1275,7 +1275,7 @@ public class Video {
      * @param createdTime the Created_time to set
      */
     public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+        this.createdTime = createdTime != null ? new Date(createdTime.getTime()) : null;
     }
 
     /**
@@ -1374,7 +1374,7 @@ public class Video {
      * @return the End_time
      */
     public Date getEndTime() {
-        return endTime;
+        return this.endTime != null ? new Date(this.endTime.getTime()) : null;
     }
 
     /**
@@ -1383,7 +1383,7 @@ public class Video {
      * @param endTime the End_time to set
      */
     public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+        this.endTime = endTime != null ? new Date(endTime.getTime()) : null;
     }
 
     /**
@@ -2426,7 +2426,7 @@ public class Video {
      * @return the Start_time
      */
     public Date getStartTime() {
-        return startTime;
+        return this.startTime != null ? new Date(this.startTime.getTime()) : null;
     }
 
     /**
@@ -2435,7 +2435,7 @@ public class Video {
      * @param startTime the Start_time to set
      */
     public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+        this.startTime = startTime != null ? new Date(startTime.getTime()) : null;
     }
 
     /**
@@ -2812,7 +2812,7 @@ public class Video {
      * @return the Taken_time
      */
     public Date getTakenTime() {
-        return takenTime;
+        return this.takenTime != null ? new Date(this.takenTime.getTime()) : null;
     }
 
     /**
@@ -2821,7 +2821,7 @@ public class Video {
      * @param takenTime the Taken_time to set
      */
     public void setTakenTime(Date takenTime) {
-        this.takenTime = takenTime;
+        this.takenTime = takenTime != null ? new Date(takenTime.getTime()) : null;
     }
 
     /**

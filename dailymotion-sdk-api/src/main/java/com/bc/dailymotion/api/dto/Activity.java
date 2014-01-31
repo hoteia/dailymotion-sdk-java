@@ -79,7 +79,7 @@ public class Activity {
      * @return the Created_time
      */
     public Date getCreatedTime() {
-        return createdTime;
+        return this.createdTime != null ? new Date(this.createdTime.getTime()) : null;
     }
 
     /**
@@ -88,7 +88,7 @@ public class Activity {
      * @param createdTime the Created_time to set
      */
     public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+        this.createdTime = createdTime != null ? new Date(createdTime.getTime()) : null;
     }
 
     /**

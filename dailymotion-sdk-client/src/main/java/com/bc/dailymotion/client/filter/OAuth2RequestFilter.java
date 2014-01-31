@@ -113,6 +113,11 @@ public class OAuth2RequestFilter implements RequestFilter {
     private OAuth2Token token;
 
     /**
+     * The minimal remaining time for a valid token
+     */
+    private static final int MINIMAL_DELAY = 5;
+
+    /**
      * Request filter that acquires an OAuth token if:
      * <ul>
      * <li>no token has been acquired</li>
@@ -209,7 +214,7 @@ public class OAuth2RequestFilter implements RequestFilter {
      * @return The boolean that shows of the token has expired
      */
     private boolean isTokenExpired() {
-        return (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - acquireTime) > (token.getExpiresIn() - 5);
+        return (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - acquireTime) > (token.getExpiresIn() - MINIMAL_DELAY);
     }
 
     /**

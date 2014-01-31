@@ -26,6 +26,10 @@
         <jetty.port>8080</jetty.port>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Configuration for Sonar Reports -->
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+        <sonar.profile>Sonar way with Findbugs</sonar.profile>
     </properties>
 
     <issueManagement>

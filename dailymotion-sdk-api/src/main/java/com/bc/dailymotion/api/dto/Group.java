@@ -159,7 +159,7 @@ public class Group {
      * @return the Created_time
      */
     public Date getCreatedTime() {
-        return createdTime;
+        return this.createdTime != null ? new Date(this.createdTime.getTime()) : null;
     }
 
     /**
@@ -168,7 +168,7 @@ public class Group {
      * @param createdTime the Created_time to set
      */
     public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+        this.createdTime = createdTime != null ? new Date(createdTime.getTime()) : null;
     }
 
     /**

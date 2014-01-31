@@ -632,7 +632,7 @@ public class User {
      * @return the Birthday
      */
     public Date getBirthday() {
-        return birthday;
+        return this.birthday != null ? new Date(this.birthday.getTime()) : null;
     }
 
     /**
@@ -641,7 +641,7 @@ public class User {
      * @param birthday the Birthday to set
      */
     public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+        this.birthday = birthday != null ? new Date(birthday.getTime()) : null;
     }
 
     /**
@@ -704,7 +704,7 @@ public class User {
      * @return the Created_time
      */
     public Date getCreatedTime() {
-        return createdTime;
+        return this.createdTime != null ? new Date(this.createdTime.getTime()) : null;
     }
 
     /**
@@ -713,7 +713,7 @@ public class User {
      * @param createdTime the Created_time to set
      */
     public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
+        this.createdTime = createdTime != null ? new Date(createdTime.getTime()) : null;
     }
 
     /**

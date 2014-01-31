@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ import java.util.Map;
  * <li>POST</li>
  * <li>PUT</li>
  * </ul>
+ *
  * @see <a href="http://www.dailymotion.com/doc/api/graph-api.html">http://www.dailymotion.com/doc/api/graph-api.html</a>
  */
 @Service(value = "dailymotionClient")
@@ -110,7 +112,12 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     /**
      * Static logger used for traces
      */
-    private static Logger LOGGER = LoggerFactory.getLogger(DailymotionClientImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DailymotionClientImpl.class);
+
+    /**
+     * Map containing the different classes for responses
+     */
+    private Map<Class, ApiResponse<?>> availableResponses;
 
     /**
      * Scheme used for OAuth
@@ -126,7 +133,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * </ul>
      */
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         Assert.notNull(this.dailymotionRootUrl, "The DailyMotion root url is null");
         Assert.notNull(this.useProxy, "The boolean useProxy is null");
         Assert.notNull(this.proxyHost, "The proxyHost is null, if you don't use a proxy, set it to empty !");
@@ -468,7 +475,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
         Client.RequestHolder requestHolder = this.httpClient.url(url);
         if (params != null) {
-            for(Map.Entry<String, List<String>> entry : params.entrySet()){
+            for (Map.Entry<String, List<String>> entry : params.entrySet()) {
                 requestHolder.setQueryParameter(entry.getKey(), this.arrayToString(entry.getValue()));
             }
         }
@@ -507,31 +514,25 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     private ApiResponse<?> buildResponse(Class clazz) throws ClassNotFoundException {
         Assert.notNull(clazz, GenericErrorMessages.NO_NULL_ALLOWED.toString());
 
-        switch (clazz.getSimpleName()) {
-            case "Activity":
-                return new ApiResponse<Activity>();
-            case "Channel":
-                return new ApiResponse<Channel>();
-            case "Comment":
-                return new ApiResponse<Comment>();
-            case "Contest":
-                return new ApiResponse<Contest>();
-            case "Group":
-                return new ApiResponse<Group>();
-            case "Playlist":
-                return new ApiResponse<Playlist>();
-            case "Record":
-                return new ApiResponse<Record>();
-            case "Strongtag":
-                return new ApiResponse<Strongtag>();
-            case "Subtitle":
-                return new ApiResponse<Subtitle>();
-            case "User":
-                return new ApiResponse<User>();
-            case "Video":
-                return new ApiResponse<Video>();
-            default:
-                throw new ClassNotFoundException(MessageFormat.format("The given Class ({0}) isn't allowed here", clazz.getSimpleName()));
+        if (this.availableResponses == null) {
+            this.availableResponses = new HashMap<>();
+            this.availableResponses.put(Activity.class, new ApiResponse<Activity>());
+            this.availableResponses.put(Channel.class, new ApiResponse<Channel>());
+            this.availableResponses.put(Comment.class, new ApiResponse<Comment>());
+            this.availableResponses.put(Contest.class, new ApiResponse<Contest>());
+            this.availableResponses.put(Group.class, new ApiResponse<Group>());
+            this.availableResponses.put(Playlist.class, new ApiResponse<Playlist>());
+            this.availableResponses.put(Record.class, new ApiResponse<Record>());
+            this.availableResponses.put(Strongtag.class, new ApiResponse<Strongtag>());
+            this.availableResponses.put(Subtitle.class, new ApiResponse<Subtitle>());
+            this.availableResponses.put(User.class, new ApiResponse<User>());
+            this.availableResponses.put(Video.class, new ApiResponse<Video>());
+        }
+
+        if (this.availableResponses.containsKey(clazz)) {
+            return this.availableResponses.get(clazz);
+        } else {
+            throw new ClassNotFoundException(MessageFormat.format("The given Class ({0}) isn't allowed here {}", clazz.getSimpleName()));
         }
     }
 }
