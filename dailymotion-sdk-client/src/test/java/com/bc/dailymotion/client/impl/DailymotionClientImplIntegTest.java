@@ -21,7 +21,7 @@ public class DailymotionClientImplIntegTest {
         this.dailymotionClient = new DailymotionClientImpl();
 
         ReflectionTestUtils.setField(this.dailymotionClient, "dailymotionRootUrl", "https://api.dailymotion.com");
-        ReflectionTestUtils.setField(this.dailymotionClient, "useProxy", false);
+        ReflectionTestUtils.setField(this.dailymotionClient, "useProxy", true);
         ReflectionTestUtils.setField(this.dailymotionClient, "proxyHost", "proxy.priv.atos.fr");
         ReflectionTestUtils.setField(this.dailymotionClient, "proxyPort", 3128);
         ReflectionTestUtils.setField(this.dailymotionClient, "timeout", 5000);
@@ -47,7 +47,7 @@ public class DailymotionClientImplIntegTest {
         videoResponse.setList(new ArrayList<Video>());
 
         // When
-        ApiResponse<?> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.ME);
+        ApiResponse<?> actualResponse = this.dailymotionClient.doGet(VideoEndpoint.ALL);
 
         // Then
         //Assertions.assertThat(actualResponse).isEqualsToByComparingFields(videoResponse);

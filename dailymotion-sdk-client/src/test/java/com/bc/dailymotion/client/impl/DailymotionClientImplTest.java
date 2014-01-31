@@ -28,8 +28,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
@@ -74,11 +76,19 @@ public class DailymotionClientImplTest {
         return response;
     }
 
+    private HashMap<String, List<String>> getParameters(){
+        HashMap<String, List<String>> parameters = new HashMap<>();
+        parameters.put("param", new ArrayList<String>());
+        parameters.get("param").add("test1");
+        parameters.get("param").add("test2");
+        return parameters;
+    }
+
     @DataProvider(name = "doGetEndpoint")
     private Object[][] doGetEndpoint() throws InstantiationException, IllegalAccessException {
         return new Object[][]{
                 {1, Activity.class, null, "https://api.dailymotion.com/activities", ActivityEndpoint.ALL, this.getResponseForType(Activity.class)},
-                {2, Activity.class, new Object[]{new HashMap<>()}, "https://api.dailymotion.com/activities", ActivityEndpoint.ALL, this.getResponseForType(Activity.class)},
+                {2, Activity.class, new Object[]{this.getParameters()}, "https://api.dailymotion.com/activities", ActivityEndpoint.ALL, this.getResponseForType(Activity.class)},
                 {3, Activity.class, new Object[]{"xabcdef"}, "https://api.dailymotion.com/activity/xabcdef", ActivityEndpoint.ID, this.getResponseForType(Activity.class)},
                 {4, Activity.class, new Object[]{"xabcdef", new HashMap<>()}, "https://api.dailymotion.com/activity/xabcdef", ActivityEndpoint.ID, this.getResponseForType(Activity.class)},
                 {1, Channel.class, null, "https://api.dailymotion.com/channels", ChannelEndpoint.ALL, this.getResponseForType(Channel.class)},
@@ -139,7 +149,7 @@ public class DailymotionClientImplTest {
 
         OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
         Response response = mock(Response.class, RETURNS_DEEP_STUBS);
-        when(this.httpClient.url(anyString()).get()).thenReturn(response);
+        when(this.httpClient.url(anyString()).asyncGet().get()).thenReturn(response);
         when(response.getBody()).thenReturn(helper.getObjectMapper().writeValueAsString(tResponse));
         when(response.getStatus()).thenReturn(Http.OK);
         when(filter.getAccessTokenEndPoint()).thenReturn("my-token");
@@ -338,7 +348,7 @@ public class DailymotionClientImplTest {
 
         OAuth2RequestFilter filter = mock(OAuth2RequestFilter.class, RETURNS_DEEP_STUBS);
         Response response = mock(Response.class, RETURNS_DEEP_STUBS);
-        when(this.httpClient.url(anyString()).get()).thenReturn(response);
+        when(this.httpClient.url(anyString()).asyncGet().get()).thenReturn(response);
         when(response.getBody()).thenReturn(helper.getObjectMapper().writeValueAsString(tResponse));
         when(response.getStatus()).thenReturn(Http.OK);
         when(filter.getAccessTokenEndPoint()).thenReturn("my-token");

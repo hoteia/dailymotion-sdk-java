@@ -1,5 +1,6 @@
 package com.bc.dailymotion.client;
 
+import com.bc.dailymotion.api.ApiError;
 import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
@@ -37,7 +38,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doGet(Endpoint endPoint);
+    ApiResponse<?> doGet(Endpoint endPoint) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -46,7 +47,7 @@ public interface DailymotionClient {
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -55,7 +56,7 @@ public interface DailymotionClient {
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doGet(Endpoint endPoint, String id);
+    ApiResponse<?> doGet(Endpoint endPoint, String id) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -65,7 +66,7 @@ public interface DailymotionClient {
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -74,7 +75,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doGet(Connection connection, String id);
+    ApiResponse<?> doGet(Connection connection, String id) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -84,7 +85,7 @@ public interface DailymotionClient {
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -94,7 +95,7 @@ public interface DailymotionClient {
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doGet(Connection connection, String id, String subId);
+    ApiResponse<?> doGet(Connection connection, String id, String subId) throws ApiError;
 
     /**
      * Performs a GET HTTP request on Dailymotion API
@@ -105,7 +106,7 @@ public interface DailymotionClient {
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params);
+    ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -113,7 +114,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doPost(Endpoint endPoint);
+    ApiResponse<?> doPost(Endpoint endPoint) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -122,7 +123,7 @@ public interface DailymotionClient {
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -131,7 +132,7 @@ public interface DailymotionClient {
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doPost(Endpoint endPoint, String id);
+    ApiResponse<?> doPost(Endpoint endPoint, String id) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -141,7 +142,7 @@ public interface DailymotionClient {
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -150,7 +151,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doPost(Connection connection, String id);
+    ApiResponse<?> doPost(Connection connection, String id) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -160,7 +161,7 @@ public interface DailymotionClient {
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -170,7 +171,7 @@ public interface DailymotionClient {
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doPost(Connection connection, String id, String subId);
+    ApiResponse<?> doPost(Connection connection, String id, String subId) throws ApiError;
 
     /**
      * Performs a POST HTTP request on Dailymotion API
@@ -181,24 +182,7 @@ public interface DailymotionClient {
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params);
-
-    /**
-     * Performs a DELETE HTTP request on Dailymotion API
-     *
-     * @param endPoint The endpoint to call
-     * @return The response containing the list of E elements
-     */
-    ApiResponse<?> doDelete(Endpoint endPoint);
-
-    /**
-     * Performs a DELETE HTTP request on Dailymotion API
-     *
-     * @param endPoint The endpoint to call
-     * @param params   The list of parameters given for the request
-     * @return The response containing the list of E elements
-     */
-    ApiResponse<?> doDelete(Endpoint endPoint, Map<String, List<String>> params);
+    ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError;
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -207,17 +191,7 @@ public interface DailymotionClient {
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
      */
-    ApiResponse<?> doDelete(Endpoint endPoint, String id);
-
-    /**
-     * Performs a DELETE HTTP request on Dailymotion API
-     *
-     * @param endPoint The endpoint to call
-     * @param id       The id that will be used to filter the request on the endpoint
-     * @param params   The list of parameters given for the request
-     * @return The response containing the list of E elements
-     */
-    ApiResponse<?> doDelete(Endpoint endPoint, String id, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Endpoint endPoint, String id) throws ApiError;
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -226,17 +200,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doDelete(Connection connection, String id);
-
-    /**
-     * Performs a DELETE HTTP request on Dailymotion API
-     *
-     * @param connection The connection to call
-     * @param id         The id that will be used to filter the request on the endpoint
-     * @param params     The list of parameters given for the request
-     * @return The response containing the list of T elements
-     */
-    ApiResponse<?> doDelete(Connection connection, String id, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Connection connection, String id) throws ApiError;
 
     /**
      * Performs a DELETE HTTP request on Dailymotion API
@@ -246,16 +210,5 @@ public interface DailymotionClient {
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
      */
-    ApiResponse<?> doDelete(Connection connection, String id, String subId);
-
-    /**
-     * Performs a DELETE HTTP request on Dailymotion API
-     *
-     * @param connection The connection to call
-     * @param id         The id that will be used to filter the request on the endpoint
-     * @param subId      The id that will be used to filter the request on the connection
-     * @param params     The list of parameters given for the request
-     * @return The response containing the list of T elements
-     */
-    ApiResponse<?> doDelete(Connection connection, String id, String subId, Map<String, List<String>> params);
+    ApiResponse<?> doDelete(Connection connection, String id, String subId) throws ApiError;
 }

@@ -228,7 +228,7 @@ public class OAuth2RequestFilter implements RequestFilter {
             token = retrieveAccessToken(this.username, this.password);
         }
 
-        if (token != null) {
+        if (token != null && token.getAccessToken() != null) {
             ctx.getRequest().getHeaders().add(Http.AUTHORIZATION, schemeName + " " + token.getAccessToken());
         }
         return ctx;

@@ -1,18 +1,22 @@
 package com.bc.dailymotion.client.impl;
 
+import com.bc.dailymotion.api.ApiError;
 import com.bc.dailymotion.api.ApiResponse;
 import com.bc.dailymotion.api.Connection;
 import com.bc.dailymotion.api.Endpoint;
 import com.bc.dailymotion.api.dto.*;
 import com.bc.dailymotion.client.DailymotionClient;
 import com.bc.dailymotion.client.constants.GenericConstants;
-import com.bc.dailymotion.client.exceptions.GenericErrorMessages;
+import com.bc.dailymotion.client.constants.GenericErrorMessages;
 import com.bc.dailymotion.client.filter.OAuth2RequestFilter;
 import com.ning.http.client.AsyncHttpClientConfig;
+import com.ning.http.client.ProxyServer;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.resthub.web.Client;
+import org.resthub.web.Http;
 import org.resthub.web.JsonHelper;
 import org.resthub.web.Response;
+import org.resthub.web.exception.ClientExceptionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -24,6 +28,7 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Implementation of DailyMotion Client
@@ -151,18 +156,18 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder();
         builder.setRequestTimeoutInMs(this.timeout);
         builder.addRequestFilter(filter);
-        this.httpClient = new Client(builder);
         if (this.useProxy) {
-            this.httpClient.setProxy(this.proxyHost, this.proxyPort);
+            builder.setProxyServer(new ProxyServer(this.proxyHost, this.proxyPort));
             LOGGER.debug("Using proxy with url {}:{}", this.proxyHost, this.proxyPort);
         }
+        this.httpClient = new Client(builder);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Endpoint endPoint) {
+    public ApiResponse<?> doGet(Endpoint endPoint) throws ApiError {
         Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, endPoint, null, null);
@@ -172,7 +177,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params) {
+    public ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, endPoint, null, params);
@@ -182,7 +187,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Endpoint endPoint, String id) {
+    public ApiResponse<?> doGet(Endpoint endPoint, String id) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, endPoint, id, null);
     }
@@ -191,7 +196,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params) {
+    public ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, endPoint, id, params);
     }
@@ -200,7 +205,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Connection connection, String id) {
+    public ApiResponse<?> doGet(Connection connection, String id) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, connection, id, null, null);
     }
@@ -209,7 +214,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params) {
+    public ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, connection, id, null, params);
     }
@@ -218,7 +223,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Connection connection, String id, String subId) {
+    public ApiResponse<?> doGet(Connection connection, String id, String subId) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, connection, id, subId, null);
     }
@@ -227,7 +232,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params) {
+    public ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.GET, connection, id, subId, params);
     }
@@ -236,7 +241,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Endpoint endPoint) {
+    public ApiResponse<?> doPost(Endpoint endPoint) throws ApiError {
         Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, endPoint, null, null);
@@ -246,7 +251,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params) {
+    public ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, endPoint, null, params);
@@ -256,7 +261,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Endpoint endPoint, String id) {
+    public ApiResponse<?> doPost(Endpoint endPoint, String id) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, endPoint, id, null);
     }
@@ -265,7 +270,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params) {
+    public ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, endPoint, id, params);
     }
@@ -274,7 +279,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Connection connection, String id) {
+    public ApiResponse<?> doPost(Connection connection, String id) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, connection, id, null, null);
     }
@@ -283,7 +288,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params) {
+    public ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, connection, id, null, params);
     }
@@ -292,7 +297,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Connection connection, String id, String subId) {
+    public ApiResponse<?> doPost(Connection connection, String id, String subId) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, connection, id, subId, null);
     }
@@ -301,7 +306,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params) {
+    public ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
         return this.doRequest(HttpMethod.POST, connection, id, subId, params);
     }
@@ -310,28 +315,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doDelete(Endpoint endPoint) {
-        Assert.notNull(endPoint, GenericErrorMessages.NO_NULL_ALLOWED.toString());
-        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, endPoint, null, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApiResponse<?> doDelete(Endpoint endPoint, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
-        Assert.isTrue(!"ID".equals(endPoint.toString()), GenericErrorMessages.TYPE_ID_NOT_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, endPoint, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApiResponse<?> doDelete(Endpoint endPoint, String id) {
+    public ApiResponse<?> doDelete(Endpoint endPoint, String id) throws ApiError {
         Assert.noNullElements(new Object[]{endPoint, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
+        Assert.isTrue(!"ALL".equals(endPoint.toString()), GenericErrorMessages.TYPE_ALL_NOT_ALLOWED.toString());
+        Assert.isTrue(!"ME".equals(endPoint.toString()), GenericErrorMessages.TYPE_ME_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.DELETE, endPoint, id, null);
     }
 
@@ -339,17 +326,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doDelete(Endpoint endPoint, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{endPoint, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, endPoint, id, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApiResponse<?> doDelete(Connection connection, String id) {
+    public ApiResponse<?> doDelete(Connection connection, String id) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
+        Assert.isTrue(!"ALL".equals(connection.toString()), GenericErrorMessages.TYPE_ALL_NOT_ALLOWED.toString());
+        Assert.isTrue(!"ME".equals(connection.toString()), GenericErrorMessages.TYPE_ME_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.DELETE, connection, id, null, null);
     }
 
@@ -357,27 +337,11 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * {@inheritDoc}
      */
     @Override
-    public ApiResponse<?> doDelete(Connection connection, String id, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, id, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, connection, id, null, params);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApiResponse<?> doDelete(Connection connection, String id, String subId) {
+    public ApiResponse<?> doDelete(Connection connection, String id, String subId) throws ApiError {
         Assert.noNullElements(new Object[]{connection, id, subId}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
+        Assert.isTrue(!"ALL".equals(connection.toString()), GenericErrorMessages.TYPE_ALL_NOT_ALLOWED.toString());
+        Assert.isTrue(!"ME".equals(connection.toString()), GenericErrorMessages.TYPE_ME_NOT_ALLOWED.toString());
         return this.doRequest(HttpMethod.DELETE, connection, id, subId, null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ApiResponse<?> doDelete(Connection connection, String id, String subId, Map<String, List<String>> params) {
-        Assert.noNullElements(new Object[]{connection, id, subId, params}, GenericErrorMessages.NO_NULL_ALLOWED.toString());
-        return this.doRequest(HttpMethod.DELETE, connection, id, subId, params);
     }
 
     /**
@@ -389,7 +353,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param params   The optional parameters
      * @return The response object containing a list of T elements
      */
-    private ApiResponse<?> doRequest(final HttpMethod method, Endpoint endPoint, String id, Map<String, List<String>> params) {
+    private ApiResponse<?> doRequest(final HttpMethod method, Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError {
         LOGGER.trace("[IN] doRequest with parameters {},{}.{},{},{},{}", method, endPoint.getClass().getSimpleName(), endPoint, id, params);
         try {
             String endpointUrl = endPoint.getValue();
@@ -404,15 +368,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format(GenericConstants.TWO_PARAMETERS.toString(), this.dailymotionRootUrl, endpointUrl);
             }
 
-            Response response = this.callDailymotionAPI(method, url, params);
-            Assert.notNull(response, GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
-            Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
-
-            ApiResponse<?> apiResponse = this.buildResponse(endPoint.getClazz());
-            apiResponse = JsonHelper.deserialize(response.getBody(), apiResponse.getClass());
+            ApiResponse<?> apiResponse = this.handleResponse(this.handleRequest(method, url, params), endPoint.getClazz());
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | ExecutionException | InterruptedException e) {
             LOGGER.error(GenericErrorMessages.ERROR_ON_DO_REQUEST.toString(), e);
         }
 
@@ -429,7 +388,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param params     The optional parameters
      * @return The response object containing a list of T elements
      */
-    private ApiResponse<?> doRequest(final HttpMethod method, Connection connection, String id, String subId, Map<String, List<String>> params) {
+    private ApiResponse<?> doRequest(final HttpMethod method, Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError {
         LOGGER.trace("[IN] doRequest with parameters {},{}.{},{},{},{},{}", method, connection.getClass().getSimpleName(), connection, id, subId, params);
         try {
             String endpointUrl = connection.getParent().getValue();
@@ -447,15 +406,10 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
                 url = MessageFormat.format(GenericConstants.THREE_PARAMETERS.toString(), this.dailymotionRootUrl, MessageFormat.format(endpointUrl, id), connectionUrl);
             }
 
-            Response response = this.callDailymotionAPI(method, url, params);
-            Assert.notNull(response, GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
-            Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
-
-            ApiResponse<?> apiResponse = this.buildResponse(connection.getClazz());
-            apiResponse = JsonHelper.deserialize(response.getBody(), apiResponse.getClass());
+            ApiResponse<?> apiResponse = this.handleResponse(this.handleRequest(method, url, params), connection.getClazz());
             LOGGER.trace("ApiResponse from URL {} is {}", url, apiResponse);
             return apiResponse;
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | ExecutionException | InterruptedException e) {
             LOGGER.error(GenericErrorMessages.ERROR_ON_DO_REQUEST.toString(), e);
         }
 
@@ -470,7 +424,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @param params The optional parameters
      * @return Returns the JSON response if any
      */
-    private Response callDailymotionAPI(final HttpMethod method, final String url, final Map<String, List<String>> params) {
+    private Response handleRequest(final HttpMethod method, final String url, final Map<String, List<String>> params) throws ExecutionException, InterruptedException {
         LOGGER.trace("[IN] callDailymotionAPI with parameters {}, {}, {}", method, url, params);
 
         Client.RequestHolder requestHolder = this.httpClient.url(url);
@@ -480,15 +434,39 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
             }
         }
 
+        LOGGER.info("Calling DailyMotion API using URL {}", url);
+
         if (HttpMethod.GET.equals(method)) {
-            return requestHolder.get();
+            return requestHolder.asyncGet().get();
         } else if (HttpMethod.POST.equals(method)) {
-            return requestHolder.post();
+            return requestHolder.asyncPost().get();
         } else if (HttpMethod.DELETE.equals(method)) {
-            return requestHolder.delete();
+            return requestHolder.asyncDelete().get();
         } else {
             throw new UnsupportedOperationException(MessageFormat.format("The given HttpMethod ({0}) isn't allowed here", method));
         }
+    }
+
+    /**
+     * Handles the response from DailyMotion API
+     *
+     * @param response The response from the API
+     * @param clazz    The class expected in response
+     * @return The ApiResponse that represents the JSON return from WS
+     * @throws ClassNotFoundException
+     * @throws ApiError
+     */
+    private ApiResponse<?> handleResponse(Response response, Class clazz) throws ClassNotFoundException, ApiError {
+        Assert.notNull(response, GenericErrorMessages.RESPONSE_IS_NULL.toString());
+
+        if (response.getStatus() >= Http.BAD_REQUEST && response.getStatus() < Http.INTERNAL_SERVER_ERROR) {
+            throw JsonHelper.deserialize(response.getBody(), ApiError.class);
+        }else if (response.getStatus() >= Http.INTERNAL_SERVER_ERROR) {
+            throw ClientExceptionFactory.createHttpExceptionFromStatusCode(response.getStatus());
+        }
+
+        Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
+        return JsonHelper.deserialize(response.getBody(), this.getResponseClass(clazz));
     }
 
     /**
@@ -511,7 +489,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @return The ApiResponse class
      * @throws ClassNotFoundException
      */
-    private ApiResponse<?> buildResponse(Class clazz) throws ClassNotFoundException {
+    private Class<? extends ApiResponse> getResponseClass(Class clazz) throws ClassNotFoundException {
         Assert.notNull(clazz, GenericErrorMessages.NO_NULL_ALLOWED.toString());
 
         if (this.availableResponses == null) {
@@ -530,7 +508,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         }
 
         if (this.availableResponses.containsKey(clazz)) {
-            return this.availableResponses.get(clazz);
+            return this.availableResponses.get(clazz).getClass();
         } else {
             throw new ClassNotFoundException(MessageFormat.format("The given Class ({0}) isn't allowed here {}", clazz.getSimpleName()));
         }
