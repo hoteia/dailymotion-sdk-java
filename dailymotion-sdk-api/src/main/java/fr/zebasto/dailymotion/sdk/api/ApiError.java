@@ -17,7 +17,7 @@ public class ApiError extends Exception {
      * Default constructor
      */
     @JsonCreator
-    public ApiError(@JsonProperty(value = "code") int code, @JsonProperty(value = "message") String message, @JsonProperty(value = "type") String type){
+    public ApiError(@JsonProperty(value = "code") int code, @JsonProperty(value = "message") String message, @JsonProperty(value = "type") String type) {
         this.code = code;
         this.message = message;
         this.type = type;

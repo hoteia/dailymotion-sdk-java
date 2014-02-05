@@ -1,9 +1,10 @@
 package fr.zebasto.dailymotion.sdk.client;
 
-import com.zb.dailymotion.api.ApiError;
-import com.zb.dailymotion.api.ApiResponse;
-import com.zb.dailymotion.api.Connection;
-import com.zb.dailymotion.api.Endpoint;
+
+import fr.zebasto.dailymotion.sdk.api.ApiError;
+import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.Connection;
+import fr.zebasto.dailymotion.sdk.api.Endpoint;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import java.util.Map;
  * <li>POST</li>
  * <li>PUT</li>
  * </ul>
+ *
  * @see <a href="http://www.dailymotion.com/doc/api/graph-api.html">http://www.dailymotion.com/doc/api/graph-api.html</a>
  */
 public interface DailymotionClient {

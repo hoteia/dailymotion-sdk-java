@@ -1,14 +1,18 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import com.zb.dailymotion.api.ApiResponse;
-import com.zb.dailymotion.api.Connection;
-import com.zb.dailymotion.api.Endpoint;
-import com.zb.dailymotion.api.connection.channel.ChannelVideo;
-import com.zb.dailymotion.api.connection.contest.ContestMember;
-import com.zb.dailymotion.api.connection.contest.ContestVideo;
-import com.zb.dailymotion.api.connection.group.GroupMember;
-import com.zb.dailymotion.api.connection.group.GroupVideo;
-import com.zb.dailymotion.api.connection.playlist.PlaylistVideo;
+import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.Connection;
+import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.connection.channel.ChannelVideo;
+import fr.zebasto.dailymotion.sdk.api.connection.contest.ContestMember;
+import fr.zebasto.dailymotion.sdk.api.connection.contest.ContestVideo;
+import fr.zebasto.dailymotion.sdk.api.connection.group.GroupMember;
+import fr.zebasto.dailymotion.sdk.api.connection.group.GroupVideo;
+import fr.zebasto.dailymotion.sdk.api.connection.playlist.PlaylistVideo;
+import fr.zebasto.dailymotion.sdk.api.connection.user.*;
+import fr.zebasto.dailymotion.sdk.api.connection.video.*;
+import fr.zebasto.dailymotion.sdk.api.dto.*;
+import fr.zebasto.dailymotion.sdk.api.endpoint.*;
 import org.fest.assertions.api.Assertions;
 import org.mockito.Answers;
 import org.mockito.InjectMocks;
@@ -71,7 +75,7 @@ public class DailymotionClientImplTest {
         return response;
     }
 
-    private HashMap<String, List<String>> getParameters(){
+    private HashMap<String, List<String>> getParameters() {
         HashMap<String, List<String>> parameters = new HashMap<>();
         parameters.put("param", new ArrayList<String>());
         parameters.get("param").add("test1");

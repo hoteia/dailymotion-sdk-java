@@ -1,15 +1,16 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import com.zb.dailymotion.api.ApiError;
-import com.zb.dailymotion.api.ApiResponse;
-import com.zb.dailymotion.api.Connection;
-import com.zb.dailymotion.api.Endpoint;
+import com.ning.http.client.AsyncHttpClientConfig;
+import com.ning.http.client.ProxyServer;
+import fr.zebasto.dailymotion.sdk.api.ApiError;
+import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.Connection;
+import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.dto.*;
 import fr.zebasto.dailymotion.sdk.client.DailymotionClient;
 import fr.zebasto.dailymotion.sdk.client.constants.GenericConstants;
 import fr.zebasto.dailymotion.sdk.client.constants.GenericErrorMessages;
 import fr.zebasto.dailymotion.sdk.client.filter.OAuth2RequestFilter;
-import com.ning.http.client.AsyncHttpClientConfig;
-import com.ning.http.client.ProxyServer;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.resthub.web.Client;
 import org.resthub.web.Http;
@@ -460,7 +461,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
 
         if (response.getStatus() >= Http.BAD_REQUEST && response.getStatus() < Http.INTERNAL_SERVER_ERROR) {
             throw JsonHelper.deserialize(response.getBody(), ApiError.class);
-        }else if (response.getStatus() >= Http.INTERNAL_SERVER_ERROR) {
+        } else if (response.getStatus() >= Http.INTERNAL_SERVER_ERROR) {
             throw ClientExceptionFactory.createHttpExceptionFromStatusCode(response.getStatus());
         }
 

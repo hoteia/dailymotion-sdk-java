@@ -1,9 +1,9 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import com.zb.dailymotion.api.ApiError;
-import com.zb.dailymotion.api.ApiResponse;
-import com.zb.dailymotion.api.dto.Video;
-import com.zb.dailymotion.api.endpoint.VideoEndpoint;
+import fr.zebasto.dailymotion.sdk.api.ApiError;
+import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.dto.Video;
+import fr.zebasto.dailymotion.sdk.api.endpoint.VideoEndpoint;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
