@@ -12,7 +12,7 @@ Usage
 The Dailymotion Java SDK uses Maven as base project. You can import the client using the following code :
 
     <dependency>
-        <groupId>com.bc.dailymotion</groupId>
+        <groupId>fr.zebasto.dailymotion</groupId>
         <artifactId>dailymotion-sdk-client</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </dependency>
@@ -30,7 +30,7 @@ It as simple as the following lines of code :
 
 #### 2.2 Bean injection using xml configuration
 
-    <bean name="dailymotionClient" class="com.bc.dailymotion.client.impl.DailymotionClientImpl" />
+    <bean name="dailymotionClient" class="fr.zebasto.dailymotion.sdk.client.impl.DailymotionClientImpl" />
 
     <bean id="mySpringBeanWithDependency" class="testbean.MySpringBeanWithDependency">
         <property name="client" ref="dailymotionClient" />
