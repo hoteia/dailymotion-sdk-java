@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
@@ -44,6 +45,8 @@ public class DailymotionClientImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Client httpClient;
+    
+    private UUID randomId = UUID.randomUUID();
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -62,7 +65,10 @@ public class DailymotionClientImplTest {
     }
 
     private <T> ApiResponse<T> getResponseForType(Class<T> type) throws IllegalAccessException, InstantiationException {
-        List<T> list = asList(type.newInstance(), type.newInstance(), type.newInstance());
+        List<T> list = new ArrayList<>();
+        list.add(getObjectForClass(type));
+        list.add(getObjectForClass(type));
+        list.add(getObjectForClass(type));
 
         ApiResponse<T> response = new ApiResponse<>();
         response.setExplicit(false);
@@ -73,6 +79,57 @@ public class DailymotionClientImplTest {
         response.setList(list);
 
         return response;
+    }
+
+    private <T> T getObjectForClass(Class<T> type) {
+        switch (type.getSimpleName()) {
+            case "Activity":
+                Activity a = new Activity();
+                a.setId(randomId.toString());
+                return (T) a;
+            case "Channel":
+                Channel b = new Channel();
+                b.setId(randomId.toString());
+                return (T) b;
+            case "Comment":
+                Comment c = new Comment();
+                c.setId(randomId.toString());
+                return (T) c;
+            case "Contest":
+                Contest d = new Contest();
+                d.setId(randomId.toString());
+                return (T) d;
+            case "Group":
+                Group e = new Group();
+                e.setId(randomId.toString());
+                return (T) e;
+            case "Playlist":
+                Playlist f = new Playlist();
+                f.setId(randomId.toString());
+                return (T) f;
+            case "Record":
+                Record g = new Record();
+                g.setId(randomId.toString());
+                return (T) g;
+            case "Strongtag":
+                Strongtag h = new Strongtag();
+                h.setId(randomId.toString());
+                return (T) h;
+            case "Subtitle":
+                Subtitle i = new Subtitle();
+                i.setId(randomId.toString());
+                return (T) i;
+            case "User":
+                User j = new User();
+                j.setId(randomId.toString());
+                return (T) j;
+            case "Video":
+                Video k = new Video();
+                k.setId(randomId.toString());
+                return (T) k;
+            default:
+                return null;
+        }
     }
 
     private HashMap<String, List<String>> getParameters() {
@@ -134,7 +191,10 @@ public class DailymotionClientImplTest {
     @Test(dataProvider = "doGetEndpoint")
     public <T> void testDoGetEndpoint(int method, Class<T> tClass, Object[] params, String expectedUrl, Endpoint endpoint, ApiResponse expectedResponse) throws Exception {
         // Given
-        List<T> list = asList(tClass.newInstance(), tClass.newInstance(), tClass.newInstance());
+        List<T> list = new ArrayList<>();
+        list.add(getObjectForClass(tClass));
+        list.add(getObjectForClass(tClass));
+        list.add(getObjectForClass(tClass));
 
         ApiResponse<T> tResponse = new ApiResponse<>();
         tResponse.setExplicit(false);
@@ -333,7 +393,10 @@ public class DailymotionClientImplTest {
     @Test(dataProvider = "doGetConnection")
     public <T> void testDoGetConnection(int method, Class<T> tClass, Object[] params, String expectedUrl, Connection connection, ApiResponse expectedResponse) throws Exception {
         // Given
-        List<T> list = asList(tClass.newInstance(), tClass.newInstance(), tClass.newInstance());
+        List<T> list = new ArrayList<>();
+        list.add(getObjectForClass(tClass));
+        list.add(getObjectForClass(tClass));
+        list.add(getObjectForClass(tClass));
 
         ApiResponse<T> tResponse = new ApiResponse<>();
         tResponse.setExplicit(false);
@@ -374,5 +437,6 @@ public class DailymotionClientImplTest {
         // Then
         verify(this.httpClient).url(expectedUrl);
         Assertions.assertThat(actualResponse).isNotNull().isEqualsToByComparingFields(expectedResponse);
+        Assertions.assertThat(actualResponse.getList()).containsAll(expectedResponse.getList());
     }
 }

@@ -1,6 +1,7 @@
 package fr.zebasto.dailymotion.sdk.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -12,15 +13,35 @@ import java.util.List;
  * Created by Bastien on 04/01/2014.
  */
 public class ApiResponse<E> {
+    /**
+     *
+     */
     private int page;
+
+    /**
+     *
+     */
     private int limit;
+
+    /**
+     *
+     */
     private boolean explicit;
+
+    /**
+     *
+     */
     private int total;
 
+    /**
+     *
+     */
     @JsonProperty(value = "has_more")
     private boolean hasMore;
 
-    @JsonTypeInfo(property = "list", use = JsonTypeInfo.Id.CLASS)
+    /**
+     *
+     */
     private List<E> list;
 
     /**

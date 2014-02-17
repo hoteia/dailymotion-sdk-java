@@ -1,5 +1,6 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.ProxyServer;
 import fr.zebasto.dailymotion.sdk.api.ApiError;
@@ -122,7 +123,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
     /**
      * Map containing the different classes for responses
      */
-    private Map<Class, ApiResponse<?>> availableResponses;
+    private Map<Class, TypeReference> availableResponses;
 
     /**
      * Scheme used for OAuth
@@ -466,6 +467,7 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
         }
 
         Assert.notNull(response.getBody(), GenericErrorMessages.RESPONSE_BODY_IS_NULL.toString());
+        LOGGER.debug("Response from WS is {}", response.getBody());
         return JsonHelper.deserialize(response.getBody(), this.getResponseClass(clazz));
     }
 
@@ -489,26 +491,26 @@ public class DailymotionClientImpl implements DailymotionClient, InitializingBea
      * @return The ApiResponse class
      * @throws ClassNotFoundException
      */
-    private Class<? extends ApiResponse> getResponseClass(Class clazz) throws ClassNotFoundException {
+    private TypeReference getResponseClass(Class clazz) throws ClassNotFoundException {
         Assert.notNull(clazz, GenericErrorMessages.NO_NULL_ALLOWED.toString());
 
         if (this.availableResponses == null) {
             this.availableResponses = new HashMap<>();
-            this.availableResponses.put(Activity.class, new ApiResponse<Activity>());
-            this.availableResponses.put(Channel.class, new ApiResponse<Channel>());
-            this.availableResponses.put(Comment.class, new ApiResponse<Comment>());
-            this.availableResponses.put(Contest.class, new ApiResponse<Contest>());
-            this.availableResponses.put(Group.class, new ApiResponse<Group>());
-            this.availableResponses.put(Playlist.class, new ApiResponse<Playlist>());
-            this.availableResponses.put(Record.class, new ApiResponse<Record>());
-            this.availableResponses.put(Strongtag.class, new ApiResponse<Strongtag>());
-            this.availableResponses.put(Subtitle.class, new ApiResponse<Subtitle>());
-            this.availableResponses.put(User.class, new ApiResponse<User>());
-            this.availableResponses.put(Video.class, new ApiResponse<Video>());
+            this.availableResponses.put(Activity.class, new TypeReference<ApiResponse<Activity>>(){});
+            this.availableResponses.put(Channel.class, new TypeReference<ApiResponse<Channel>>(){});
+            this.availableResponses.put(Comment.class, new TypeReference<ApiResponse<Comment>>(){});
+            this.availableResponses.put(Contest.class, new TypeReference<ApiResponse<Contest>>(){});
+            this.availableResponses.put(Group.class, new TypeReference<ApiResponse<Group>>(){});
+            this.availableResponses.put(Playlist.class, new TypeReference<ApiResponse<Playlist>>(){});
+            this.availableResponses.put(Record.class, new TypeReference<ApiResponse<Record>>(){});
+            this.availableResponses.put(Strongtag.class, new TypeReference<ApiResponse<Strongtag>>(){});
+            this.availableResponses.put(Subtitle.class, new TypeReference<ApiResponse<Subtitle>>(){});
+            this.availableResponses.put(User.class, new TypeReference<ApiResponse<User>>(){});
+            this.availableResponses.put(Video.class, new TypeReference<ApiResponse<Video>>(){});
         }
 
         if (this.availableResponses.containsKey(clazz)) {
-            return this.availableResponses.get(clazz).getClass();
+            return this.availableResponses.get(clazz);
         } else {
             throw new ClassNotFoundException(MessageFormat.format("The given Class ({0}) isn't allowed here {}", clazz.getSimpleName()));
         }

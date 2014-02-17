@@ -14,8 +14,8 @@
     <!-- +++++++++++++++++++++ -->
     <!-- Loggers 'applicatifs' -->
     <!-- +++++++++++++++++++++ -->
-    <logger name="com.zb.dailymotion.client" additivity="false">
-        <level value="info"/>
+    <logger name="fr.zebasto.dailymotion.sdk.client" additivity="false">
+        <level value="trace"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
@@ -35,6 +35,6 @@
     <!-- ROOT -->
     <!-- ++++ -->
     <root level="info">
-    <appender-ref ref="STDOUT"/>
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
