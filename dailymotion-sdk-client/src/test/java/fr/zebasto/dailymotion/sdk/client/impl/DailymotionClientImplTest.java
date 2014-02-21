@@ -1,6 +1,6 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
 import fr.zebasto.dailymotion.sdk.api.Connection;
 import fr.zebasto.dailymotion.sdk.api.Endpoint;
 import fr.zebasto.dailymotion.sdk.api.connection.channel.ChannelVideo;
@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
 
 /**

@@ -1,6 +1,7 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class User {
+public class User implements Entity {
     /**
      * The address of the user
      * userinfo scope required for reading. userinfo scope required for writing.

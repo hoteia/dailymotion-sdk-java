@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 
-public class ObjectComparatorTest {
+public class DtoComparatorTest {
     private static final String ID = "id";
 
     @DataProvider(name = "classesWithFieldsSetted")

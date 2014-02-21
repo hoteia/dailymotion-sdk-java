@@ -1,8 +1,8 @@
 package fr.zebasto.dailymotion.sdk.client;
 
 
-import fr.zebasto.dailymotion.sdk.api.ApiError;
-import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
 import fr.zebasto.dailymotion.sdk.api.Connection;
 import fr.zebasto.dailymotion.sdk.api.Endpoint;
 

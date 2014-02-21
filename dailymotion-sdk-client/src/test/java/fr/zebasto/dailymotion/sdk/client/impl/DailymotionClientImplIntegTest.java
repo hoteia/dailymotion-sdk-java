@@ -1,6 +1,6 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import fr.zebasto.dailymotion.sdk.api.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
 import fr.zebasto.dailymotion.sdk.api.dto.Video;
 import fr.zebasto.dailymotion.sdk.api.endpoint.VideoEndpoint;
 import org.springframework.test.util.ReflectionTestUtils;

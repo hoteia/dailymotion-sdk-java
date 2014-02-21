@@ -1,8 +1,6 @@
-package fr.zebasto.dailymotion.sdk.api;
+package fr.zebasto.dailymotion.sdk.api.communication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,33 +12,34 @@ import java.util.List;
  */
 public class ApiResponse<E> {
     /**
-     *
+     * Defines the current viewed page
      */
     private int page;
 
     /**
-     *
+     * Defines the limit of elements that will be fetched
+     * DailyMotion defines a top limit at 100
      */
     private int limit;
 
     /**
-     *
+     * Boolean that represents if the content is explicit or not
      */
     private boolean explicit;
 
     /**
-     *
+     * The number of element for the endpoint
      */
     private int total;
 
     /**
-     *
+     * Boolean that defines if the are more elements on the endpoint
      */
     @JsonProperty(value = "has_more")
     private boolean hasMore;
 
     /**
-     *
+     * The list of elements
      */
     private List<E> list;
 

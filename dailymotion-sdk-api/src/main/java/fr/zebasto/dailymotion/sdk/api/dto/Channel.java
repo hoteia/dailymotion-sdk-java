@@ -1,12 +1,13 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class Channel {
+public class Channel implements Entity {
     /**
      * The localized description of the channel.
      * No access_token required for reading.

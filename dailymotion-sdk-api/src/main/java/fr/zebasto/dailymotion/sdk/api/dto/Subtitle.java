@@ -1,12 +1,13 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class Subtitle {
+public class Subtitle implements Entity {
     /**
      * The videosubtitle object ID
      * No access_token required for reading.

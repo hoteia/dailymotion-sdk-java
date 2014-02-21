@@ -1,4 +1,4 @@
-package fr.zebasto.dailymotion.sdk.api;
+package fr.zebasto.dailymotion.sdk.api.communication;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

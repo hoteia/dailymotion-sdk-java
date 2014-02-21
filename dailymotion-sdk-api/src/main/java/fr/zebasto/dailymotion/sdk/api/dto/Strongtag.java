@@ -1,12 +1,13 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class Strongtag {
+public class Strongtag implements Entity {
     /**
      * The strongtags_freebase object ID
      * No access_token required for reading.

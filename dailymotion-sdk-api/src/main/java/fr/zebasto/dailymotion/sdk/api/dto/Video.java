@@ -1,6 +1,7 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class Video {
+public class Video implements Entity {
     /**
      * A boolean indicating that the video is in 3D format (true) or not (false).
      * No access_token required for reading.

@@ -1,6 +1,7 @@
 package fr.zebasto.dailymotion.sdk.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.zebasto.dailymotion.sdk.api.Entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by Bastien on 04/01/2014.
  */
-public class Activity {
+public class Activity implements Entity{
     /**
      * The date the activity has happened
      * No access_token required for reading.

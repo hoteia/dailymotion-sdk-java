@@ -1,6 +1,6 @@
 package fr.zebasto.dailymotion.sdk.client.impl;
 
-import fr.zebasto.dailymotion.sdk.api.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
 import fr.zebasto.dailymotion.sdk.api.Endpoint;
 import fr.zebasto.dailymotion.sdk.api.endpoint.*;
 import org.mockito.InjectMocks;
