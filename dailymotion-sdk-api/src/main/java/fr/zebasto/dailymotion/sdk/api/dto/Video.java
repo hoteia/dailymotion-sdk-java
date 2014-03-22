@@ -111,6 +111,7 @@ public class Video implements Entity {
      * This field can be used as filter. No access_token required for reading. This field is writable.
      * Return a channel. You can request sub-fields by using channel.<sub-field> notation.
      */
+    @JsonProperty(value = "channel.*")
     private Channel channel;
 
     /**
@@ -462,6 +463,7 @@ public class Video implements Entity {
      * This field can be used as filter. No access_token required for reading.
      * Return a user. You can request sub-fields by using owner.<sub-field> notation.
      */
+    @JsonProperty(value = "owner.*")
     private User owner;
 
     /**
