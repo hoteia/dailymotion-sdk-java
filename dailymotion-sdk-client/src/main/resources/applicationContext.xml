@@ -10,7 +10,7 @@
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <context:component-scan base-package="com.zb.dailymotion.client"/>
+    <context:component-scan base-package="fr.zebasto.dailymotion.sdk.client"/>
 
     <!-- Import properties files to Override default values -->
     <context:property-placeholder location="classpath*:dailymotionClient.properties"

@@ -39,6 +39,7 @@ public interface DailymotionClient {
      *
      * @param endPoint The endpoint to call
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Endpoint endPoint) throws ApiError;
 
@@ -48,6 +49,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Endpoint endPoint, Map<String, List<String>> params) throws ApiError;
 
@@ -57,6 +59,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Endpoint endPoint, String id) throws ApiError;
 
@@ -67,6 +70,7 @@ public interface DailymotionClient {
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError;
 
@@ -76,6 +80,7 @@ public interface DailymotionClient {
      * @param connection The connection to call
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Connection connection, String id) throws ApiError;
 
@@ -86,6 +91,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Connection connection, String id, Map<String, List<String>> params) throws ApiError;
 
@@ -96,6 +102,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Connection connection, String id, String subId) throws ApiError;
 
@@ -107,6 +114,7 @@ public interface DailymotionClient {
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doGet(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError;
 
@@ -115,6 +123,7 @@ public interface DailymotionClient {
      *
      * @param endPoint The endpoint to call
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Endpoint endPoint) throws ApiError;
 
@@ -124,6 +133,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Endpoint endPoint, Map<String, List<String>> params) throws ApiError;
 
@@ -133,6 +143,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Endpoint endPoint, String id) throws ApiError;
 
@@ -143,6 +154,7 @@ public interface DailymotionClient {
      * @param id       The id that will be used to filter the request on the endpoint
      * @param params   The list of parameters given for the request
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Endpoint endPoint, String id, Map<String, List<String>> params) throws ApiError;
 
@@ -152,6 +164,7 @@ public interface DailymotionClient {
      * @param connection The connection to call
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Connection connection, String id) throws ApiError;
 
@@ -162,6 +175,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Connection connection, String id, Map<String, List<String>> params) throws ApiError;
 
@@ -172,6 +186,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Connection connection, String id, String subId) throws ApiError;
 
@@ -183,6 +198,7 @@ public interface DailymotionClient {
      * @param subId      The id that will be used to filter the request on the connection
      * @param params     The list of parameters given for the request
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doPost(Connection connection, String id, String subId, Map<String, List<String>> params) throws ApiError;
 
@@ -192,6 +208,7 @@ public interface DailymotionClient {
      * @param endPoint The endpoint to call
      * @param id       The id that will be used to filter the request on the endpoint
      * @return The response containing the list of E elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doDelete(Endpoint endPoint, String id) throws ApiError;
 
@@ -201,6 +218,7 @@ public interface DailymotionClient {
      * @param connection The connection to call
      * @param id         The id that will be used to filter the request on the endpoint
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doDelete(Connection connection, String id) throws ApiError;
 
@@ -211,6 +229,7 @@ public interface DailymotionClient {
      * @param id         The id that will be used to filter the request on the endpoint
      * @param subId      The id that will be used to filter the request on the connection
      * @return The response containing the list of T elements
+     * @throws ApiError The error returned by the WebService
      */
     ApiResponse<?> doDelete(Connection connection, String id, String subId) throws ApiError;
 }

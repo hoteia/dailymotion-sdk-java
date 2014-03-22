@@ -15,6 +15,9 @@ public class ApiError extends Exception {
 
     /**
      * Default constructor
+     * @param code The HTTP return Code
+     * @param message The message corresponding to the error
+     * @param type The type of the error
      */
     @JsonCreator
     public ApiError(@JsonProperty(value = "code") int code, @JsonProperty(value = "message") String message, @JsonProperty(value = "type") String type) {
