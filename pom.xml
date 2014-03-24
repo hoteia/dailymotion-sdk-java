@@ -214,6 +214,7 @@
                         <docencoding>UTF-8</docencoding>
                         <charset>UTF-8</charset>
                         <encoding>UTF-8</encoding>
+                        <aggregate>true</aggregate>
                     </configuration>
                 </plugin>
                 <plugin>
