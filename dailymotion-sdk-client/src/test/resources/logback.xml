@@ -15,7 +15,7 @@
     <!-- Loggers 'applicatifs' -->
     <!-- +++++++++++++++++++++ -->
     <logger name="fr.zebasto.dailymotion.sdk.client" additivity="false">
-        <level value="trace"/>
+        <level value="info"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
