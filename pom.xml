@@ -70,11 +70,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>fr.zebasto.dailymotion</groupId>
-                <artifactId>dailymotion-sdk-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.resthub</groupId>
                 <artifactId>resthub-web-client</artifactId>
                 <version>${resthub.version}</version>
