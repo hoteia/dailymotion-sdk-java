@@ -74,7 +74,7 @@
     <scm>
         <connection>scm:git:git@github.com:bcecchinato/dailymotion-sdk-java.git</connection>
         <developerConnection>scm:git:git@github.com:bcecchinato/dailymotion-sdk-java.git</developerConnection>
-        <url>scm:git:git@github.com:bcecchinato/dailymotion-sdk-java</url>
+        <url>scm:git:git@github.com:bcecchinato/dailymotion-sdk-java.git</url>
         <tag>HEAD</tag>
     </scm>
 
