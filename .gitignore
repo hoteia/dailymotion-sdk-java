@@ -1,77 +1,12 @@
-###################################################
-# Github                                          #
-# https://help.github.com/articles/ignoring-files #
-# https://github.com/github/gitignore             #
-###################################################
-
-# Compiled source #
-###################
-target/
-bin/
-*.class
-
-# Packages #
-############
-MANIFEST.MF
-*.jar
-*.war
-*.ear
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Maven Release #
-#################
-release.properties
-pom.xml.releaseBackup
-
-# IDE Config #
-##############
-.classpath
 .project
-.metadata
-.settings/
-*.iml
-*.ipr
-*.iws
-.idea/
+.classpath
+target
+.settings
+.DS_Store
+MANIFEST.MF
 .pmd
 .checkstyle
-
-# TestNG #
-##########
-testng.xml
-test-output/
-
-# Log #
-#######
-*.log
-
-# Simulator #
-#############
-*.shm
-cache/
-
-log/
-logContent/
-
-# OS generated files #
-######################*
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-Icon?
-.DS_Store
-.DS_Store?
-._*
-.Trashes
-$RECYCLE.BIN/
-
-# Keep .gitkeep files #
-#######################
-!.gitkeep
+*.iml
+.idea
+nb-configuration.xml
+*.versionsBackup
