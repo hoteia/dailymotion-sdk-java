@@ -35,7 +35,7 @@
         <maven.javadoc.version>2.9.1</maven.javadoc.version>
         <maven.deploy.version>2.8.1</maven.deploy.version>
         <maven.archetype.version>2.2</maven.archetype.version>
-        <maven-release-plugin.version>2.4.2</maven-release-plugin.version>
+        <maven-release-plugin.version>2.5</maven-release-plugin.version>
         <maven.source.version>2.2.1</maven.source.version>
         <maven.install.version>2.5.1</maven.install.version>
         <maven.assembly.version>2.4</maven.assembly.version>
@@ -136,6 +136,12 @@
         <dependency>
             <groupId>org.resthub</groupId>
             <artifactId>resthub-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.9</version>
         </dependency>
     </dependencies>
 
