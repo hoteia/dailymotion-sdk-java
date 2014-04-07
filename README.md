@@ -12,7 +12,7 @@ Usage
 The Dailymotion Java SDK uses Maven as base project. You can import the client using the following code :
 
     <dependency>
-        <groupId>fr.zebasto.dailymotion</groupId>
+        <groupId>fr.zebasto</groupId>
         <artifactId>dailymotion-sdk-client</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </dependency>
