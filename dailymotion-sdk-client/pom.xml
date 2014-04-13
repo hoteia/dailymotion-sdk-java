@@ -12,7 +12,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>fr.zebasto.dailymotion</groupId>
+            <groupId>fr.zebasto</groupId>
             <artifactId>dailymotion-sdk-api</artifactId>
             <version>${project.version}</version>
         </dependency>
