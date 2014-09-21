@@ -22,7 +22,7 @@ public interface CommentEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/comments", target = Comment.class, method = HttpMethod.GET)
-    ApiResponse<Comment> findAll(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Comment> findAll(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *
@@ -41,7 +41,7 @@ public interface CommentEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/comments", target = Comment.class, method = HttpMethod.POST)
-    ApiResponse<Comment> create(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Comment> create(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *

@@ -22,7 +22,7 @@ public interface RecordEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/record", target = Record.class, method = HttpMethod.GET)
-    ApiResponse<Record> findAll(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Record> findAll(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *
@@ -41,7 +41,7 @@ public interface RecordEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/records", target = Record.class, method = HttpMethod.POST)
-    ApiResponse<Record> create(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Record> create(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *

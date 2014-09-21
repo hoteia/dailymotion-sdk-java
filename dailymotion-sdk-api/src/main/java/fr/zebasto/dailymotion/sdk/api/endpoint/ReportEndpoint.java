@@ -23,7 +23,7 @@ public interface ReportEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/report", target = Report.class, method = HttpMethod.POST)
-    ApiResponse<Report> create(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Report> create(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *

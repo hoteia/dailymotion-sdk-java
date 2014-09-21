@@ -92,7 +92,7 @@ public interface PlaylistEndpoint {
      * @return
      * @throws ApiError
      */
-    @Connection(value = "/playlist/{id}/videos/{id}", target = Video.class, method = HttpMethod.POST, params = 2)
+    @Connection(value = "/playlist/{id}/videos/{video}", target = Video.class, method = HttpMethod.POST, params = 2)
     ApiResponse<Video> addVideoToPlaylist(String id, String video, Map<String, Object> parameters) throws ApiError;
 
     /**
@@ -112,6 +112,6 @@ public interface PlaylistEndpoint {
      * @param video
      * @throws ApiError
      */
-    @Connection(value = "/playlist/{id}/video/{id}", target = Video.class, method = HttpMethod.DELETE, params = 2)
+    @Connection(value = "/playlist/{id}/video/{video}", target = Video.class, method = HttpMethod.DELETE, params = 2)
     void removeVideoFromPlaylist(String id, String video) throws ApiError;
 }

@@ -316,7 +316,9 @@ public class DailymotionClient implements InvocationHandler {
     }
 
     private <E extends Entity> ApiTypeReference<E> getApiTypeReference(Class<E> clazz) {
-        this.availableResponses.putIfAbsent(clazz, new ApiTypeReference<E>());
+        if (!this.availableResponses.containsKey(clazz)) {
+            this.availableResponses.put(clazz, new ApiTypeReference<E>());
+        }
         return (ApiTypeReference<E>) this.availableResponses.get(clazz);
     }
 

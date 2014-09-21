@@ -22,7 +22,7 @@ public interface SubtitleEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/subtitle", target = Subtitle.class, method = HttpMethod.GET)
-    ApiResponse<Subtitle> findAll(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Subtitle> findAll(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *
@@ -41,7 +41,7 @@ public interface SubtitleEndpoint {
      * @throws ApiError
      */
     @Endpoint(value = "/video/{id}/subtitle", target = Subtitle.class, method = HttpMethod.POST)
-    ApiResponse<Subtitle> create(Map<String, Object> parameters) throws ApiError;
+    ApiResponse<Subtitle> create(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
      *
