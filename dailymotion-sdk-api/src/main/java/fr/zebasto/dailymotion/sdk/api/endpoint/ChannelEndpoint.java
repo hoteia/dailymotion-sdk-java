@@ -1,47 +1,55 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Connection;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Channel;
+import fr.zebasto.dailymotion.sdk.api.dto.User;
+import fr.zebasto.dailymotion.sdk.api.dto.Video;
+
+import java.util.Map;
 
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum ChannelEndpoint implements Endpoint {
-    ALL("channels", Channel.class),
-    ID("channel/{0}", Channel.class);
+public interface ChannelEndpoint {
+    /**
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/channels", target = Channel.class, method = HttpMethod.GET)
+    ApiResponse<Channel> findAll(Map<String, Object> parameters) throws ApiError;
 
     /**
-     * Defines the URL of the Endpoint
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private String value;
+    @Endpoint(value = "/channel/{id}", target = Channel.class, method = HttpMethod.GET)
+    ApiResponse<Channel> findById(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
-     * Defines the expected class returned in list
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private Class clazz;
+    @Connection(value = "/channel/{id}/users", target = User.class, method = HttpMethod.GET)
+    ApiResponse<User> findUsersByChannelId(String id, Map<String, Object> parameters) throws ApiError;
 
     /**
-     * {@inheritDoc}
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
-     *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
-     */
-    private ChannelEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Connection(value = "/channel/{id}/videos", target = Video.class, method = HttpMethod.GET)
+    ApiResponse<Video> findVideosByChannelId(String id, Map<String, Object> parameters) throws ApiError;
 }

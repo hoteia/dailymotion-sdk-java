@@ -1,46 +1,27 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Strongtag;
 
+import java.util.Map;
+
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum StrongtagEndpoint implements Endpoint {
-    ID("strongtag/{0}", Strongtag.class);
-
+public interface StrongtagEndpoint {
     /**
-     * Defines the URL of the Endpoint
-     */
-    private String value;
-
-    /**
-     * Defines the expected class returned in list
-     */
-    private Class clazz;
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
      *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private StrongtagEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Endpoint(value = "/strongtag/{id}", target = Strongtag.class, method = HttpMethod.GET)
+    ApiResponse<Strongtag> findById(String id, Map<String, Object> parameters) throws ApiError;
 }

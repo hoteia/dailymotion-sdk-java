@@ -1,46 +1,64 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Record;
 
+import java.util.Map;
+
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum RecordEndpoint implements Endpoint {
-    ID("record/{0}", Record.class);
-
+public interface RecordEndpoint {
     /**
-     * Defines the URL of the Endpoint
-     */
-    private String value;
-
-    /**
-     * Defines the expected class returned in list
-     */
-    private Class clazz;
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
      *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private RecordEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Endpoint(value = "/video/{id}/record", target = Record.class, method = HttpMethod.GET)
+    ApiResponse<Record> findAll(Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/record/{id}", target = Record.class, method = HttpMethod.GET)
+    ApiResponse<Record> findById(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/video/{id}/records", target = Record.class, method = HttpMethod.POST)
+    ApiResponse<Record> create(Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/record/{id}", target = Record.class, method = HttpMethod.POST)
+    ApiResponse<Record> update(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/record/{id}", target = Record.class, method = HttpMethod.DELETE)
+    void delete(String id) throws ApiError;
 }

@@ -1,46 +1,64 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Subtitle;
 
+import java.util.Map;
+
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum SubtitleEndpoint implements Endpoint {
-    ID("subtitle/{0}", Subtitle.class);
-
+public interface SubtitleEndpoint {
     /**
-     * Defines the URL of the Endpoint
-     */
-    private String value;
-
-    /**
-     * Defines the expected class returned in list
-     */
-    private Class clazz;
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
      *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private SubtitleEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Endpoint(value = "/video/{id}/subtitle", target = Subtitle.class, method = HttpMethod.GET)
+    ApiResponse<Subtitle> findAll(Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/subtitle/{id}", target = Subtitle.class, method = HttpMethod.GET)
+    ApiResponse<Subtitle> findById(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/video/{id}/subtitle", target = Subtitle.class, method = HttpMethod.POST)
+    ApiResponse<Subtitle> create(Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/subtitle/{id}", target = Subtitle.class, method = HttpMethod.POST)
+    ApiResponse<Subtitle> update(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/subtitle/{id}", target = Subtitle.class, method = HttpMethod.DELETE)
+    void delete(String id) throws ApiError;
 }

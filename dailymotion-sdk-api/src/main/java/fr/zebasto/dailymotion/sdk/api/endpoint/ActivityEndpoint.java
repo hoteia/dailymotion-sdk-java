@@ -1,47 +1,34 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Activity;
 
+import java.util.Map;
+
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum ActivityEndpoint implements Endpoint {
-    ALL("activities", Activity.class),
-    ID("activity/{0}", Activity.class);
+public interface ActivityEndpoint {
+    /**
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/activities", target = Activity.class, method = HttpMethod.GET)
+    ApiResponse<Activity> findAll(Map<String, Object> parameters) throws ApiError;
 
     /**
-     * Defines the URL of the Endpoint
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private String value;
-
-    /**
-     * Defines the expected class returned in list
-     */
-    private Class clazz;
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
-     *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
-     */
-    private ActivityEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Endpoint(value = "/activity/{id}", target = Activity.class, method = HttpMethod.GET)
+    ApiResponse<Activity> findById(String id, Map<String, Object> parameters) throws ApiError;
 }

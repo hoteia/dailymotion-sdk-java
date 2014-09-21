@@ -1,4 +1,4 @@
-package fr.zebasto.dailymotion.sdk.client.constants;
+package fr.zebasto.dailymotion.sdk.client.lang;
 
 /**
  * Created by a528122 on 16/01/14.

@@ -30,7 +30,7 @@ It as simple as the following lines of code :
 
 #### 2.2 Bean injection using xml configuration
 
-    <bean name="dailymotionClient" class="fr.zebasto.dailymotion.sdk.client.impl.DailymotionClientImpl" />
+    <bean name="dailymotionClient" class="fr.zebasto.dailymotion.sdk.client.DailymotionClientImpl" />
 
     <bean id="mySpringBeanWithDependency" class="testbean.MySpringBeanWithDependency">
         <property name="client" ref="dailymotionClient" />

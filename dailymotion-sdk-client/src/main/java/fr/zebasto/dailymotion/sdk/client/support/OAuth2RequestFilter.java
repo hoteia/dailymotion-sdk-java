@@ -1,4 +1,4 @@
-package fr.zebasto.dailymotion.sdk.client.filter;
+package fr.zebasto.dailymotion.sdk.client.support;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.ProxyServer;

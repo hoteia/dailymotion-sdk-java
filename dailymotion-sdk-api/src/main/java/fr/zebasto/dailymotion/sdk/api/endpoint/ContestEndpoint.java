@@ -1,47 +1,59 @@
 package fr.zebasto.dailymotion.sdk.api.endpoint;
 
-import fr.zebasto.dailymotion.sdk.api.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.annotation.Connection;
+import fr.zebasto.dailymotion.sdk.api.annotation.Endpoint;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiError;
+import fr.zebasto.dailymotion.sdk.api.communication.ApiResponse;
+import fr.zebasto.dailymotion.sdk.api.communication.HttpMethod;
 import fr.zebasto.dailymotion.sdk.api.dto.Contest;
+import fr.zebasto.dailymotion.sdk.api.dto.User;
+import fr.zebasto.dailymotion.sdk.api.dto.Video;
+
+import java.util.Map;
 
 /**
- * Created by Bastien on 13/01/2014.
+ * Class description
+ *
+ * @author Bastien Cecchinato
+ * @since 1.0.0
  */
-public enum ContestEndpoint implements Endpoint {
-    ALL("contests", Contest.class),
-    ID("contest/{0}", Contest.class);
-
+public interface ContestEndpoint {
     /**
-     * Defines the URL of the Endpoint
-     */
-    private String value;
-
-    /**
-     * Defines the expected class returned in list
-     */
-    private Class clazz;
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getValue() {
-        return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Class getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Default constructor for the Endpoint
      *
-     * @param value The url of the endpoint
-     * @param clazz The class that will be returned inside the list
+     * @param parameters
+     * @return
+     * @throws ApiError
      */
-    private ContestEndpoint(String value, Class clazz) {
-        this.value = value;
-        this.clazz = clazz;
-    }
+    @Endpoint(value = "/contests", target = Contest.class, method = HttpMethod.GET)
+    ApiResponse<Contest> findAll(Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/contest/{id}", target = Contest.class, method = HttpMethod.GET)
+    ApiResponse<Contest> findById(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Endpoint(value = "/contest/{id}/members", target = User.class, method = HttpMethod.GET)
+    ApiResponse<User> findUsersByContestId(String id, Map<String, Object> parameters) throws ApiError;
+
+    /**
+     *
+     * @param id
+     * @param parameters
+     * @return
+     * @throws ApiError
+     */
+    @Connection(value = "/contest/{id}/videos", target = Video.class, method = HttpMethod.GET)
+    ApiResponse<Video> findVideosByContestId(String id, Map<String, Object> parameters) throws ApiError;
 }

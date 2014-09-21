@@ -18,7 +18,7 @@
 
     <properties>
         <resthub.version>2.1.6</resthub.version>
-        <spring.version>4.0.2.RELEASE</spring.version>
+        <spring.version>4.1.0.RELEASE</spring.version>
 
         <maven.jetty.version>9.1.2.v20140210</maven.jetty.version>
         <jetty.port>8080</jetty.port>
@@ -97,13 +97,10 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
+                <artifactId>spring-framework-bom</artifactId>
                 <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
